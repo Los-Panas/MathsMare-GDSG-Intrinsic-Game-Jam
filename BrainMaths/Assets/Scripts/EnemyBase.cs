@@ -14,8 +14,6 @@ public class EnemyBase : MonoBehaviour
 
     public float minCoordToDestroy = 0.0f; // coords for the left side to despawn the enemy, to adjust sprite size offset
     
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +25,7 @@ public class EnemyBase : MonoBehaviour
     void Update()
     {
         CheckOffScreenConditions();
-        Move();        
+        Move();
     }
 
     private void CheckOffScreenConditions()
