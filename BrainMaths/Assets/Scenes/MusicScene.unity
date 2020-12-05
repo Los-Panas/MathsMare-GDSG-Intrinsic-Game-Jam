@@ -363,6 +363,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: de597c896ed820547aa01946892273a1, type: 3}
   - {fileID: 8300000, guid: bec38901919c3864fa0c706fa7ec144a, type: 3}
+  - {fileID: 8300000, guid: 0a696b74ea500ed488f7a4c208d69c37, type: 3}
   length: 75
   distanceBetween: 1
   beatsBeforeChange: 10
