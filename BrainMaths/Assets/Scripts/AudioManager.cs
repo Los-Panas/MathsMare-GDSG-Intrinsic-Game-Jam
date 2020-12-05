@@ -102,9 +102,7 @@ public class AudioManager : MonoBehaviour
         if (spectrumCount >= refrashRate)
         {
             spectrumCount = 0;
-            print(spectrum.Length);
             int min = Mathf.Min(spectrum.Length, bars.Length);
-            print(min);
             for (int i = 0; i < min; ++i)
             {
                 // bars[i].material.color = Color.green; // TODO: change color
