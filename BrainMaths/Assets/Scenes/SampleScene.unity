@@ -486,5 +486,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 1
-  acceleration: 10
-  max_velocity: 5
+  acceleration: 0.25
+  max_velocity: 10

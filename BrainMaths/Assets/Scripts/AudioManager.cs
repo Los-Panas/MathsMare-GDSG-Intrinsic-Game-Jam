@@ -19,14 +19,14 @@ public class AudioManager : MonoBehaviour
 
     public void OnBeat()
     {
-        Debug.Log("Beat!!!");
+        //Debug.Log("Beat!!!");
     }
 
     public void OnSpectrum(float[] spectrum)
     {
         for (int i = 0; i < spectrum.Length; ++i)
         {
-            print(spectrum[i]);
+            //print(spectrum[i]);
             Vector3 start = new Vector3(i, 0, 0);
             Vector3 end = new Vector3(i, spectrum[i] * length, 0);
             Debug.DrawLine(start, end);
