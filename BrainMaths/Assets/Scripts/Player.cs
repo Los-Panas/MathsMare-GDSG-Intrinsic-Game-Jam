@@ -3,6 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
+    enum Grade
+    {
+        F = 0,
+        D_MINUS = 1,
+        D = 2,
+        D_PLUS = 3,
+        C_MINUS = 4,
+        C = 5,
+        C_PLUS = 6,
+        B_MINUS = 7,
+        B = 8,
+        B_PLUS = 9,
+        A_MINUS = 10,
+        A = 11,
+        A_PLUS = 12,
+        ULTRA_A = 13
+    }
+
     enum GravityState
     {
         Normal,
@@ -12,7 +30,9 @@ public class Player : MonoBehaviour
     // Inspector -------------------
     [Header("Player Variables")]
     [SerializeField]
-    int lives = 1;
+    Grade grade = Grade.C_MINUS;
+    [SerializeField]
+    Sprite[] spriteGrades;
     [SerializeField]
     float acceleration = 0.5f;
     [SerializeField]
@@ -31,6 +51,8 @@ public class Player : MonoBehaviour
     [Header("GameObjects/Components")]
     [SerializeField]
     SpriteRenderer brain_sprite;
+    [SerializeField]
+    SpriteRenderer gradeSprite;
     // -----------------------------
 
     // Internal Variables ----------
@@ -47,6 +69,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         pos = transform.position;
+        AddGrade();
     }
 
     // Update is called once per frame
@@ -156,9 +179,7 @@ public class Player : MonoBehaviour
         {
             if (collision.tag == "Enemy")
             {
-                // Substract one mark
-                // mark -= 1;
-
+                DecreaseGrade();
                 StartCoroutine(InvulnerableAnim());
             }
         }
@@ -195,5 +216,45 @@ public class Player : MonoBehaviour
         }
 
         is_invulnerable = false;
+    }
+
+    void OnPlayerDead()
+    {
+        // TODO: 
+    }
+
+    void AddGrade()
+    {
+        if (grade != Grade.ULTRA_A)
+        {
+            ++grade;
+        }
+
+        if (grade != Grade.ULTRA_A)
+        {
+            gradeSprite.sprite = spriteGrades[(int)grade];
+        }
+        else
+        {
+            // TODO: add pluses
+        }
+    }
+
+    void DecreaseGrade()
+    {
+        --grade;
+
+        if (grade == Grade.ULTRA_A)
+        {
+            // TODO: Decrease pluses
+        }
+        else
+        {
+            gradeSprite.sprite = spriteGrades[(int)grade];
+            if (grade == Grade.F)
+            {
+                OnPlayerDead();
+            }
+        }
     }
 }
