@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Player : MonoBehaviour
 {
     enum GravityState
@@ -20,6 +19,18 @@ public class Player : MonoBehaviour
     float max_velocity = 5.0f;
     [SerializeField]
     float sinus_speed = 2.0f;
+    [SerializeField]
+    int invulnerable_cycles = 3;
+    [SerializeField]
+    float invulnerable_time = 2;
+    [SerializeField]
+    Color invulnerable_color;
+    [SerializeField]
+    bool is_invulnerable = false;
+
+    [Header("GameObjects/Components")]
+    [SerializeField]
+    SpriteRenderer brain_sprite;
     // -----------------------------
 
     // Internal Variables ----------
@@ -46,10 +57,10 @@ public class Player : MonoBehaviour
         if (g_state == GravityState.Normal)
         {
             // Gravity -> I use deltaTime 2 times because both acceleration and velocity need to be converted to per frame instead of per second.
-            current_velocity += acceleration * current_gravity_direction;  // v = v0 + a*t 
-            current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
-            pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
-            transform.position = pos;
+            //current_velocity += acceleration * current_gravity_direction;  // v = v0 + a*t 
+            //current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
+            //pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
+            //transform.position = pos;
             // ------------------------------------------------------------------------------
         }
         else
@@ -78,7 +89,12 @@ public class Player : MonoBehaviour
 
     void HandleInput()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(InvulnerableAnim());
+        }
+
+        if (Input.GetKey(KeyCode.D))
         {
             time_hold += Time.deltaTime;
 
@@ -132,5 +148,52 @@ public class Player : MonoBehaviour
             "Current Velocity: " + current_velocity +
             "\n---------------------"
             );
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!is_invulnerable)
+        {
+            if (collision.tag == "Enemy")
+            {
+                // Substract one mark
+                // mark -= 1;
+
+                StartCoroutine(InvulnerableAnim());
+            }
+        }
+    }
+
+    IEnumerator InvulnerableAnim()
+    {
+        is_invulnerable = true;
+        int current_cycle = 0;
+        float time_start = Time.time;
+        float time_per_cycle = invulnerable_time / (float)invulnerable_cycles;
+        Color current_color = brain_sprite.color;
+
+        while (current_cycle < invulnerable_cycles)
+        {
+            float t = (Time.time - time_start) / time_per_cycle;
+
+            if (t < 0.5f)
+            {
+                brain_sprite.color = Color.Lerp(current_color, invulnerable_color, t * 2);
+            }
+            else if (t < 1)
+            {
+                brain_sprite.color = Color.Lerp(invulnerable_color, current_color, (t - 0.5f) * 2);
+            }
+            else
+            {
+                brain_sprite.color = current_color;
+                ++current_cycle;
+                time_start = Time.time;
+            }
+
+            yield return null;
+        }
+
+        is_invulnerable = false;
     }
 }

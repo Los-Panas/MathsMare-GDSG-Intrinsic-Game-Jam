@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 751415732}
   - component: {fileID: 751415733}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,6 +334,11 @@ MonoBehaviour:
   acceleration: 0.25
   max_velocity: 8
   sinus_speed: 5
+  invulnerable_cycles: 3
+  invulnerable_time: 2
+  invulnerable_color: {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0.74509805}
+  is_invulnerable: 0
+  brain_sprite: {fileID: 751415733}
 --- !u!1 &1770654293
 GameObject:
   m_ObjectHideFlags: 0
