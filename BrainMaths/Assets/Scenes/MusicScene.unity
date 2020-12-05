@@ -360,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   length: 75
   distanceBetween: 1
-  timeBeforeChange: 0.5
+  timeBeforeChange: 0.25
   availableColors:
   - {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0}
   - {r: 0.54509807, g: 0.42745098, b: 0.6117647, a: 0}

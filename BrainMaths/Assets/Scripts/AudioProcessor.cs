@@ -243,22 +243,6 @@ public class AudioProcessor : MonoBehaviour
 		}
 	}
 
-	public void changeCameraColor()
-	{
-		//Debug.Log("camera");
-		float r = Random.Range(0f, 1f);
-		float g = Random.Range(0f, 1f);
-		float b = Random.Range(0f, 1f);
-
-		//Debug.Log(r + "," + g + "," + b);
-		Color color = new Color(r, g, b);
-
-		GetComponent<Camera>().clearFlags = CameraClearFlags.Color;
-		Camera.main.backgroundColor = color;
-
-		//camera.backgroundColor = color;
-	}
-
 	public float getBandWidth()
 	{
 		return (2f / (float)bufferSize) * (samplingRate / 2f);
