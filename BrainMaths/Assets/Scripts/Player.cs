@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
     float time_hold = 0.0f;
     float manual_time = 0;
     bool special_charged = false;
+    bool is_special_coroutine_finished = true;
     Coroutine grade_perlin_noise_coroutine;
     // -----------------------------
 
@@ -298,8 +299,7 @@ public class Player : MonoBehaviour
         StartCoroutine(PerlinNoiseShake(Camera.gameObject, 10));
         Vector2 pos = transform.position;
         pos.x += 1;
-        Instantiate(DeathExpansionWave, pos, Quaternion.identity); 
-        Debug.Log("BOOM");
+        Instantiate(DeathExpansionWave, pos, Quaternion.identity);
     }
 
     IEnumerator NoSpecialChargedFeedback()
