@@ -9,6 +9,7 @@ public class EnemySin : EnemyBase
     public float waveSpeed = 10.0f;  // TODO: speed based on bpm?
     public float mySpeedX = 3.0f;
     private float value;
+
     public override void Initialize()
     {
         Debug.Log("Im enemy moUstachoe, and i dont want random speed");
