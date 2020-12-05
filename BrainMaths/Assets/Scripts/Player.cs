@@ -57,10 +57,10 @@ public class Player : MonoBehaviour
         if (g_state == GravityState.Normal)
         {
             // Gravity -> I use deltaTime 2 times because both acceleration and velocity need to be converted to per frame instead of per second.
-            //current_velocity += acceleration * current_gravity_direction;  // v = v0 + a*t 
-            //current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
-            //pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
-            //transform.position = pos;
+            current_velocity += acceleration * current_gravity_direction;  // v = v0 + a*t 
+            current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
+            pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
+            transform.position = pos;
             // ------------------------------------------------------------------------------
         }
         else
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
             }
         } 
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.D))
         {
             ChangeGravityDirection();
 
