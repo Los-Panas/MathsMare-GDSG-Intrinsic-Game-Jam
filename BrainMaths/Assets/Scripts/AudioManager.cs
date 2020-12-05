@@ -15,11 +15,14 @@ public class AudioManager : MonoBehaviour
     private AudioSource currentAudioSource;
     private AudioSource extraAudioSource;
 
-    [Header("Spectrum Visual Settings")]
+    [Header("Spectrum Bars")]
     [SerializeField]
-    private float length = 0;
+    private float barLength = 0;
     [SerializeField]
-    private float distanceBetween = 0;
+    private int refrashRate = 0;
+    private int spectrumCount = 0;
+    [SerializeField]
+    private MeshRenderer[] bars;
 
     [Header("Background")]
     [SerializeField]
@@ -95,11 +98,18 @@ public class AudioManager : MonoBehaviour
 
     public void OnSpectrum(float[] spectrum)
     {
-        for (int i = 0; i < spectrum.Length; ++i)
+        ++spectrumCount;
+        if (spectrumCount >= refrashRate)
         {
-            Vector3 start = new Vector3(i * distanceBetween, 0, 0);
-            Vector3 end = new Vector3(i * distanceBetween, spectrum[i] * length, 0);
-            Debug.DrawLine(start, end);
+            spectrumCount = 0;
+
+            int min = Mathf.Min(spectrum.Length, bars.Length);
+
+            for (int i = 0; i < min; ++i)
+            {
+                // bars[i].material.color = Color.green; // TODO: change color
+                bars[i].material.SetFloat("_Fill", Mathf.Min(1, spectrum[i] * barLength));
+            }
         }
     }
 }
