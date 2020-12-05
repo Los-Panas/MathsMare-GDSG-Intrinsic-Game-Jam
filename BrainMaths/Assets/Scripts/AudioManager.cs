@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("Spectrum Visual Settings")]
+    [Header("Musics")]
+    [SerializeField]
+    private float overlapEndingSec = 4;
+    [SerializeField]
+    private AudioClip[] clips;
 
+    private List<AudioClip> clipsUsed = new List<AudioClip>();
+    private AudioProcessor audioProcessor;
+    private AudioSource currentAudioSource;
+    private AudioSource extraAudioSource;
+
+    [Header("Spectrum Visual Settings")]
     [SerializeField]
     private float length = 0;
     [SerializeField]
@@ -14,25 +24,73 @@ public class AudioManager : MonoBehaviour
     [Header("Background")]
     [SerializeField]
     [Space]
-    private float timeBeforeChange = 0;
-    private float timeLastChange = 0;
+    private float beatsBeforeChange = 0;
+    private float beatCout = 0;
     [SerializeField]
     private Color[] availableColors;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        currentAudioSource = audioSources[0];
+        extraAudioSource = audioSources[1];
+
+        audioProcessor = GetComponent<AudioProcessor>();
+
+        OnChangeMusic();
+    }
+
+    private void Update()
+    {
+        if (currentAudioSource.isPlaying && currentAudioSource.clip.length - currentAudioSource.time <= overlapEndingSec)
+        {
+            OnChangeMusic();
+        }
+    }
+
+    private void OnChangeMusic()
+    {
+        AudioSource auxAudioSource = currentAudioSource;
+
+        extraAudioSource.clip = GetRandomClip();
+        extraAudioSource.Play();
+
+        currentAudioSource = extraAudioSource;
+        extraAudioSource = auxAudioSource;
+
+        audioProcessor.SetAudioSource(currentAudioSource);
+    }
+
+    private AudioClip GetRandomClip()
+    {
+        AudioClip clip;
+
+        while (true)
+        {
+            clip = clips[Random.Range(0, clips.Length)];
+            if (!clipsUsed.Contains(clip))
+            {
+                if (clipsUsed.Count == clips.Length - 1)
+                {
+                    clipsUsed.Clear();
+                }
+
+                clipsUsed.Add(clip);
+                break;
+            }
+        }
+
+        return clip;
     }
 
     public void OnBeat()
     {
-        if (Time.time - timeLastChange > timeBeforeChange)
+        ++beatCout;
+        if (beatCout >= beatsBeforeChange)
         {
-            timeLastChange = Time.time;
+            beatCout = 0;
             Camera.main.backgroundColor = availableColors[Random.Range(0, availableColors.Length)];
         }
-
     }
 
     public void OnSpectrum(float[] spectrum)

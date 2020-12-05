@@ -95,19 +95,24 @@ public class AudioProcessor : MonoBehaviour
 	{
 		initArrays();
 
-		audioSource = GetComponent<AudioSource>();
+		//initialize record of previous spectrum
+		spec = new float[nBand];
+		for (int i = 0; i < nBand; ++i)
+		{
+			spec[i] = 100.0f;
+		}
+
+		lastT = getCurrentTimeMillis();
+	}
+
+	public void SetAudioSource(AudioSource audioSource)
+    {
+		this.audioSource = audioSource;
 		samplingRate = audioSource.clip.frequency;
 
 		framePeriod = (float)bufferSize / (float)samplingRate;
 
-		//initialize record of previous spectrum
-		spec = new float[nBand];
-		for (int i = 0; i < nBand; ++i)
-			spec[i] = 100.0f;
-
 		auco = new Autoco(maxlag, decay, framePeriod, getBandWidth());
-
-		lastT = getCurrentTimeMillis();
 	}
 
 	public void tapTempo()
