@@ -35,7 +35,7 @@ public class EnemyBase : MonoBehaviour
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
         if(screenPosition.x < minCoordToDestroy)
         {
-            Debug.Log("TODO: Oriorii I need to destroy myself");
+            Destroy();
         }
     }
 
@@ -56,5 +56,19 @@ public class EnemyBase : MonoBehaviour
     {
         mPosition.x += mVelocity.x * mSpeed.x * Time.deltaTime;
         transform.position = mPosition;  
+    }
+
+    public virtual void Destroy()
+    {
+        // TODO: Animation
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Death")
+        {
+            Destroy();
+        }
     }
 }

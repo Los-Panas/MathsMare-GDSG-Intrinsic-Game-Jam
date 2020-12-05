@@ -126,6 +126,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29c0c18e10bf6c4084fa9f734dbfc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 0.25
+  max_velocity: 8
+  sinus_speed: 5
+  invulnerable_cycles: 3
+  invulnerable_time: 2
+  invulnerable_color: {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0.74509805}
+  is_invulnerable: 0
+  DeathExpansionWave: {fileID: 0}
+  brain_sprite: {fileID: 4492117078098937944}
+  gradeSprite: {fileID: 0}
+  Camera: {fileID: 0}
   grade: 1
   spriteGrades:
   - {fileID: 21300000, guid: dce74d02fe8299d45a1bf4b74c2e415c, type: 3}
@@ -141,15 +152,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7474db9a3843fff4d9bbd6a3eb666612, type: 3}
   - {fileID: 21300000, guid: d53cf0f3685fd944d8dc959cd480b051, type: 3}
   - {fileID: 21300000, guid: 7aa4bbce9f4cce244ae483669bd12857, type: 3}
-  acceleration: 0.25
-  max_velocity: 8
-  sinus_speed: 5
-  invulnerable_cycles: 3
-  invulnerable_time: 2
-  invulnerable_color: {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0.74509805}
-  is_invulnerable: 0
-  brain_sprite: {fileID: 4492117078098937944}
-  gradeSprite: {fileID: 0}
+  grade_perlin_noise_factor: 5
 --- !u!1 &4492117079227249592
 GameObject:
   m_ObjectHideFlags: 0

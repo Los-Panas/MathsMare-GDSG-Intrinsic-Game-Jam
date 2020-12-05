@@ -30,10 +30,6 @@ public class Player : MonoBehaviour
     // Inspector -------------------
     [Header("Player Variables")]
     [SerializeField]
-    Grade grade = Grade.C_MINUS;
-    [SerializeField]
-    Sprite[] spriteGrades;
-    [SerializeField]
     float acceleration = 0.5f;
     [SerializeField]
     float max_velocity = 5.0f;
@@ -48,11 +44,23 @@ public class Player : MonoBehaviour
     [SerializeField]
     bool is_invulnerable = false;
 
-    [Header("GameObjects/Components")]
+    [Header("GameObjects / Components")]
+    [SerializeField]
+    GameObject DeathExpansionWave;
     [SerializeField]
     SpriteRenderer brain_sprite;
     [SerializeField]
     SpriteRenderer gradeSprite;
+    [SerializeField]
+    GameObject Camera;
+
+    [Header("Grade Variables")]
+    [SerializeField]
+    Grade grade = Grade.C_MINUS;
+    [SerializeField]
+    Sprite[] spriteGrades;
+    [SerializeField]
+    float grade_perlin_noise_factor = 5.0f;
     // -----------------------------
 
     // Internal Variables ----------
@@ -62,6 +70,8 @@ public class Player : MonoBehaviour
     Vector3 pos;
     float time_hold = 0.0f;
     float manual_time = 0;
+    bool special_charged = false;
+    Coroutine grade_perlin_noise_coroutine;
     // -----------------------------
 
 
@@ -70,6 +80,7 @@ public class Player : MonoBehaviour
     {
         pos = transform.position;
         AddGrade();
+        special_charged = false;
     }
 
     // Update is called once per frame
@@ -80,10 +91,10 @@ public class Player : MonoBehaviour
         if (g_state == GravityState.Normal)
         {
             // Gravity -> I use deltaTime 2 times because both acceleration and velocity need to be converted to per frame instead of per second.
-            current_velocity += acceleration * current_gravity_direction;  // v = v0 + a*t 
-            current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
-            pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
-            transform.position = pos;
+            //current_velocity += acceleration * current_gravity_direction;  // v = v0 + a*t 
+            //current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
+            //pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
+            //transform.position = pos;
             // ------------------------------------------------------------------------------
         }
         else
@@ -112,12 +123,20 @@ public class Player : MonoBehaviour
 
     void HandleInput()
     {
+        // TODO: Remove
+        // Debug --------------------------------
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(InvulnerableAnim());
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            special_charged = true;
+        }
+        // ---------------------------------------
+
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             time_hold += Time.deltaTime;
 
@@ -136,11 +155,26 @@ public class Player : MonoBehaviour
             }
         } 
 
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             ChangeGravityDirection();
 
             time_hold = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightControl))
+        {
+            if (special_charged)
+            {
+                UseSpecial();
+            }
+            else
+            {
+                if (grade_perlin_noise_coroutine == null)
+                {
+                    grade_perlin_noise_coroutine = StartCoroutine(NoSpecialChargedFeedback());
+                }
+            }
         }
     }
 
@@ -225,13 +259,11 @@ public class Player : MonoBehaviour
 
     void AddGrade()
     {
-        if (grade != Grade.ULTRA_A)
-        {
-            ++grade;
-        }
+        special_charged = true;
 
         if (grade != Grade.ULTRA_A)
         {
+            ++grade;
             gradeSprite.sprite = spriteGrades[(int)grade];
         }
         else
@@ -243,6 +275,8 @@ public class Player : MonoBehaviour
     void DecreaseGrade()
     {
         --grade;
+
+        // Restart Grade Progress to 0
 
         if (grade == Grade.ULTRA_A)
         {
@@ -256,5 +290,52 @@ public class Player : MonoBehaviour
                 OnPlayerDead();
             }
         }
+    }
+
+    void UseSpecial()
+    {
+        special_charged = false;
+        StartCoroutine(PerlinNoiseShake(Camera.gameObject, 10));
+        Vector2 pos = transform.position;
+        pos.x += 1;
+        Instantiate(DeathExpansionWave, pos, Quaternion.identity); 
+        Debug.Log("BOOM");
+    }
+
+    IEnumerator NoSpecialChargedFeedback()
+    {
+        Vector3 original_pos = gradeSprite.transform.position;
+        Vector3 pos = gradeSprite.transform.position;
+        float time_start = Time.time;
+
+        while (Time.time - time_start < 0.25f)
+        {
+            pos.x += (Mathf.PerlinNoise(0, Time.time * 10) - 0.5f) * grade_perlin_noise_factor * Time.deltaTime;
+            pos.y += (Mathf.PerlinNoise(Time.time * 10, 0) - 0.5f) * grade_perlin_noise_factor * Time.deltaTime;
+            gradeSprite.transform.position = pos;
+
+            yield return null;
+        }
+
+        gradeSprite.transform.position = original_pos;
+        grade_perlin_noise_coroutine = null;
+    }
+
+    IEnumerator PerlinNoiseShake(GameObject gameObject, float perlin_noise_factor)
+    {
+        Vector3 original_pos = gameObject.transform.position;
+        Vector3 pos = gameObject.transform.position;
+        float time_start = Time.time;
+
+        while (Time.time - time_start < 0.25f)
+        {
+            pos.x += (Mathf.PerlinNoise(0, Time.time * 10) - 0.5f) * perlin_noise_factor * Time.deltaTime;
+            pos.y += (Mathf.PerlinNoise(Time.time * 10, 0) - 0.5f) * perlin_noise_factor * Time.deltaTime;
+            gameObject.transform.position = pos;
+
+            yield return null;
+        }
+
+        gameObject.transform.position = original_pos;
     }
 }
