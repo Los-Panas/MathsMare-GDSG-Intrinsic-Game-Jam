@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     float acceleration = 0.5f;
     [SerializeField]
     float max_velocity = 5.0f;
+    [SerializeField]
+    float sinus_speed = 2.0f;
     // -----------------------------
 
     // Internal Variables ----------
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour
     float current_velocity = 0.0f;
     int current_gravity_direction = -1;
     Vector3 pos;
-    int frames_button_hold = 0;
+    float time_hold = 0.0f;
     float manual_time = 0;
     // -----------------------------
 
@@ -39,7 +41,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        manual_time += Time.deltaTime;
         HandleInput();
 
         if (g_state == GravityState.Normal)
@@ -49,9 +50,13 @@ public class Player : MonoBehaviour
             current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
             pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
             transform.position = pos;
+            // ------------------------------------------------------------------------------
         }
         else
         {
+            // Sinus Movement while Holding
+            manual_time += Time.deltaTime * sinus_speed;
+
             if (current_velocity != 0)
             {
                 current_velocity -= acceleration * 0.5f * current_gravity_direction;
@@ -63,18 +68,21 @@ public class Player : MonoBehaviour
                 }
             }
 
-            pos.y += Mathf.Sin(manual_time * 3) * Time.deltaTime * 0.5f;
+            pos.y += Mathf.Sin(manual_time) * Time.deltaTime * 0.35f;
             transform.position = pos;
+            // ------------------------------------------------------------------------------
         }
 
-        Analysis();
+        //Analysis();
     }
 
     void HandleInput()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if (frames_button_hold > 5 && g_state != GravityState.Floating)
+            time_hold += Time.deltaTime;
+
+            if (time_hold >= 0.15f && g_state != GravityState.Floating)
             {
                 g_state = GravityState.Floating;
 
@@ -87,22 +95,35 @@ public class Player : MonoBehaviour
                     manual_time = 0;
                 }
             }
-
-            ++frames_button_hold;
         } 
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
             ChangeGravityDirection();
 
-            frames_button_hold = 0;
+            time_hold = 0;
         }
     }
 
     void ChangeGravityDirection()
     {
-        g_state = GravityState.Normal;
-        current_gravity_direction = -current_gravity_direction;
+        if (g_state == GravityState.Floating)
+        {
+            if (Mathf.Sin(manual_time) > 0)
+            {
+                current_gravity_direction = 1;
+            }
+            else
+            {
+                current_gravity_direction = -1;
+            }
+
+            g_state = GravityState.Normal;
+        }
+        else
+        {
+            current_gravity_direction = -current_gravity_direction;
+        }
     }
 
     void Analysis()
