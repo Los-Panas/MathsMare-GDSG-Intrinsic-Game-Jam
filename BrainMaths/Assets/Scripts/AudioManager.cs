@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private Color[] availableColors;
 
-    [Header("EnemySpawnet")]
+    [Header("Enemy Spawner")]
     [SerializeField]
     [Space]
     private float beatsBeforeSpawn = 0;

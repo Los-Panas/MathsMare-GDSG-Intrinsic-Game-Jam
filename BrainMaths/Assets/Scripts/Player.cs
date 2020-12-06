@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
+    static public Player instance;
+
     enum Grade
     {
         F = 0,
@@ -61,6 +63,11 @@ public class Player : MonoBehaviour
     Sprite[] spriteGrades;
     [SerializeField]
     float grade_perlin_noise_factor = 5.0f;
+    [SerializeField]
+    MeshRenderer gradeBar;
+    int enemyCount = 0;
+    [SerializeField]
+    int[] enemyCoutToUpgrade;
     // -----------------------------
 
     // Internal Variables ----------
@@ -79,9 +86,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+
         pos = transform.position;
         AddGrade();
         special_charged = false;
+        OnResetBar();
     }
 
     // Update is called once per frame
@@ -265,19 +275,24 @@ public class Player : MonoBehaviour
         if (grade != Grade.ULTRA_A)
         {
             ++grade;
-            gradeSprite.sprite = spriteGrades[(int)grade];
+            if (grade != Grade.ULTRA_A)
+            { 
+                gradeSprite.sprite = spriteGrades[(int)grade];
+            }
         }
-        else
+
+        if (grade == Grade.ULTRA_A)
         {
             // TODO: add pluses
         }
+        OnResetBar();
     }
 
     void DecreaseGrade()
     {
         --grade;
 
-        // Restart Grade Progress to 0
+        OnResetBar();
 
         if (grade == Grade.ULTRA_A)
         {
@@ -291,6 +306,28 @@ public class Player : MonoBehaviour
                 OnPlayerDead();
             }
         }
+    }
+
+    public void OnUpdateBarUp()
+    {
+        ++enemyCount;
+        // TODO: lerp
+
+        int target = enemyCoutToUpgrade[(int)grade - 1];
+        if (enemyCount == target)
+        {
+            AddGrade();
+        }
+        else
+        {
+            gradeBar.material.SetFloat("_Fill", (float)((float)enemyCount / (float)target));
+        }
+    }
+
+    void OnResetBar()
+    {
+        gradeBar.material.SetFloat("_Fill", 0);
+        enemyCount = 0;
     }
 
     void UseSpecial()

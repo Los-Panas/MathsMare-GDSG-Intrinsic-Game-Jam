@@ -13,7 +13,9 @@ public class EnemyBase : MonoBehaviour
     public Vector2 minAndMax;
 
     public float minCoordToDestroy = 0.0f; // coords for the left side to despawn the enemy, to adjust sprite size offset
-    
+
+    private bool deleted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,11 @@ public class EnemyBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (deleted)
+        {
+            return;
+        }
+
         CheckOffScreenConditions();
         Move();
     }
@@ -33,6 +40,7 @@ public class EnemyBase : MonoBehaviour
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
         if(screenPosition.x < minCoordToDestroy)
         {
+            Player.instance.OnUpdateBarUp();
             Destroy();
         }
     }
@@ -60,6 +68,8 @@ public class EnemyBase : MonoBehaviour
     {
         // TODO: Animation
         Destroy(gameObject);
+
+        deleted = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
