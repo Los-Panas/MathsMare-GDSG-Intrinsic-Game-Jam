@@ -1,7 +1,25 @@
 fileFormatVersion: 2
 guid: c31bcd9d1b1338e4891113b78107c375
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4949040336389871768
+    second: infinityMouthsSprite_0
+  - first:
+      213: 3446827219814851907
+    second: infinityMouthsSprite_1
+  - first:
+      213: 1310506387501824475
+    second: infinityMouthsSprite_2
+  - first:
+      213: 6136459319018845054
+    second: infinityMouthsSprite_3
+  - first:
+      213: 2352158104042524694
+    second: infinityMouthsSprite_4
+  - first:
+      213: 6150394878820939883
+    second: infinityMouthsSprite_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -40,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -109,7 +127,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: infinityMouthsSprite_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 77
+        width: 22
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 867e662090a715bb0800000000000000
+      internalID: -4949040336389871768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infinityMouthsSprite_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 77
+        width: 22
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3452637281795df20800000000000000
+      internalID: 3446827219814851907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infinityMouthsSprite_2
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 45
+        width: 22
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd93de6bd9adf2210800000000000000
+      internalID: 1310506387501824475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infinityMouthsSprite_3
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 45
+        width: 22
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e73f0c00d35192550800000000000000
+      internalID: 6136459319018845054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infinityMouthsSprite_4
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 13
+        width: 22
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 610d207555b84a020800000000000000
+      internalID: 2352158104042524694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: infinityMouthsSprite_5
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 13
+        width: 22
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b68f08c5e879a5550800000000000000
+      internalID: 6150394878820939883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

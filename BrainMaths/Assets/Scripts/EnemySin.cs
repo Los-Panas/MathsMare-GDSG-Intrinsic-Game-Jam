@@ -12,7 +12,7 @@ public class EnemySin : EnemyBase
 
     public override void Initialize()
     {
-        Debug.Log("Im enemy moUstachoe, and i dont want random speed");
+        Debug.Log("Im enemy moustachoe, and i dont want random speed");
         mSpeed = new Vector2(mySpeedX, waveSpeed);
     }
 

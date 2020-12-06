@@ -20,7 +20,7 @@ public class AttractParticles : MonoBehaviour
 
     void Awake()
     {
-        target = GameObject.Find("Bar").transform;
+        target = GameObject.Find("GradeBar").transform;
         AffectedParticles = GetComponent<ParticleSystem>();
         Setup();
     }
