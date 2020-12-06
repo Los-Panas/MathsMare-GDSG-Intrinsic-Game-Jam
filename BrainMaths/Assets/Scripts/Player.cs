@@ -73,23 +73,14 @@ public class Player : MonoBehaviour
     KeyCode MoveUp = KeyCode.W;
     [SerializeField]
     KeyCode MoveDown = KeyCode.S;
-    [SerializeField]
-    float timeAfterTouchBounds = 0;
     // -----------------------------
 
     // Internal Variables ----------
     Rigidbody2D rb;
-    Coroutine barCoroutine = null;
-    float auxCountBar = 0;
-    float current_velocity = 0.0f;
-    int current_gravity_direction = -1;
-    Vector3 pos;
     float special_time_hold = 0.0f;
     float manual_time = 0;
     bool special_charged = false;
     Coroutine grade_perlin_noise_coroutine;
-    bool ignoreChange = false;
-    float timeTouchBounds = 0;
     
     public struct BarInfo
     {
@@ -118,7 +109,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
 
-        pos = transform.position;
         special_charged = false;
         gradeSprite.sprite = spriteGrades[(int)grade];
         gradeBar.material.SetFloat("_Fill", 0);

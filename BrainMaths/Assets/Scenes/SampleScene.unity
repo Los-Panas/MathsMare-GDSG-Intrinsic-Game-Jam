@@ -2460,7 +2460,7 @@ PrefabInstance:
     - target: {fileID: 4492117078378589320, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9
+      value: -7.29
       objectReference: {fileID: 0}
     - target: {fileID: 4492117078378589320, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
@@ -2514,24 +2514,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
-      propertyPath: grade
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
-        type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
-        type: 3}
       propertyPath: Camera
       value: 
       objectReference: {fileID: 519420028}
-    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
-        type: 3}
-      propertyPath: MoveDown
-      value: 115
-      objectReference: {fileID: 0}
     - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
       propertyPath: gradeBar
