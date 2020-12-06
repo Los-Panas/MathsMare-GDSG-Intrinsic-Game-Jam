@@ -157,10 +157,10 @@ public class Player : MonoBehaviour
         //    StartCoroutine(InvulnerableAnim());
         //}
 
-        //if(Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    special_charged = true;
-        //}
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            special_charged = true;
+        }
         // ---------------------------------------
 
         if (CanUserChangeGravity())
@@ -270,6 +270,10 @@ public class Player : MonoBehaviour
                 DecreaseGrade();
                 StartCoroutine(InvulnerableAnim());
             }
+            if (g_state == GravityState.Floating)
+            {
+                g_state = GravityState.Normal;
+            }
             current_gravity_direction = -1;
         }
         else if (collision.tag == "VerticalLimitDown")
@@ -280,6 +284,10 @@ public class Player : MonoBehaviour
             {
                 DecreaseGrade();
                 StartCoroutine(InvulnerableAnim());
+            }
+            if (g_state == GravityState.Floating)
+            {
+                g_state = GravityState.Normal;
             }
             current_gravity_direction = 1;
         }
@@ -296,6 +304,10 @@ public class Player : MonoBehaviour
                 DecreaseGrade();
                 StartCoroutine(InvulnerableAnim());
             }
+            if (g_state == GravityState.Floating)
+            {
+                g_state = GravityState.Normal;
+            }
             current_gravity_direction = -1;
         }
         else if (collision.tag == "VerticalLimitDown")
@@ -306,6 +318,10 @@ public class Player : MonoBehaviour
             {
                 DecreaseGrade();
                 StartCoroutine(InvulnerableAnim());
+            }
+            if (g_state == GravityState.Floating)
+            {
+                g_state = GravityState.Normal;
             }
             current_gravity_direction = 1;
         }
