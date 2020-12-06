@@ -87,9 +87,6 @@ public class EnemiesSpawner : MonoBehaviour
 
 
         Vector3 spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), transform.position.z);
-        Instantiate(spwn, transform.position + spwnPosicion, transform.rotation);
-
         return Instantiate(spwn, transform.position + spwnPosicion, transform.rotation);
-
     }
 }

@@ -68,6 +68,8 @@ public class Player : MonoBehaviour
     int enemyCount = 0;
     [SerializeField]
     int[] enemyCoutToUpgrade;
+    Coroutine barCoroutine = null;
+    float auxCountBar = 0;
     // -----------------------------
 
     // Internal Variables ----------
@@ -314,13 +316,14 @@ public class Player : MonoBehaviour
         // TODO: lerp
 
         int target = enemyCoutToUpgrade[(int)grade - 1];
-        if (enemyCount == target)
+        if (barCoroutine != null)
         {
-            AddGrade();
+            auxCountBar = (float)((float)enemyCount / (float)target);
         }
         else
         {
-            gradeBar.material.SetFloat("_Fill", (float)((float)enemyCount / (float)target));
+            barCoroutine = StartCoroutine(BarUp((float)((float)enemyCount / (float)target)));
+            auxCountBar = 0.0F;
         }
     }
 
@@ -328,6 +331,43 @@ public class Player : MonoBehaviour
     {
         gradeBar.material.SetFloat("_Fill", 0);
         enemyCount = 0;
+    }
+
+    IEnumerator BarUp(float value)
+    {
+        float current = gradeBar.material.GetFloat("_Fill");
+        float time = Time.time;
+        while (true)
+        {
+            float t = (Time.time - time) / 1;
+            current = Mathf.Lerp(current, value, t);
+            gradeBar.material.SetFloat("_Fill", current);
+            
+            if (current >= value)
+            {
+                break;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+
+        if (value >= 1)
+        {
+            // TODO: particulita guay
+            AddGrade();
+        }
+
+        if (auxCountBar != 0.0F)
+        {
+            barCoroutine = StartCoroutine(BarUp(auxCountBar));
+            auxCountBar = 0.0F;
+        }
+        else
+        {
+            barCoroutine = null;
+        }
     }
 
     void UseSpecial()
