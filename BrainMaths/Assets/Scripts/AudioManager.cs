@@ -32,6 +32,14 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private Color[] availableColors;
 
+    [Header("EnemySpawnet")]
+    [SerializeField]
+    [Space]
+    private float beatsBeforeSpawn = 0;
+    private float spawnCout = 0;
+    [SerializeField]
+    private EnemiesSpawner spawner;
+
     private void Awake()
     {
         AudioSource[] audioSources = GetComponents<AudioSource>();
@@ -93,6 +101,12 @@ public class AudioManager : MonoBehaviour
         {
             beatCout = 0;
             Camera.main.backgroundColor = availableColors[Random.Range(0, availableColors.Length)];
+        }
+        ++spawnCout;
+        if(spawnCout >= beatsBeforeSpawn)
+        {
+            spawnCout = 0;
+            spawner.SpawnRandomEnemy();
         }
     }
 

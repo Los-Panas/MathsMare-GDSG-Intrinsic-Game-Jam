@@ -8,12 +8,17 @@ public class EnemiesSpawner : MonoBehaviour
     {
         Top,
         Middle,
-        Bottom
+        Bottom,
+        Random
     }
     public enum EnemyType
     {
         Pi,
-        Plus
+        Plus,
+        Percentatge,
+        Decrease,
+        Sqrt
+        
     }
     [System.Serializable]
     public struct EnemyMap
@@ -41,20 +46,6 @@ public class EnemiesSpawner : MonoBehaviour
         objectSize = transform.position + new Vector3(rect.x - 1, rect.y - 1, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Time.time >= timerSpawner)
-        {
-            timerSpawner = Time.time + spawnRate;
-            GameObject spwn = enemies[Random.Range(0, enemies.Count)].enemy;
-
-
-            Vector3 spwnPosicion = new Vector3(0 , Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), transform.position.z);
-            Instantiate(spwn, transform.position + spwnPosicion , transform.rotation);
-        }
-    }
-
     public GameObject SpawnEnemy(EnemyType enemy, SpawnPos pos)
     {
         //search enemy
@@ -67,22 +58,38 @@ public class EnemiesSpawner : MonoBehaviour
                 break;
             }
         }
-        
+        Vector3 spwnPosicion = Vector3.zero;
         switch (pos)
         {
             case SpawnPos.Top:
-                Vector3 spwnPosicion = new Vector3(0, objectSize.y * 0.5f, transform.position.z);
-                Instantiate(spawnEnemy, transform.position + spwnPosicion, transform.rotation);
+                spwnPosicion = new Vector3(0, objectSize.y * 0.5f, transform.position.z);
                 break;
             case SpawnPos.Middle:
-                Instantiate(spawnEnemy, transform.position , transform.rotation);
+
                 break;
             case SpawnPos.Bottom:
-                spwnPosicion = new Vector3(0, objectSize.y * 0.5f, transform.position.z);
-                Instantiate(spawnEnemy, transform.position + -spwnPosicion, transform.rotation);
+                spwnPosicion = new Vector3(0, -objectSize.y * 0.5f, transform.position.z);
+                break;
+            case SpawnPos.Random:
+                spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), transform.position.z);
                 break;
         }
+        
+        return Instantiate(spawnEnemy, transform.position + spwnPosicion, transform.rotation);
 
-        return null;
+    }
+
+    public GameObject SpawnRandomEnemy()
+    {
+        //search enemy
+        timerSpawner = Time.time + spawnRate;
+        GameObject spwn = enemies[Random.Range(0, enemies.Count)].enemy;
+
+
+        Vector3 spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), transform.position.z);
+        Instantiate(spwn, transform.position + spwnPosicion, transform.rotation);
+
+        return Instantiate(spwn, transform.position + spwnPosicion, transform.rotation);
+
     }
 }
