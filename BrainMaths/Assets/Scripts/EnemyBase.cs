@@ -61,6 +61,7 @@ public class EnemyBase : MonoBehaviour
     public virtual void Move()
     {
         mPosition.x += mVelocity.x * mSpeed.x * Time.deltaTime;
+        mPosition.y = transform.position.y;
         transform.position = mPosition; 
     }
 
