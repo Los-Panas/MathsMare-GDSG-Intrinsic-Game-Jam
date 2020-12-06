@@ -26,10 +26,7 @@ public class PercentageBalls : MonoBehaviour
 
             transform.rotation *= Quaternion.Euler(0, 0, Time.time);
 
-            if (Camera.main.WorldToScreenPoint(transform.position).x < 0)
-            {
-                Destroy(gameObject);
-            }
+            
         }
     }
 
