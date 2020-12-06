@@ -80,7 +80,6 @@ public class Player : MonoBehaviour
     float time_hold = 0.0f;
     float manual_time = 0;
     bool special_charged = false;
-    bool is_special_coroutine_finished = true;
     Coroutine grade_perlin_noise_coroutine;
     // -----------------------------
 
@@ -99,6 +98,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (barCoroutine == null && auxCountBar != 0.0F)
+        {
+            barCoroutine = StartCoroutine(BarUp(auxCountBar));
+            auxCountBar = 0.0F;
+        }
+
         HandleInput();
 
         if (g_state == GravityState.Normal)
@@ -313,7 +318,6 @@ public class Player : MonoBehaviour
     public void OnUpdateBarUp()
     {
         ++enemyCount;
-        // TODO: lerp
 
         int target = enemyCoutToUpgrade[(int)grade - 1];
         if (barCoroutine != null)
@@ -336,11 +340,12 @@ public class Player : MonoBehaviour
     IEnumerator BarUp(float value)
     {
         float current = gradeBar.material.GetFloat("_Fill");
+        float init = current;
         float time = Time.time;
         while (true)
         {
             float t = (Time.time - time) / 1;
-            current = Mathf.Lerp(current, value, t);
+            current = Mathf.Lerp(init, value, t);
             gradeBar.material.SetFloat("_Fill", current);
             
             if (current >= value)
@@ -359,15 +364,7 @@ public class Player : MonoBehaviour
             AddGrade();
         }
 
-        if (auxCountBar != 0.0F)
-        {
-            barCoroutine = StartCoroutine(BarUp(auxCountBar));
-            auxCountBar = 0.0F;
-        }
-        else
-        {
-            barCoroutine = null;
-        }
+        barCoroutine = null;
     }
 
     void UseSpecial()
