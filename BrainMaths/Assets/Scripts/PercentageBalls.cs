@@ -25,8 +25,6 @@ public class PercentageBalls : MonoBehaviour
             transform.position = pos;
 
             transform.rotation *= Quaternion.Euler(0, 0, Time.time);
-
-            
         }
     }
 
