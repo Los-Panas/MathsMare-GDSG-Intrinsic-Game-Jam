@@ -40,6 +40,10 @@ public class EnemyPercentage : EnemyBase
             case PercentageState.FirstHalf:
                 base.Move();
 
+                Vector2 pos = transform.position;
+                pos.y = Player.instance.transform.position.y;
+                transform.position = pos;
+
                 if (transform.position.x <= mid_point)
                 {
                     current_state = PercentageState.Shooting;
@@ -64,7 +68,7 @@ public class EnemyPercentage : EnemyBase
         {
             balls[i].transform.SetParent(transform.parent);
             Vector2 pos = balls[i].transform.position;
-            balls[i].GetComponent<PercentageBalls>().SetBallFree(new Vector2(-9, balls_vertical_target - balls_vertical_target * 2 * i) - pos, mVelocity.x);
+            balls[i].GetComponent<PercentageBalls>().SetBallFree(new Vector2(-9, transform.position.y + balls_vertical_target - balls_vertical_target * 2 * i) - pos, mVelocity.x);
         }
     }
 
