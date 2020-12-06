@@ -16,6 +16,10 @@ public class EnemyBase : MonoBehaviour
 
     private bool deleted = false;
 
+    [Header("Death Particles")]
+    [SerializeField]
+    private GameObject deathParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +72,8 @@ public class EnemyBase : MonoBehaviour
     public virtual void Destroy()
     {
         // TODO: Animation
+        Instantiate(deathParticles, transform.position, transform.rotation);
+
         Destroy(gameObject);
 
         deleted = true;

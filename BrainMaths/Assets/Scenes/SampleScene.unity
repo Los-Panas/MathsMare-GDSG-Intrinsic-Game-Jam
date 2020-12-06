@@ -771,6 +771,7 @@ MonoBehaviour:
   - {fileID: 1943511231}
   - {fileID: 1182187913}
   - {fileID: 841751017}
+  changeBarsColor: 3.81
   beatsBeforeChange: 10
   availableColors:
   - {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0}

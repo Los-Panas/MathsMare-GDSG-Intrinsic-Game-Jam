@@ -214,6 +214,8 @@ MonoBehaviour:
   randomizeStartingSpeed: 0
   minAndMax: {x: 0, y: 0}
   minCoordToDestroy: 0
+  deathParticles: {fileID: 1438847939287979412, guid: ff5eb1d4fe3c56e4cbb111d28d83961f,
+    type: 3}
   amplitude: 2
   waveSpeed: 10
   mySpeedX: 2

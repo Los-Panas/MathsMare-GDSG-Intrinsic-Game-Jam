@@ -7,7 +7,7 @@ public class AttractParticles : MonoBehaviour
     // The particle system to operate on
     private ParticleSystem AffectedParticles;
 
-    public Transform target;
+    private Transform target;
   
     [Range(0.0f,1.0f)]
     public float speed = 1.0f;
@@ -20,6 +20,7 @@ public class AttractParticles : MonoBehaviour
 
     void Awake()
     {
+        target = GameObject.Find("Bar").transform;
         AffectedParticles = GetComponent<ParticleSystem>();
         Setup();
     }
@@ -31,6 +32,8 @@ public class AttractParticles : MonoBehaviour
     // A cursor for the movement interpolation
     void LateUpdate()
     {
+        if (!AffectedParticles.IsAlive())
+            Destroy(this);
         // Work only if we have something to work on :)
         if (AffectedParticles != null)
         {
