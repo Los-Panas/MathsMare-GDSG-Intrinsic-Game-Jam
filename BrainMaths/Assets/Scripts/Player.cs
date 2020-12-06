@@ -66,29 +66,40 @@ public class Player : MonoBehaviour
     int enemyCount = 0;
     [SerializeField]
     int[] enemyCoutToUpgrade;
+    // -----------------------------
 
     [Header("Controls")]
     [SerializeField]
     KeyCode MoveUp = KeyCode.W;
     [SerializeField]
     KeyCode MoveDown = KeyCode.S;
-    [SerializeField]
-    float timeAfterTouchBounds = 0;
     // -----------------------------
 
     // Internal Variables ----------
     Rigidbody2D rb;
-    Coroutine barCoroutine = null;
-    float auxCountBar = 0;
-    float current_velocity = 0.0f;
-    int current_gravity_direction = -1;
-    Vector3 pos;
     float special_time_hold = 0.0f;
     float manual_time = 0;
     bool special_charged = false;
     Coroutine grade_perlin_noise_coroutine;
-    bool ignoreChange = false;
-    float timeTouchBounds = 0;
+    
+    public struct BarInfo
+    {
+        public BarInfo(float value, Action action)
+        {
+            this.value = value;
+            this.action = action;
+        }
+        public enum Action
+        {
+            Decrease,
+            Increase,
+            None
+        }
+        public float value;
+        public Action action;
+    }
+    Queue<BarInfo> barActions = new Queue<BarInfo>();
+    bool callNextAction = false;
     // -----------------------------
 
     // Start is called before the first frame update
@@ -98,35 +109,21 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
 
-        pos = transform.position;
-        AddGrade();
         special_charged = false;
-        OnResetBar();
+        gradeSprite.sprite = spriteGrades[(int)grade];
+        gradeBar.material.SetFloat("_Fill", 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // TODO: Remove
-        // Debug --------------------------------
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    StartCoroutine(InvulnerableAnim());
-        //}
-
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (callNextAction && barActions.Count > 0)
         {
-            special_charged = true;
+            callNextAction = false;
+            StartCoroutine(MoveBar(barActions.Peek()));
         }
-        // ---------------------------------------
 
         manual_time += Time.deltaTime * sinus_speed;
-
-        if (barCoroutine == null && auxCountBar != 0.0F)
-        {
-            barCoroutine = StartCoroutine(BarUp(auxCountBar));
-            auxCountBar = 0.0F;
-        }
     }
 
     private void FixedUpdate()
@@ -292,20 +289,20 @@ public class Player : MonoBehaviour
         ++enemyCount;
 
         int target = enemyCoutToUpgrade[(int)grade - 1];
-        if (barCoroutine != null)
+        barActions.Enqueue(new BarInfo((float)((float)enemyCount / (float)target), BarInfo.Action.Increase));
+        if (barActions.Count == 1)
         {
-            auxCountBar = (float)((float)enemyCount / (float)target);
-        }
-        else
-        {
-            barCoroutine = StartCoroutine(BarUp((float)((float)enemyCount / (float)target)));
-            auxCountBar = 0.0F;
+            callNextAction = true;
         }
     }
 
     void OnResetBar()
     {
-        gradeBar.material.SetFloat("_Fill", 0);
+        barActions.Enqueue(new BarInfo(0, BarInfo.Action.None));
+        if (barActions.Count == 1)
+        {
+            callNextAction = true;
+        }
         enemyCount = 0;
 
         if (grade == Grade.F)
@@ -314,7 +311,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator BarUp(float value)
+    IEnumerator MoveBar(BarInfo info)
     {
         if (grade != Grade.F)
         {
@@ -323,11 +320,11 @@ public class Player : MonoBehaviour
             float time = Time.time;
             while (true)
             {
-                float t = (Time.time - time) / 1;
-                current = Mathf.Lerp(init, value, t);
+                float t = (Time.time - time) / 0.25f;
+                current = Mathf.Lerp(init, info.value, t);
                 gradeBar.material.SetFloat("_Fill", current);
 
-                if (current >= value)
+                if ((current >= info.value && info.value != 0) || (info.value == 0.0f && current == 0.0F))
                 {
                     break;
                 }
@@ -337,14 +334,21 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (value >= 1)
+            if (info.value >= 1.0F && info.action == BarInfo.Action.Increase)
             {
-                // TODO: particulita guay
                 AddGrade();
+            }
+            else if (info.value == 0.0F && info.action == BarInfo.Action.Decrease)
+            {
+                DecreaseGrade();
             }
         }
 
-        barCoroutine = null;
+        barActions.Dequeue();
+        if (barActions.Count > 0)
+        {
+            callNextAction = true;
+        }
     }
 
     void UseSpecial()

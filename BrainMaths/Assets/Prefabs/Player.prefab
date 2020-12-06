@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4492117078378589320}
   - component: {fileID: 4492117078378589323}
   - component: {fileID: 122815416}
-  - component: {fileID: 122815417}
+  - component: {fileID: 1314435291565339175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -140,7 +140,7 @@ MonoBehaviour:
   brain_sprite: {fileID: 4492117078098937944}
   gradeSprite: {fileID: 0}
   Camera: {fileID: 0}
-  grade: 1
+  grade: 4
   spriteGrades:
   - {fileID: 21300000, guid: dce74d02fe8299d45a1bf4b74c2e415c, type: 3}
   - {fileID: 21300000, guid: 4cf9d9c36ba27de4c9e81669aed1bb8d, type: 3}
@@ -160,7 +160,6 @@ MonoBehaviour:
   enemyCoutToUpgrade: 02000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
   MoveUp: 119
   MoveDown: 115
-  timeAfterTouchBounds: 0
 --- !u!50 &122815416
 Rigidbody2D:
   serializedVersion: 4
@@ -182,8 +181,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &122815417
-BoxCollider2D:
+--- !u!70 &1314435291565339175
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -195,19 +194,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.0702858, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.5927734, y: 1.1317272}
-  m_EdgeRadius: 0
+  m_Offset: {x: 1.13, y: 0}
+  m_Size: {x: 1.55, y: 1.09}
+  m_Direction: 1
 --- !u!1 &4492117079227249592
 GameObject:
   m_ObjectHideFlags: 0

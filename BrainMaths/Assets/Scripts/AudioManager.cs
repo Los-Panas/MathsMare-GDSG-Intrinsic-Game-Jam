@@ -23,6 +23,10 @@ public class AudioManager : MonoBehaviour
     private int spectrumCount = 0;
     [SerializeField]
     private MeshRenderer[] bars;
+    [SerializeField]
+    private float changeBarsColor = 0;
+    private float beatcountbybars = 0;
+
 
     [Header("Background")]
     [SerializeField]
@@ -49,6 +53,8 @@ public class AudioManager : MonoBehaviour
         audioProcessor = GetComponent<AudioProcessor>();
 
         OnChangeMusic();
+
+        beatcountbybars = changeBarsColor;
     }
 
     private void Update()
@@ -108,6 +114,7 @@ public class AudioManager : MonoBehaviour
             spawnCout = 0;
             spawner.SpawnRandomEnemy();
         }
+        ++beatcountbybars;
     }
 
     public void OnSpectrum(float[] spectrum)
@@ -119,9 +126,47 @@ public class AudioManager : MonoBehaviour
             int min = Mathf.Min(spectrum.Length, bars.Length);
             for (int i = 0; i < min; ++i)
             {
-                // bars[i].material.color = Color.green; // TODO: change color
+                if (changeBarsColor <= beatcountbybars)
+                {
+                    beatcountbybars = 0;
+
+                    if (i <= min * 0.5 )
+                    {
+                        Color col = Camera.main.backgroundColor;
+                        while (col == Camera.main.backgroundColor)
+                        {
+                            col = availableColors[Random.Range(0, availableColors.Length)];
+                        }
+                        bars[i].material.color = col; // TODO: change color
+                        bars[min - 1 - i].material.color = col;
+                    }
+                }
+                
                 bars[i].material.SetFloat("_Fill", Mathf.Min(1, spectrum[i] * barLength));
             }
+        }
+
+        if (changeBarsColor <= beatcountbybars)
+        {
+            spectrumCount = 0;
+            int min = Mathf.Min(spectrum.Length, bars.Length);
+
+            for (int i = 0; i < min - 1; ++i)
+            {
+                beatcountbybars = 0;
+
+                if (i <= min * 0.5)
+                {
+                    Color col = Camera.main.backgroundColor;
+                    while (col == Camera.main.backgroundColor)
+                    {
+                        col = availableColors[Random.Range(0, availableColors.Length)];
+                    }
+                    bars[i].material.color = col; // TODO: change color
+                    bars[min - 1 - i].material.color = col;
+                }
+            }
+
         }
     }
 }
