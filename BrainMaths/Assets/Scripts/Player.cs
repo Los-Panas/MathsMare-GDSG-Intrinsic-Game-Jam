@@ -72,6 +72,14 @@ public class Player : MonoBehaviour
     float auxCountBar = 0;
     // -----------------------------
 
+    [Header("Controls")]
+    [SerializeField]
+    KeyCode changeGravity = KeyCode.W;
+    [SerializeField]
+    KeyCode specialAttack = KeyCode.E;
+    [SerializeField]
+    float timeAfterTouchBounds = 0;
+
     // Internal Variables ----------
     GravityState g_state = GravityState.Normal;
     float current_velocity = 0.0f;
@@ -81,8 +89,9 @@ public class Player : MonoBehaviour
     float manual_time = 0;
     bool special_charged = false;
     Coroutine grade_perlin_noise_coroutine;
+    bool ignoreChange = false;
+    float timeTouchBounds = 0;
     // -----------------------------
-
 
     // Start is called before the first frame update
     void Start()
@@ -143,44 +152,47 @@ public class Player : MonoBehaviour
     {
         // TODO: Remove
         // Debug --------------------------------
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(InvulnerableAnim());
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    StartCoroutine(InvulnerableAnim());
+        //}
 
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            special_charged = true;
-        }
+        //if(Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    special_charged = true;
+        //}
         // ---------------------------------------
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (CanUserChangeGravity())
         {
-            time_hold += Time.deltaTime;
-
-            if (time_hold >= 0.15f && g_state != GravityState.Floating)
+            if (Input.GetKey(changeGravity))
             {
-                g_state = GravityState.Floating;
+                time_hold += Time.deltaTime;
 
-                if (current_gravity_direction < 0) 
+                if (time_hold >= 0.15f && g_state != GravityState.Floating)
                 {
-                    manual_time = Mathf.PI;
-                }
-                else
-                {
-                    manual_time = 0;
+                    g_state = GravityState.Floating;
+
+                    if (current_gravity_direction < 0)
+                    {
+                        manual_time = Mathf.PI;
+                    }
+                    else
+                    {
+                        manual_time = 0;
+                    }
                 }
             }
-        } 
 
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            ChangeGravityDirection();
+            if (Input.GetKeyUp(changeGravity))
+            {
+                ChangeGravityDirection();
 
-            time_hold = 0;
+                time_hold = 0;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.RightControl))
+        if (Input.GetKeyDown(specialAttack))
         {
             if (special_charged)
             {
@@ -217,6 +229,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    bool CanUserChangeGravity()
+    {
+        if (ignoreChange)
+        {
+            if (Time.time - timeTouchBounds < timeAfterTouchBounds)
+            {
+                return false;
+            }
+            ignoreChange = false;
+        }
+        return true;
+    }
+
     void Analysis()
     {
         Debug.Log("Analysis:\n" +
@@ -234,6 +259,55 @@ public class Player : MonoBehaviour
                 DecreaseGrade();
                 StartCoroutine(InvulnerableAnim());
             }
+        }
+
+        if (collision.tag == "VerticalLimitUp")
+        {
+            timeTouchBounds = Time.time;
+            ignoreChange = true;
+            if (!is_invulnerable)
+            {
+                DecreaseGrade();
+                StartCoroutine(InvulnerableAnim());
+            }
+            current_gravity_direction = -1;
+        }
+        else if (collision.tag == "VerticalLimitDown")
+        {
+            timeTouchBounds = Time.time;
+            ignoreChange = true;
+            if (!is_invulnerable)
+            {
+                DecreaseGrade();
+                StartCoroutine(InvulnerableAnim());
+            }
+            current_gravity_direction = 1;
+        }
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "VerticalLimitUp")
+        {
+            timeTouchBounds = Time.time;
+            ignoreChange = true;
+            if (!is_invulnerable)
+            {
+                DecreaseGrade();
+                StartCoroutine(InvulnerableAnim());
+            }
+            current_gravity_direction = -1;
+        }
+        else if (collision.tag == "VerticalLimitDown")
+        {
+            timeTouchBounds = Time.time;
+            ignoreChange = true;
+            if (!is_invulnerable)
+            {
+                DecreaseGrade();
+                StartCoroutine(InvulnerableAnim());
+            }
+            current_gravity_direction = 1;
         }
     }
 
@@ -277,6 +351,11 @@ public class Player : MonoBehaviour
 
     void AddGrade()
     {
+        if (grade == Grade.F)
+        {
+            return;
+        }
+
         special_charged = true;
 
         if (grade != Grade.ULTRA_A)
@@ -297,6 +376,11 @@ public class Player : MonoBehaviour
 
     void DecreaseGrade()
     {
+        if (grade == Grade.F)
+        {
+            return;
+        }
+
         --grade;
 
         OnResetBar();
@@ -317,6 +401,11 @@ public class Player : MonoBehaviour
 
     public void OnUpdateBarUp()
     {
+        if (grade == Grade.F)
+        {
+            return;
+        }
+
         ++enemyCount;
 
         int target = enemyCoutToUpgrade[(int)grade - 1];
@@ -335,33 +424,41 @@ public class Player : MonoBehaviour
     {
         gradeBar.material.SetFloat("_Fill", 0);
         enemyCount = 0;
+
+        if (grade == Grade.F)
+        {
+            return;
+        }
     }
 
     IEnumerator BarUp(float value)
     {
-        float current = gradeBar.material.GetFloat("_Fill");
-        float init = current;
-        float time = Time.time;
-        while (true)
+        if (grade != Grade.F)
         {
-            float t = (Time.time - time) / 1;
-            current = Mathf.Lerp(init, value, t);
-            gradeBar.material.SetFloat("_Fill", current);
-            
-            if (current >= value)
+            float current = gradeBar.material.GetFloat("_Fill");
+            float init = current;
+            float time = Time.time;
+            while (true)
             {
-                break;
-            }
-            else
-            {
-                yield return null;
-            }
-        }
+                float t = (Time.time - time) / 1;
+                current = Mathf.Lerp(init, value, t);
+                gradeBar.material.SetFloat("_Fill", current);
 
-        if (value >= 1)
-        {
-            // TODO: particulita guay
-            AddGrade();
+                if (current >= value)
+                {
+                    break;
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+
+            if (value >= 1)
+            {
+                // TODO: particulita guay
+                AddGrade();
+            }
         }
 
         barCoroutine = null;
