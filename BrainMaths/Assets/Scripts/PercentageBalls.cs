@@ -39,4 +39,12 @@ public class PercentageBalls : MonoBehaviour
         this.direction = direction.normalized;
         this.speed = -speed;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Death")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
