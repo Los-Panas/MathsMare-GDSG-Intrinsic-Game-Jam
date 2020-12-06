@@ -131,65 +131,9 @@ public class Player : MonoBehaviour
         {
             callNextAction = false;
             StartCoroutine(MoveBar(barActions.Peek()));
-        } 
-
-        HandleInput();
-
-        if (g_state == GravityState.Normal)
-        {
-            // Gravity -> I use deltaTime 2 times because both acceleration and velocity need to be converted to per frame instead of per second.
-            current_velocity += acceleration * current_gravity_direction;  // v = v0 + a*t 
-            current_velocity = Mathf.Clamp(current_velocity, -max_velocity, max_velocity);
-            pos.y += current_velocity * Time.deltaTime; // x = x0 + v*t
-            transform.position = pos;
-            // ------------------------------------------------------------------------------
         }
-        else
-        {
-            // Sinus Movement while Holding
-            manual_time += Time.deltaTime * sinus_speed;
-
-            if (current_velocity != 0)
-            {
-                current_velocity -= acceleration * 0.5f * current_gravity_direction;
-                pos.y += current_velocity * Time.deltaTime;
-
-                if (current_velocity < 0.1f && current_velocity > -0.1f)
-                {
-                    current_velocity = 0;
-                }
-            }
-
-            pos.y += Mathf.Sin(manual_time) * Time.deltaTime * 0.35f;
-            transform.position = pos;
-            // ------------------------------------------------------------------------------
-        }
-
-        //Analysis();
-    }
-
-    void HandleInput()
-    {
-        // TODO: Remove
-        // Debug --------------------------------
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    StartCoroutine(InvulnerableAnim());
-        //}
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            special_charged = true;
-        }
-        // ---------------------------------------
 
         manual_time += Time.deltaTime * sinus_speed;
-
-        if (barCoroutine == null && auxCountBar != 0.0F)
-        {
-            barCoroutine = StartCoroutine(BarUp(auxCountBar));
-            auxCountBar = 0.0F;
-        }
     }
 
     private void FixedUpdate()
