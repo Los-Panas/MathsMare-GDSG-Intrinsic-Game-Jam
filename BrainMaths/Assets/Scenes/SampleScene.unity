@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89499594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4990486, y: -0.65111244, z: -251.58496}
+  m_LocalPosition: {x: 1.78, y: -0.65111244, z: -251.58496}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 798320278}
@@ -572,7 +572,7 @@ Transform:
   m_Children:
   - {fileID: 1102752021}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &519420033
 AudioSource:
@@ -1082,7 +1082,7 @@ GameObject:
   - component: {fileID: 1050606698}
   - component: {fileID: 1050606697}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: GradeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1727,7 +1727,7 @@ PrefabInstance:
     - target: {fileID: 8573243226603799895, guid: 14e1ea5d3fcf8ca44a66c5e944b0aae9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8573243226603799895, guid: 14e1ea5d3fcf8ca44a66c5e944b0aae9,
         type: 3}
@@ -2059,7 +2059,7 @@ PrefabInstance:
     - target: {fileID: 4492117078378589320, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.29
+      value: -6.35
       objectReference: {fileID: 0}
     - target: {fileID: 4492117078378589320, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
@@ -2110,6 +2110,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589321, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
