@@ -28,7 +28,6 @@ public class AttractParticles : MonoBehaviour
         }
         AffectedParticles = GetComponent<ParticleSystem>();
         Setup();
-        EnemiesSpawner.instance.PlayTickSFX();
 
     }
 
@@ -40,7 +39,11 @@ public class AttractParticles : MonoBehaviour
     void LateUpdate()
     {
         if (!AffectedParticles.IsAlive())
+        {
+            EnemiesSpawner.instance.PlayTickSFX();
+
             Destroy(gameObject);
+        }
 
         // Work only if we have something to work on :)
         if (AffectedParticles != null)
