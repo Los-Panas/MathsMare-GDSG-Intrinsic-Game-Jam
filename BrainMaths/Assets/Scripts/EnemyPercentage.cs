@@ -19,6 +19,8 @@ public class EnemyPercentage : EnemyBase
     float mid_point = 0;
     [SerializeField]
     float balls_vertical_target = 5.0f;
+    [SerializeField]
+    float vertical_speed = 2.0f;
 
     [Header("Balls")]
     [SerializeField]
@@ -31,6 +33,9 @@ public class EnemyPercentage : EnemyBase
     public override void Initialize()
     {
         anim = GetComponent<Animator>();
+        Vector2 pos = transform.position;
+        pos.y = Player.instance.transform.position.y;
+        transform.position = pos;
     }
 
     public override void Move()
@@ -41,7 +46,17 @@ public class EnemyPercentage : EnemyBase
                 base.Move();
 
                 Vector2 pos = transform.position;
-                pos.y = Player.instance.transform.position.y;
+                Vector2 player_pos = Player.instance.transform.position;
+
+                if (player_pos.y > pos.y)
+                {
+                    pos.y += vertical_speed * Time.deltaTime;
+                }
+                else if (player_pos.y < pos.y)
+                {
+                    pos.y -= vertical_speed * Time.deltaTime;
+                }
+
                 transform.position = pos;
 
                 if (transform.position.x <= mid_point)
