@@ -134,6 +134,7 @@ MonoBehaviour:
   is_invulnerable: 0
   time_to_hold_special: 0.25
   onGradeUp: {fileID: 8300000, guid: d15eba10b644be543b4646463fc6211b, type: 3}
+  onDie: {fileID: 8300000, guid: 8640998f1b1221d47a245d5a68f3082b, type: 3}
   invulnerable_cycles: 3
   invulnerable_time: 2
   invulnerable_color: {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0.74509805}
@@ -142,7 +143,9 @@ MonoBehaviour:
   brain_sprite: {fileID: 4492117078098937944}
   gradeSprite: {fileID: 0}
   Camera: {fileID: 0}
-  grade: 4
+  deadPlayer: {fileID: 8383754973192515916, guid: 2c94d0f8c28188547838f255b3f17feb,
+    type: 3}
+  grade: 1
   spriteGrades:
   - {fileID: 21300000, guid: dce74d02fe8299d45a1bf4b74c2e415c, type: 3}
   - {fileID: 21300000, guid: 4cf9d9c36ba27de4c9e81669aed1bb8d, type: 3}
@@ -160,8 +163,12 @@ MonoBehaviour:
   grade_perlin_noise_factor: 5
   gradeBar: {fileID: 0}
   enemyCoutToUpgrade: 02000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
+  max_scale_to_add: 0.25
   MoveUp: 119
   MoveDown: 115
+  enemies_avoided: 0
+  enemies_erased: 0
+  hits_received: 0
 --- !u!50 &122815416
 Rigidbody2D:
   serializedVersion: 4
@@ -182,7 +189,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &1314435291565339175
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
