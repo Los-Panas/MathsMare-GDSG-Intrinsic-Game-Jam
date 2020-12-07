@@ -2704,6 +2704,12 @@ PrefabInstance:
       objectReference: {fileID: 7817080630979587659}
     - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
+      propertyPath: deadPlayer
+      value: 
+      objectReference: {fileID: 8383754973192515916, guid: 2c94d0f8c28188547838f255b3f17feb,
+        type: 3}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
       propertyPath: gradeSprite
       value: 
       objectReference: {fileID: 2103333127}
