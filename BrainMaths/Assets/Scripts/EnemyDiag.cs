@@ -16,7 +16,7 @@ public class EnemyDiag : EnemyBase
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Move()
     {
         if (Camera.main.WorldToScreenPoint(transform.position).x < 0)
         {

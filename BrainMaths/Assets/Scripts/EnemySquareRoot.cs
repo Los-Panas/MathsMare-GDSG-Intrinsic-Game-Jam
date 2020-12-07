@@ -19,7 +19,7 @@ public class EnemySquareRoot : EnemyBase
     [SerializeField]
     float trigger_point = 5.5f;
     [SerializeField]
-    float max_random_bound = 4.5f;
+    float max_random_bound = 4;
     [SerializeField]
     float time_to_pos = 1.0f;
 
