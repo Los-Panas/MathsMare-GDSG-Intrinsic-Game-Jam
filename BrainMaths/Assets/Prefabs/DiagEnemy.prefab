@@ -102,7 +102,10 @@ MonoBehaviour:
   randomizeStartingSpeed: 0
   minAndMax: {x: 0, y: 0}
   minCoordToDestroy: 0
-  deathParticles: {fileID: 0}
+  deathParticlesTicks: {fileID: 1438847939287979412, guid: ff5eb1d4fe3c56e4cbb111d28d83961f,
+    type: 3}
+  deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
+    type: 3}
   mySpeed: 2
 --- !u!1 &3842717060574709654
 GameObject:

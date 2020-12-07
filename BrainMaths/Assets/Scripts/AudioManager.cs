@@ -126,22 +126,11 @@ public class AudioManager : MonoBehaviour
             int min = Mathf.Min(spectrum.Length, bars.Length);
             for (int i = 0; i < min; ++i)
             {
-                if (changeBarsColor <= beatcountbybars)
+                if (i <= min * 0.5)
                 {
-                    beatcountbybars = 0;
 
-                    if (i <= min * 0.5 )
-                    {
-                        Color col = Camera.main.backgroundColor;
-                        while (col == Camera.main.backgroundColor)
-                        {
-                            col = availableColors[Random.Range(0, availableColors.Length)];
-                        }
-                        bars[i].material.color = col; // TODO: change color
-                        bars[min - 1 - i].material.color = col;
-                    }
+                    bars[min - 1 - i].material.color = availableColors[Random.Range(0, availableColors.Length)];
                 }
-                
                 bars[i].material.SetFloat("_Fill", Mathf.Min(1, spectrum[i] * barLength));
             }
         }

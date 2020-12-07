@@ -18,7 +18,9 @@ public class EnemyBase : MonoBehaviour
 
     [Header("Death Particles")]
     [SerializeField]
-    private GameObject deathParticles;
+    private GameObject deathParticlesTicks;
+    [SerializeField]
+    private GameObject deathParticlesExplosion;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +44,7 @@ public class EnemyBase : MonoBehaviour
     private void CheckOffScreenConditions()
     {
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        if(screenPosition.x < minCoordToDestroy)
+        if(screenPosition.x - 20 < minCoordToDestroy)
         {
             Player.instance.OnUpdateBarUp();
             Destroy();
@@ -72,7 +74,9 @@ public class EnemyBase : MonoBehaviour
     public virtual void Destroy()
     {
         // TODO: Animation
-        Instantiate(deathParticles, transform.position, transform.rotation);
+        Instantiate(deathParticlesExplosion, transform.position, transform.rotation);
+
+        Instantiate(deathParticlesTicks, transform.position, transform.rotation);
 
         Destroy(gameObject);
 

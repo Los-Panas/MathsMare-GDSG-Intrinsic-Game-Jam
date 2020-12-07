@@ -539,7 +539,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.08, y: 0}
@@ -563,7 +563,10 @@ MonoBehaviour:
   randomizeStartingSpeed: 0
   minAndMax: {x: 0, y: 0}
   minCoordToDestroy: 0
-  deathParticles: {fileID: 0}
+  deathParticlesTicks: {fileID: 1438847939287979412, guid: ff5eb1d4fe3c56e4cbb111d28d83961f,
+    type: 3}
+  deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
+    type: 3}
   trigger_point: 5.5
   max_random_bound: 4.5
   time_to_pos: 1

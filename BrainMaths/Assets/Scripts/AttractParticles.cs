@@ -21,6 +21,11 @@ public class AttractParticles : MonoBehaviour
     void Awake()
     {
         target = GameObject.Find("GradeBar").transform;
+        if (target == null)
+        {
+            Destroy(this);
+            return;
+        }
         AffectedParticles = GetComponent<ParticleSystem>();
         Setup();
     }
