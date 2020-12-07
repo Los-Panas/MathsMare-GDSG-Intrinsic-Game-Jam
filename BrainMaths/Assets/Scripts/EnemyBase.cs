@@ -81,7 +81,7 @@ public class EnemyBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Death")
+        if (collision.tag == "Death" || collision.tag == "Player")
         {
             Destroy();
         }
