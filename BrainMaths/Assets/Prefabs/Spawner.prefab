@@ -121,11 +121,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - enemy: {fileID: 6625452718649950164, guid: 53c548b9497e16747b0c5e3ca2dcbf5e, type: 3}
-    type: 0
+    type: 3
   - enemy: {fileID: 9073319633478315134, guid: 29cd9755e98981d4c92d74f7260b93e7, type: 3}
-    type: 1
+    type: 0
   - enemy: {fileID: 5127076276521967098, guid: c07372e29e09c334c84aeb0cc6ac6e29, type: 3}
     type: 2
   - enemy: {fileID: 4823123726321996552, guid: baf8237a7c62488468a37ef53372af8b, type: 3}
     type: 4
+  - enemy: {fileID: 6391039666279341151, guid: 28bd962c47b08cc49a1147a002f7d85a, type: 3}
+    type: 1
+  - enemy: {fileID: 3842717060251453681, guid: ea67e2746d88d3f478f95bd9f499205d, type: 3}
+    type: 1
   spawnRate: 2
