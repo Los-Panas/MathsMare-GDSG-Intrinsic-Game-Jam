@@ -32,6 +32,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("Background")]
     [SerializeField]
+    private MeshRenderer backgroundBar;
+    [SerializeField]
     [Space]
     private float beatsBeforeChange = 0;
     private float beatCout = 0;
@@ -130,6 +132,11 @@ public class AudioManager : MonoBehaviour
                     bars[(bars.Length - 1) - i].material.color = col;
             }
             
+            while (backgroundBar.material.color == Camera.main.backgroundColor)
+            {
+                backgroundBar.material.color = availableColors[Random.Range(0, availableColors.Length)];
+            }
+
         }
         ++spawnCout;
         if(spawnCout >= beatsBeforeSpawn)
