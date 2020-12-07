@@ -568,7 +568,7 @@ MonoBehaviour:
   deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
     type: 3}
   trigger_point: 5.5
-  max_random_bound: 4.5
+  max_random_bound: 4
   time_to_pos: 1
 --- !u!1 &4823123726421064615
 GameObject:
