@@ -7,6 +7,7 @@ public class PlayerDeath : MonoBehaviour
     [SerializeField]
     private float liveTimeSeconds;
     public GameObject particleExplosionPrefab;
+    public GameObject particleSufferingPrefab;
     [SerializeField]
     private float noiseInc;
     [SerializeField]
@@ -31,6 +32,7 @@ public class PlayerDeath : MonoBehaviour
         scaleInc = transform.localScale.x;
        
         StartCoroutine("ParticleExplosion", liveTimeSeconds);
+        StartCoroutine("Suffer");
     }
 
     // Update is called once per frame
@@ -76,5 +78,15 @@ public class PlayerDeath : MonoBehaviour
         Instantiate(particleExplosionPrefab, transform.position, Quaternion.identity);
 
         Destroy(this.gameObject);
+    }
+
+    IEnumerator Suffer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(0.3f, 1.0f));
+
+            Instantiate(particleSufferingPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

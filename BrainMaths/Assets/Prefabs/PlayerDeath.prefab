@@ -97,6 +97,8 @@ MonoBehaviour:
   liveTimeSeconds: 3
   particleExplosionPrefab: {fileID: 5632321917938871599, guid: cbce879a9894843468c75ff1591b3bdb,
     type: 3}
+  particleSufferingPrefab: {fileID: 6289308551629843607, guid: 12070a8901114fa4ba53cbde8c740953,
+    type: 3}
   noiseInc: 0
   noiseIncMultiplier: 10
   offsetMax: 3
