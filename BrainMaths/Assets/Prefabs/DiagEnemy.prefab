@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3842717060251453686}
   - component: {fileID: 3842717060251453687}
   - component: {fileID: 3842717060251453680}
+  - component: {fileID: 4518336926087185945}
   m_Layer: 0
   m_Name: DiagEnemy
   m_TagString: Enemy
@@ -107,6 +108,22 @@ MonoBehaviour:
   deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
     type: 3}
   mySpeed: 7
+--- !u!70 &4518336926087185945
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842717060251453681}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.001706363, y: 0.008531762}
+  m_Size: {x: 0.28018472, y: 0.1527766}
+  m_Direction: 1
 --- !u!1 &3842717060574709654
 GameObject:
   m_ObjectHideFlags: 0
