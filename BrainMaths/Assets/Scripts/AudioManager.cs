@@ -194,7 +194,10 @@ public class AudioManager : MonoBehaviour
                     colorbefore = col;
                     bars[i].material.color = col; // TODO: change color
 
-                    if(repeatColors)
+                    // send general beat
+                    BeatManager.instance.Beat();
+
+                    if (repeatColors)
                         bars[min - 1 - i].material.color = col;
                 }
             }

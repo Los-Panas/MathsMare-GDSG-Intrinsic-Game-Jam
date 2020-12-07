@@ -96,7 +96,9 @@ public class EnemiesSpawner : MonoBehaviour
                 break;
         }
         
-        return Instantiate(spawnEnemy, transform.position + spwnPosicion, spawnEnemy.transform.rotation);
+        GameObject newEnemy = Instantiate(spawnEnemy, transform.position + spwnPosicion, spawnEnemy.transform.rotation);
+        BeatManager.instance.AddObjToBeat(newEnemy);
+        return newEnemy;
 
     }
 
@@ -108,7 +110,11 @@ public class EnemiesSpawner : MonoBehaviour
 
 
         Vector3 spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), 0);
-        return Instantiate(spwn, transform.position + spwnPosicion, spwn.transform.rotation);
+
+        GameObject newEnemy = Instantiate(spwn, transform.position + spwnPosicion, spwn.transform.rotation);
+        BeatManager.instance.AddObjToBeat(newEnemy);
+
+        return newEnemy;
     }
 
     public void PlayTickSFX()
