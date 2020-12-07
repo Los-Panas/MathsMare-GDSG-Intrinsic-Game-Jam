@@ -64,7 +64,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     public void PlayOnEnemyDeadSFX()
     {
-        audioSource.PlayOneShot(onEnemyDead);
+        audioSource.PlayOneShot(onEnemyDead, 0.25f);
     }
 
     public GameObject SpawnEnemy(EnemyType enemy, SpawnPos pos)
@@ -113,6 +113,6 @@ public class EnemiesSpawner : MonoBehaviour
 
     public void PlayTickSFX()
     {
-        audioSource.PlayOneShot(onTickSpawn);
+        audioSource.PlayOneShot(onTickSpawn, 0.25f);
     }
 }

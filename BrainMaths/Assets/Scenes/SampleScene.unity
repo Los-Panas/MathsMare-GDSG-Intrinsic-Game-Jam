@@ -2138,6 +2138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8573243226603799891, guid: 14e1ea5d3fcf8ca44a66c5e944b0aae9,
+        type: 3}
+      propertyPath: onTickSpawn
+      value: 
+      objectReference: {fileID: 8300000, guid: 827bbf5b25b5cf249a6f9c298ba46144, type: 3}
     - target: {fileID: 8573243226603799895, guid: 14e1ea5d3fcf8ca44a66c5e944b0aae9,
         type: 3}
       propertyPath: m_RootOrder
