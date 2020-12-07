@@ -265,7 +265,7 @@ public class Player : MonoBehaviour
 
         if (grade_growing_coroutine == null)
         {
-            StartCoroutine(GradeGrowing());
+            StartCoroutine(GradeGrowing(1));
         }
 
         if (grade != Grade.ULTRA_A)
@@ -284,10 +284,10 @@ public class Player : MonoBehaviour
         OnResetBar();
     }
 
-    IEnumerator GradeGrowing()
+    IEnumerator GradeGrowing(int direction)
     {
         Vector3 start_scale = gradeSprite.transform.localScale;
-        Vector3 scale_to_grow = gradeSprite.transform.localScale * (1 + max_scale_to_add);
+        Vector3 scale_to_grow = gradeSprite.transform.localScale * (1 + direction * max_scale_to_add);
         float time_start = Time.time;
         float t = 0;
 
@@ -322,6 +322,11 @@ public class Player : MonoBehaviour
         }
 
         --grade;
+
+        if (grade_growing_coroutine == null)
+        {
+            StartCoroutine(GradeGrowing(-1));
+        }
 
         OnResetBar();
 
