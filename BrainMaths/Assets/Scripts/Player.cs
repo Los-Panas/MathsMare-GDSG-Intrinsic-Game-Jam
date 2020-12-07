@@ -73,7 +73,6 @@ public class Player : MonoBehaviour
     int enemyCount = 0;
     [SerializeField]
     int[] enemyCoutToUpgrade;
-    // -----------------------------
 
     [Header("Controls")]
     public KeyCode MoveUp = KeyCode.W;
@@ -87,6 +86,13 @@ public class Player : MonoBehaviour
     bool special_charged = false;
     Coroutine grade_perlin_noise_coroutine;
     AudioSource audioSource;
+
+    // Stats
+    int enemies_avoided = 0;
+    [HideInInspector]
+    public int enemies_erased = 0;
+    int hits_received = 0;
+    // --------------
     
     public struct BarInfo
     {
@@ -193,6 +199,7 @@ public class Player : MonoBehaviour
         {
             if (collision.tag == "Enemy")
             {
+                ++hits_received;
                 StartCoroutine(InvulnerableAnim());
                 DecreaseGrade();
             }
@@ -299,6 +306,7 @@ public class Player : MonoBehaviour
         }
 
         ++enemyCount;
+        ++enemies_avoided;
 
         int target = enemyCoutToUpgrade[(int)grade - 1];
         barActions.Enqueue(new BarInfo((float)((float)enemyCount / (float)target), BarInfo.Action.Increase));
