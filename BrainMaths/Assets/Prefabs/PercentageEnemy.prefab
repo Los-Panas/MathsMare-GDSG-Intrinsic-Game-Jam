@@ -60,6 +60,7 @@ MonoBehaviour:
     type: 3}
   mid_point: 0
   balls_vertical_target: 5
+  vertical_speed: 3
   balls:
   - {fileID: 5127076278522561552}
   - {fileID: 5127076276674343318}
