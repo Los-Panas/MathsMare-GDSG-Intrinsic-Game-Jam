@@ -15,9 +15,9 @@ public class BlackBoardNice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         manual_time += Time.deltaTime * sinus_speed;
     }
+
     private void FixedUpdate()
     {
         Vector2 movement = Vector2.zero;

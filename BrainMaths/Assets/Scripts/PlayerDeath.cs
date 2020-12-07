@@ -77,6 +77,8 @@ public class PlayerDeath : MonoBehaviour
 
         Instantiate(particleExplosionPrefab, transform.position, Quaternion.identity);
 
+        GameObject.Find("GameManager").GetComponent<GameManager>().ChangeState(GameManager.GameStates.Dead);
+
         Destroy(this.gameObject);
     }
 

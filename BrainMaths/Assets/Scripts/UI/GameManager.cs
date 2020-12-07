@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public enum GameStates
@@ -24,7 +26,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject MainGame;
     [SerializeField]
+    GameObject Gameplay;
+    [SerializeField]
     GameObject MenuCamera;
+    [SerializeField]
+    RectTransform LoseMenu;
 
     [SerializeField]
     Text enemiesErased;
@@ -37,11 +43,13 @@ public class GameManager : MonoBehaviour
     public Player player;
 
     float time_holding_ulti = 0;
+    bool accept_input = false;
 
     // Start is called before the first frame update
     void Awake()
     {
         player = PlayerBrain.GetComponent<Player>();
+        Gameplay.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,6 +64,23 @@ public class GameManager : MonoBehaviour
                 if (time_holding_ulti >= 10)
                 {
                     ChangeState(GameStates.Game);
+                }
+            }
+
+            if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
+            {
+                time_holding_ulti = 0;
+            }
+        }
+        else if(game_state==GameStates.Dead && accept_input)
+        {
+            if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
+            {
+                time_holding_ulti += 1;
+
+                if (time_holding_ulti >= 10)
+                {
+                    RestartGame();
                 }
             }
 
@@ -86,12 +111,15 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.Game:
                 canvas_anim.gameObject.SetActive(false);
-                MainGame.transform.GetChild(0).gameObject.SetActive(true);
+                Gameplay.SetActive(true);
                 Time.timeScale = 1;
                 player.UseSpecial();
                 MenuCamera.SetActive(false);
                 break;
             case GameStates.Dead:
+                MenuCamera.SetActive(true);
+                Gameplay.SetActive(false);
+                StartCoroutine(GetUpLoseMenu(0));
                 UpdateGameStats();
                 break;
         }
@@ -105,5 +133,44 @@ public class GameManager : MonoBehaviour
         enemiesErased.text = player.enemies_erased.ToString();
         enemiesDodged.text = player.enemies_avoided.ToString();
         hitsRecieved.text = player.hits_received.ToString();
+    }
+
+    IEnumerator GetUpLoseMenu(float pos_y, bool restart = false)
+    {
+        Vector2 start_pos = LoseMenu.anchoredPosition;
+        Vector2 goal_pos = start_pos;
+        goal_pos.y = pos_y;
+        float time_start = Time.time;
+
+        while (LoseMenu.anchoredPosition != goal_pos)
+        {
+            float t = (Time.time - time_start);
+
+            if (t < 1)
+            {
+                LoseMenu.anchoredPosition = Vector2.Lerp(start_pos, goal_pos, t);
+            }
+            else
+            {
+                LoseMenu.anchoredPosition = goal_pos;
+            }
+
+            yield return null;
+        }
+
+        LoseMenu.GetComponent<BlackBoardNice>().enabled = true;
+
+        if (restart)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        accept_input = true;
+    }
+
+    void RestartGame()
+    {
+        accept_input = false;
+        StartCoroutine(GetUpLoseMenu(-1020, true));
     }
 }
