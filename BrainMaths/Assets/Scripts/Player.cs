@@ -73,6 +73,8 @@ public class Player : MonoBehaviour
     int enemyCount = 0;
     [SerializeField]
     int[] enemyCoutToUpgrade;
+    [SerializeField]
+    float max_scale_to_add = 0.25f;
 
     [Header("Controls")]
     public KeyCode MoveUp = KeyCode.W;
@@ -86,6 +88,7 @@ public class Player : MonoBehaviour
     bool special_charged = false;
     Coroutine grade_perlin_noise_coroutine;
     AudioSource audioSource;
+    Coroutine grade_growing_coroutine = null;
 
     // Stats
     int enemies_avoided = 0;
@@ -257,6 +260,12 @@ public class Player : MonoBehaviour
 
         special_charged = true;
         audioSource.PlayOneShot(onGradeUp, 0.15F);
+
+        if (grade_growing_coroutine == null)
+        {
+            StartCoroutine(GradeGrowing());
+        }
+
         if (grade != Grade.ULTRA_A)
         {
             ++grade;
@@ -271,6 +280,36 @@ public class Player : MonoBehaviour
             // TODO: add pluses
         }
         OnResetBar();
+    }
+
+    IEnumerator GradeGrowing()
+    {
+        Vector3 start_scale = gradeSprite.transform.localScale;
+        Vector3 scale_to_grow = gradeSprite.transform.localScale * (1 + max_scale_to_add);
+        float time_start = Time.time;
+        float t = 0;
+
+        while (t <= 1) 
+        {
+            t = (Time.time - time_start) / 0.25f;
+
+            if (t < 0.5f)
+            {
+                gradeSprite.transform.localScale = Vector3.Lerp(start_scale, scale_to_grow, t * 2);
+            }
+            else if (t < 1)
+            {
+                gradeSprite.transform.localScale = Vector3.Lerp(scale_to_grow, start_scale, (t - 0.5f) * 2);
+            }
+            else
+            {
+                gradeSprite.transform.localScale = start_scale;
+            }
+
+            yield return null;
+        }
+
+        grade_growing_coroutine = null;
     }
 
     void DecreaseGrade()
