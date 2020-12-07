@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemiesSpawner : MonoBehaviour
 {
+    static public EnemiesSpawner instance;
+
     public enum SpawnPos
     {
         Top,
@@ -32,18 +34,35 @@ public class EnemiesSpawner : MonoBehaviour
             this.type = type;
         }
     }
+
+    [Header("SFX")]
+    [SerializeField]
+    AudioClip onEnemyDead;
+
+    [Header("Enemies")]
     public List<EnemyMap> enemies;
     public float spawnRate;
 
     private float timerSpawner;
     Vector3 objectSize;
 
+    private AudioSource audioSource;
+
     void Start()
     {
+        instance = this;
+
+        audioSource = GetComponent<AudioSource>();
+
         timerSpawner = Time.time + spawnRate;
 
         Vector3 rect = transform.GetComponent<Collider2D>().bounds.size;
         objectSize = transform.position + new Vector3(rect.x - 1, rect.y - 1, 0);
+    }
+
+    public void PlayOnEnemyDeadSFX()
+    {
+        audioSource.PlayOneShot(onEnemyDead);
     }
 
     public GameObject SpawnEnemy(EnemyType enemy, SpawnPos pos)

@@ -244,7 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 145899732}
   m_Layer: 0
-  m_Name: BigDamnClouds (1)
+  m_Name: BigDamnCloudsDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,15 +257,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145899731}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 5.45, y: 1.22, z: -564.7413}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalPosition: {x: 3.8428688, y: 0.8535209, z: -302.72095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1575641042}
   - {fileID: 1748242935}
   - {fileID: 144561412}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 815305431}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!4 &155870920 stripped
 Transform:
@@ -1170,7 +1170,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1538766117}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2066201798}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cf9b06f0d676d246a023968142b529a, type: 3}
@@ -1245,6 +1245,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.2435904, y: 0.66569805}
   m_EdgeRadius: 0
+--- !u!1 &815305430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815305431}
+  m_Layer: 0
+  m_Name: Clouds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &815305431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815305430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6071309, y: 0.36647913, z: -262.02032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 876565792}
+  - {fileID: 145899732}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &841751016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7817080631346579407, guid: 3ccf153fe6a70064cb2eb278f448005e,
@@ -1267,7 +1299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 876565792}
   m_Layer: 0
-  m_Name: BigDamnClouds
+  m_Name: BigDamnCloudsUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1280,15 +1312,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876565791}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.09, y: -1.3183483, z: -564.7413}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.6971307, y: -1.6848274, z: -302.72095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1282783399}
   - {fileID: 501606698}
   - {fileID: 1307071177}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 815305431}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1050606695
 GameObject:
@@ -2106,6 +2138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8573243226603799891, guid: 14e1ea5d3fcf8ca44a66c5e944b0aae9,
+        type: 3}
+      propertyPath: onEnemyDead
+      value: 
+      objectReference: {fileID: 8300000, guid: f373457bffeb6e6498636f696bea346e, type: 3}
     - target: {fileID: 8573243226603799895, guid: 14e1ea5d3fcf8ca44a66c5e944b0aae9,
         type: 3}
       propertyPath: m_RootOrder
@@ -2507,6 +2544,108 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1874333054}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2066201798 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8573243226603799888, guid: 14e1ea5d3fcf8ca44a66c5e944b0aae9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1538766117}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2066201799
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066201798}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2103333126
 GameObject:
   m_ObjectHideFlags: 0

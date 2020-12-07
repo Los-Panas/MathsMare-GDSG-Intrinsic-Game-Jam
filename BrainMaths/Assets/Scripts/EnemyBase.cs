@@ -97,6 +97,7 @@ public class EnemyBase : MonoBehaviour
         if (collision.tag == "Death" || collision.tag == "Player")
         {
             Destroy();
+            EnemiesSpawner.instance.PlayOnEnemyDeadSFX();
         }
     }
 }
