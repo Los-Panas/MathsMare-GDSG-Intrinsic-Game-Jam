@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public enum GameStates
@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
         Credits,
         Transition,
         Tutorial,
-        Game
+        Game,
+        Dead
     }
 
     GameStates game_state = GameStates.MainMenu;
@@ -24,6 +25,13 @@ public class GameManager : MonoBehaviour
     GameObject MainGame;
     [SerializeField]
     GameObject MenuCamera;
+
+    [SerializeField]
+    Text enemiesErased;
+    [SerializeField]
+    Text enemiesDodged;
+    [SerializeField]
+    Text hitsRecieved;
 
     [HideInInspector]
     public Player player;
@@ -83,8 +91,19 @@ public class GameManager : MonoBehaviour
                 player.UseSpecial();
                 MenuCamera.SetActive(false);
                 break;
+            case GameStates.Dead:
+                UpdateGameStats();
+                break;
         }
 
         game_state = new_state;
+    }
+
+    void UpdateGameStats()
+    {
+        //TODO: Activate lose menu and demases
+        enemiesErased.text = player.enemies_erased.ToString();
+        enemiesDodged.text = player.enemies_avoided.ToString();
+        hitsRecieved.text = player.hits_received.ToString();
     }
 }

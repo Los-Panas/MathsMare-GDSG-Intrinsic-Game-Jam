@@ -91,10 +91,12 @@ public class Player : MonoBehaviour
     Coroutine grade_growing_coroutine = null;
 
     // Stats
-    int enemies_avoided = 0;
+    [HideInInspector]
+    public int enemies_avoided = 0;
     [HideInInspector]
     public int enemies_erased = 0;
-    int hits_received = 0;
+    [HideInInspector]
+    public int hits_received = 0;
     // --------------
     
     public struct BarInfo
