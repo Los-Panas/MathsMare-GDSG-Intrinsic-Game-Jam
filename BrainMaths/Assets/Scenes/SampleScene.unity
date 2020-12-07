@@ -900,6 +900,7 @@ MonoBehaviour:
   - {fileID: 841751017}
   changeBarsColor: 3.81
   repeatColors: 0
+  backgroundBar: {fileID: 1050606697}
   beatsBeforeChange: 10
   availableColors:
   - {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0}
@@ -1395,7 +1396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050606695}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6401048, y: -0.036, z: 223.44043}
+  m_LocalPosition: {x: -0.647, y: -0.076, z: 223.44043}
   m_LocalScale: {x: 0.23750001, y: 1.1228437, z: 1}
   m_Children:
   - {fileID: 7817080630979587701}
