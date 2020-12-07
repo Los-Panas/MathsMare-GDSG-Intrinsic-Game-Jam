@@ -86,7 +86,7 @@ public class AudioManager : MonoBehaviour
 
         while (true)
         {
-            clip = clips[Random.Range(0, clips.Length)];
+            clip = clips[Random.Range(0, clips.Length - 1)];
             if (!clipsUsed.Contains(clip))
             {
                 if (clipsUsed.Count == clips.Length - 1)
