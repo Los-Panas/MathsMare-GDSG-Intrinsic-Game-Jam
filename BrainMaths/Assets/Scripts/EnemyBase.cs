@@ -47,7 +47,7 @@ public class EnemyBase : MonoBehaviour
         if(screenPosition.x - 20 < minCoordToDestroy)
         {
             Player.instance.OnUpdateBarUp();
-            Destroy();
+            DestroyWithTicks();
         }
     }
 
@@ -72,6 +72,15 @@ public class EnemyBase : MonoBehaviour
     }
 
     public virtual void Destroy()
+    {
+        // TODO: Animation
+        Instantiate(deathParticlesExplosion, transform.position, transform.rotation);
+
+        Destroy(gameObject);
+
+        deleted = true;
+    }
+    public virtual void DestroyWithTicks()
     {
         // TODO: Animation
         Instantiate(deathParticlesExplosion, transform.position, transform.rotation);
