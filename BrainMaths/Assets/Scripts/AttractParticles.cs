@@ -28,6 +28,8 @@ public class AttractParticles : MonoBehaviour
         }
         AffectedParticles = GetComponent<ParticleSystem>();
         Setup();
+        EnemiesSpawner.instance.PlayTickSFX();
+
     }
 
     // To store how many particles are active on each frame
@@ -39,6 +41,7 @@ public class AttractParticles : MonoBehaviour
     {
         if (!AffectedParticles.IsAlive())
             Destroy(gameObject);
+
         // Work only if we have something to work on :)
         if (AffectedParticles != null)
         {
