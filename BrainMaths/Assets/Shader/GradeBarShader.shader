@@ -35,8 +35,7 @@ Shader "Unlit/BackgrounMusic"
            struct v2f {
                float2 uv : TEXCOORD0;
                float4 vertex : SV_POSITION;
-               // If you need instance data in the fragment shader, uncomment next line
-               //UNITY_VERTEX_INPUT_INSTANCE_ID
+
            };
 
            uniform sampler2D _MainTex;
@@ -68,6 +67,7 @@ Shader "Unlit/BackgrounMusic"
                // But, remember to uncomment lines flagged above
             float fill = UNITY_ACCESS_INSTANCED_PROP(Props, _Fill);
            float alpha = 1;
+
            if (i.uv.y > fill)
            {
                alpha = 0;
