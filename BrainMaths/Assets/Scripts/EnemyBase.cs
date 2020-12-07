@@ -73,7 +73,6 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void Destroy()
     {
-        // TODO: Animation
         Destroy(Instantiate(deathParticlesExplosion, transform.position, transform.rotation),2);
 
         Destroy(gameObject);
@@ -82,7 +81,6 @@ public class EnemyBase : MonoBehaviour
     }
     public virtual void DestroyWithTicks()
     {
-        // TODO: Animation
         if (Player.instance.gameObject.activeSelf)
         {
             Destroy(Instantiate(deathParticlesExplosion, transform.position, transform.rotation), 2);

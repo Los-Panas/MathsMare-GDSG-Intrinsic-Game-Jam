@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerBrain;
     [SerializeField]
     GameObject MainGame;
+    [SerializeField]
+    GameObject MenuCamera;
 
     [HideInInspector]
     public Player player;
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
                 MainGame.transform.GetChild(0).gameObject.SetActive(true);
                 Time.timeScale = 1;
                 player.UseSpecial();
+                MenuCamera.SetActive(false);
                 break;
         }
 
