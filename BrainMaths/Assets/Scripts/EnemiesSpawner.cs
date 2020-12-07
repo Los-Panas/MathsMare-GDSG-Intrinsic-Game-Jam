@@ -38,6 +38,8 @@ public class EnemiesSpawner : MonoBehaviour
     [Header("SFX")]
     [SerializeField]
     AudioClip onEnemyDead;
+    [SerializeField]
+    AudioClip onTickSpawn;
 
     [Header("Enemies")]
     public List<EnemyMap> enemies;
@@ -107,5 +109,10 @@ public class EnemiesSpawner : MonoBehaviour
 
         Vector3 spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), transform.position.z);
         return Instantiate(spwn, transform.position + spwnPosicion, transform.rotation);
+    }
+
+    public void PlayTickSFX()
+    {
+        audioSource.PlayOneShot(onTickSpawn);
     }
 }
