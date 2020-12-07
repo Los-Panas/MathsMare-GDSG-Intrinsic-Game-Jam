@@ -94,10 +94,21 @@ public class EnemyBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Death" || collision.tag == "Player")
+        if (collision.tag == "Death")
         {
-            Destroy();
-            EnemiesSpawner.instance.PlayOnEnemyDeadSFX();
+            ++Player.instance.enemies_erased;
+            EnemyTouched();
         }
+
+        if (collision.tag == "Player")
+        {
+            EnemyTouched();
+        }
+    }
+
+    void EnemyTouched()
+    {
+        Destroy();
+        EnemiesSpawner.instance.PlayOnEnemyDeadSFX();
     }
 }
