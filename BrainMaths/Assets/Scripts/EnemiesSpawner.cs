@@ -96,7 +96,7 @@ public class EnemiesSpawner : MonoBehaviour
                 break;
         }
         
-        return Instantiate(spawnEnemy, transform.position + spwnPosicion, transform.rotation);
+        return Instantiate(spawnEnemy, transform.position + spwnPosicion, spawnEnemy.transform.rotation);
 
     }
 
@@ -108,7 +108,7 @@ public class EnemiesSpawner : MonoBehaviour
 
 
         Vector3 spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), 0);
-        return Instantiate(spwn, transform.position + spwnPosicion, transform.rotation);
+        return Instantiate(spwn, transform.position + spwnPosicion, spwn.transform.rotation);
     }
 
     public void PlayTickSFX()

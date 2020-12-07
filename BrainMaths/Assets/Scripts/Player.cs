@@ -74,10 +74,8 @@ public class Player : MonoBehaviour
     // -----------------------------
 
     [Header("Controls")]
-    [SerializeField]
-    KeyCode MoveUp = KeyCode.W;
-    [SerializeField]
-    KeyCode MoveDown = KeyCode.S;
+    public KeyCode MoveUp = KeyCode.W;
+    public KeyCode MoveDown = KeyCode.S;
     // -----------------------------
 
     // Internal Variables ----------
@@ -362,7 +360,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void UseSpecial()
+    public void UseSpecial()
     {
         special_charged = false;
         StartCoroutine(PerlinNoiseShake(Camera.gameObject, 10));

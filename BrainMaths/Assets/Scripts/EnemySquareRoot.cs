@@ -19,6 +19,8 @@ public class EnemySquareRoot : EnemyBase
     [SerializeField]
     float trigger_point = 5.5f;
     [SerializeField]
+    float max_random_bound = 4;
+    [SerializeField]
     float time_to_pos = 1.0f;
 
     // Variables
@@ -40,7 +42,7 @@ public class EnemySquareRoot : EnemyBase
 
                 if (transform.position.x <= trigger_point)
                 {
-                    target_pos_point = Random.Range(-4.5f, 4.5f);
+                    target_pos_point = Random.Range(-max_random_bound, max_random_bound);
                     StartCoroutine(RandomPosTransition());
                     state = EnemyState.RandomPos;
                 }

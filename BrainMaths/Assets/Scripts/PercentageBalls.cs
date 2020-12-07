@@ -24,7 +24,7 @@ public class PercentageBalls : MonoBehaviour
             pos.y += direction.y * speed * Time.deltaTime;
             transform.position = pos;
 
-            transform.rotation *= Quaternion.Euler(0, 0, Time.time);
+            transform.rotation *= Quaternion.Euler(0, 0, Time.time * Time.deltaTime * 25);
         }
     }
 
