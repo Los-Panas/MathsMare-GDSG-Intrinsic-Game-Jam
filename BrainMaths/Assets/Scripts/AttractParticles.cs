@@ -38,7 +38,7 @@ public class AttractParticles : MonoBehaviour
     void LateUpdate()
     {
         if (!AffectedParticles.IsAlive())
-            Destroy(this);
+            Destroy(gameObject);
         // Work only if we have something to work on :)
         if (AffectedParticles != null)
         {

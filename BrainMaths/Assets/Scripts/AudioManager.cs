@@ -118,7 +118,7 @@ public class AudioManager : MonoBehaviour
 
             Color col = Camera.main.backgroundColor;
             Color colorbefore = col;
-            for (int i = 0; i < (bars.Length - 1) *mult; ++i)
+            for (int i = 0; i <= (bars.Length - 1) *mult; ++i)
             {
                 while (col == Camera.main.backgroundColor || col == colorbefore)
                 {
@@ -166,7 +166,7 @@ public class AudioManager : MonoBehaviour
 
             Color colorbefore = Camera.main.backgroundColor;
 
-            for (int i = 0; i < min - 1; ++i)
+            for (int i = 0; i <= min - 1; ++i)
             {
                 beatcountbybars = 0;
 
