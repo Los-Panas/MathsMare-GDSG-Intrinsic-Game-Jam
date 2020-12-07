@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
     SpriteRenderer gradeSprite;
     [SerializeField]
     GameObject Camera;
+    [SerializeField]
+    GameObject deadPlayer;
 
     [Header("Grade Variables")]
     [SerializeField]
@@ -191,8 +193,8 @@ public class Player : MonoBehaviour
         {
             if (collision.tag == "Enemy")
             {
-                DecreaseGrade();
                 StartCoroutine(InvulnerableAnim());
+                DecreaseGrade();
             }
         }
     }
@@ -232,7 +234,10 @@ public class Player : MonoBehaviour
 
     void OnPlayerDead()
     {
-        // TODO: 
+        gradeBar.material.SetFloat("_Fill", 0);
+        StopAllCoroutines();
+        gameObject.SetActive(false);
+        Instantiate(deadPlayer, transform.position, Quaternion.identity);
     }
 
     void AddGrade()
