@@ -131,12 +131,6 @@ public class AudioManager : MonoBehaviour
                 if(repeatColors)
                     bars[(bars.Length - 1) - i].material.color = col;
             }
-            
-            while (backgroundBar.material.color == Camera.main.backgroundColor)
-            {
-                backgroundBar.material.color = availableColors[Random.Range(0, availableColors.Length)];
-            }
-
         }
         ++spawnCout;
         if(spawnCout >= beatsBeforeSpawn)
