@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     [Header("Audio")]
     [SerializeField]
     AudioClip onGradeUp;
+    [SerializeField]
+    AudioClip onDie;
 
     [Header("Invulnerability Animation")]
     [SerializeField]
@@ -232,6 +234,7 @@ public class Player : MonoBehaviour
 
     void OnPlayerDead()
     {
+        GameObject.Find("AudioSourceDead").GetComponent<AudioSource>().PlayOneShot(onDie);
         gradeBar.material.SetFloat("_Fill", 0);
         StopAllCoroutines();
         gameObject.SetActive(false);

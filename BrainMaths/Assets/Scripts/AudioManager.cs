@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
+
     [Header("Musics")]
     [SerializeField]
     private float overlapEndingSec = 4;
@@ -50,6 +52,8 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         AudioSource[] audioSources = GetComponents<AudioSource>();
         currentAudioSource = audioSources[0];
         extraAudioSource = audioSources[1];
@@ -59,6 +63,9 @@ public class AudioManager : MonoBehaviour
         OnChangeMusic();
 
         beatcountbybars = changeBarsColor;
+
+        currentAudioSource.volume = 1;
+        extraAudioSource.volume = 1;
     }
 
     private void Update()
@@ -102,6 +109,12 @@ public class AudioManager : MonoBehaviour
         }
 
         return clip;
+    }
+
+    public void SetVolume(float volume)
+    {
+        currentAudioSource.volume = volume;
+        extraAudioSource.volume = volume;
     }
 
     public void OnBeat()
