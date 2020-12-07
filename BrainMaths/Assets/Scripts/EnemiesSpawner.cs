@@ -92,7 +92,7 @@ public class EnemiesSpawner : MonoBehaviour
                 spwnPosicion = new Vector3(0, -objectSize.y * 0.5f, transform.position.z);
                 break;
             case SpawnPos.Random:
-                spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), transform.position.z);
+                spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), 0);
                 break;
         }
         
@@ -107,7 +107,7 @@ public class EnemiesSpawner : MonoBehaviour
         GameObject spwn = enemies[Random.Range(0, enemies.Count)].enemy;
 
 
-        Vector3 spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), transform.position.z);
+        Vector3 spwnPosicion = new Vector3(0, Random.Range(-objectSize.y * 0.5f, objectSize.y * 0.5f), 0);
         return Instantiate(spwn, transform.position + spwnPosicion, transform.rotation);
     }
 
