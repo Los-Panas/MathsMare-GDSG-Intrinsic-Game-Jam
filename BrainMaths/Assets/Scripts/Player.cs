@@ -34,6 +34,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     float time_to_hold_special = 0.25f;
 
+    [Header("Audio")]
+    [SerializeField]
+    AudioClip onGradeUp;
 
     [Header("Invulnerability Animation")]
     [SerializeField]
@@ -81,6 +84,7 @@ public class Player : MonoBehaviour
     float manual_time = 0;
     bool special_charged = false;
     Coroutine grade_perlin_noise_coroutine;
+    AudioSource audioSource;
     
     public struct BarInfo
     {
@@ -108,6 +112,8 @@ public class Player : MonoBehaviour
         instance = this;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+
+        audioSource = GetComponent<AudioSource>();
 
         special_charged = false;
         gradeSprite.sprite = spriteGrades[(int)grade];
@@ -237,7 +243,7 @@ public class Player : MonoBehaviour
         }
 
         special_charged = true;
-
+        audioSource.PlayOneShot(onGradeUp, 0.15F);
         if (grade != Grade.ULTRA_A)
         {
             ++grade;
