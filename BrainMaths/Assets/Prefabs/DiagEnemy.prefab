@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3842717060251453680}
   m_Layer: 0
   m_Name: DiagEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3842717060251453681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.89463824, y: -0.5153886, z: -487.2607}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 3842717061579320515}
   - {fileID: 3842717060574709653}
@@ -106,7 +106,7 @@ MonoBehaviour:
     type: 3}
   deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
     type: 3}
-  mySpeed: 2
+  mySpeed: 7
 --- !u!1 &3842717060574709654
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -4949040336389871768, guid: c31bcd9d1b1338e4891113b78107c375,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -278,7 +278,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 52ed5dc0e05f20f45b3d9444554a1fe8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

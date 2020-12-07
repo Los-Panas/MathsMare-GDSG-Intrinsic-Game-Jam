@@ -17,8 +17,8 @@ public class EnemiesSpawner : MonoBehaviour
         Plus,
         Percentatge,
         Decrease,
-        Sqrt
-        
+        Sqrt,
+        Infinity
     }
     [System.Serializable]
     public struct EnemyMap

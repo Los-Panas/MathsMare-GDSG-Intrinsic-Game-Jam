@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5127076276521966983}
   - component: {fileID: 5127076276521967096}
   - component: {fileID: 5127076276521967097}
-  - component: {fileID: 953749034}
+  - component: {fileID: 3038047242957338026}
   m_Layer: 0
   m_Name: PercentageEnemy
   m_TagString: Enemy
@@ -82,7 +82,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!70 &953749034
+--- !u!70 &3038047242957338026
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,11 +92,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.31, y: 0.101917334}
+  m_Offset: {x: -0.0043276544, y: 0.010865404}
+  m_Size: {x: 1.2225542, y: 0.23649845}
   m_Direction: 1
 --- !u!1 &5127076276674343318
 GameObject:
@@ -234,13 +234,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5127076278078726450}
-  m_LocalRotation: {x: 0, y: 0, z: -0.13052624, w: 0.9914449}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9262, w: 0.37703273}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 5127076276521966983}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135.7}
 --- !u!212 &5127076278078726448
 SpriteRenderer:
   m_ObjectHideFlags: 0
