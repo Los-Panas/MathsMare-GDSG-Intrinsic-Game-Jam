@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ButtonsController : MonoBehaviour
 {
@@ -9,10 +10,28 @@ public class ButtonsController : MonoBehaviour
     public GameObject text;
     public float timeWaitBar = 0;
     public EventSystem eventSystem;
+    public Image wBar;
+    public Image sBar;
+    public float timeHolding = 1;
+    public Sprite sSprite;
+    public Sprite wSprite;
+    public Image sImage;
+    public Image wImage;
 
     private int selected = 2;
     private InputStates wStates = new InputStates(KeyCode.W);
     private InputStates sStates = new InputStates(KeyCode.S);
+
+    Coroutine wUpCoroutine = null;
+    Coroutine sUpCoroutine = null;
+    Coroutine wDownCoroutine = null;
+    Coroutine sDownCoroutine = null;
+
+    bool wBarFinished = false;
+    bool sBarFinished = false;
+
+    bool sIngore = false;
+    bool wIgnore = false;
 
     struct InputStates
     {
@@ -52,6 +71,11 @@ public class ButtonsController : MonoBehaviour
 
         public void StartTime() { time = Time.time; }
 
+        public bool Released()
+        {
+            return !Input.GetKey(code) && !Input.GetKeyDown(code) && !Input.GetKeyUp(code);
+        }
+
         public void Update()
         {
             lastFrameStates[0] = states[0];
@@ -68,6 +92,26 @@ public class ButtonsController : MonoBehaviour
     void Start()
     {
         InputStates.timeWaitingBeforeBar = timeWaitBar;
+
+        sBar.material = new Material(sBar.material);
+        sBar.material.SetFloat("_Fill", 0);
+
+        wBar.material = new Material(wBar.material);
+        wBar.material.SetFloat("_Fill", 0);
+    }
+
+    void SwapWSprites()
+    {
+        Sprite aux = wImage.sprite;
+        wImage.sprite = wSprite;
+        wSprite = aux;
+    }
+    
+    void SwapSSprite()
+    {
+        Sprite aux = sImage.sprite;
+        sImage.sprite = sSprite;
+        sSprite = aux;
     }
 
     // Update is called once per frame
@@ -76,56 +120,147 @@ public class ButtonsController : MonoBehaviour
         wStates.Update();
         sStates.Update();
 
-        if (wStates.IsDown())
+        if (wIgnore && wStates.Released())
         {
-            wStates.StartTime();
+            wIgnore = false;
         }
 
-        if (wStates.IsLastFrameRepeat() && wStates.IsRepeat() && wStates.TimeUp())
+        if (sIngore && sStates.Released())
         {
-            // TODO: start W bar
-            print("Starting W Bar");
+            sIngore = false;
         }
-        else if (wStates.IsUp())
+
+        if (!wIgnore)
         {
-            if (wStates.TimeUp())
+            if (wStates.IsDown())
             {
-                // TODO: Decrease Bar
-                print("On Down W Bar");
+                wStates.StartTime();
+                SwapWSprites();
             }
-            else
+
+            if (wStates.IsLastFrameRepeat() && wStates.IsRepeat() && wStates.TimeUp())
             {
-                if (selected != 4)
+                if (wDownCoroutine != null)
                 {
-                    ++selected;
-                    SetSelectedGO(buttons[selected]);
+                    StopCoroutine(wDownCoroutine);
+                    wDownCoroutine = null;
+                }
+                if (wUpCoroutine == null)
+                {
+                    wUpCoroutine = StartCoroutine(MoveBar(wBar, 1));
+                }
+            }
+            else if (wStates.IsUp())
+            {
+                SwapWSprites();
+                if (wStates.TimeUp())
+                {
+                    if (wUpCoroutine != null)
+                    {
+                        StopCoroutine(wUpCoroutine);
+                        wUpCoroutine = null;
+                    }
+                    if (wDownCoroutine == null)
+                    {
+                        wDownCoroutine = StartCoroutine(MoveBar(wBar, 0));
+                        wBarFinished = false;
+                    }
+                }
+                else
+                {
+                    if (selected != 4)
+                    {
+                        ++selected;
+                        SetSelectedGO(buttons[selected]);
+                    }
                 }
             }
         }
 
-        if (sStates.IsDown())
+        if (!sIngore)
         {
-            sStates.StartTime();
+            if (sStates.IsDown())
+            {
+                sStates.StartTime();
+                SwapSSprite();
+            }
+
+            if (sStates.IsLastFrameRepeat() && sStates.IsRepeat() && sStates.TimeUp())
+            {
+                if (sDownCoroutine != null)
+                {
+                    StopCoroutine(sDownCoroutine);
+                    sDownCoroutine = null;
+                }
+                if (sUpCoroutine == null)
+                {
+                    sUpCoroutine = StartCoroutine(MoveBar(sBar, 1));
+                }
+            }
+            else if (sStates.IsUp())
+            {
+                SwapSSprite();
+                if (sStates.TimeUp())
+                {
+                    if (sUpCoroutine != null)
+                    {
+                        StopCoroutine(sUpCoroutine);
+                        sUpCoroutine = null;
+                    }
+                    if (sDownCoroutine == null)
+                    {
+                        sDownCoroutine = StartCoroutine(MoveBar(sBar, 0));
+                        sBarFinished = false;
+                    }
+                }
+                else
+                {
+                    if (selected != 0)
+                    {
+                        --selected;
+                        SetSelectedGO(buttons[selected]);
+                    }
+                }
+            }
         }
 
-        if (sStates.IsLastFrameRepeat() && sStates.IsRepeat() && sStates.TimeUp())
+       
+        if (wBarFinished && sBarFinished)
         {
-            // TODO: start S bar
-            print("Starting S Bar");
-        }
-        else if (sStates.IsUp())
-        {
-            if (sStates.TimeUp())
+            wBarFinished = false;
+            sBarFinished = false;
+            sBar.material.SetFloat("_Fill", 0);
+            wBar.material.SetFloat("_Fill", 0);
+
+            sIngore = true;
+            wIgnore = true;
+
+            switch (selected)
             {
-                // TODO: Decrease Bar
-                print("On Down S Bar");
-            }
-            else
-            {
-                if (selected != 0)
+                case 0: // Github
                 {
-                    --selected;
-                    SetSelectedGO(buttons[selected]);
+                    Application.OpenURL("https://github.com/Los-Panas/MathsMare-GDSG-Intrinsic-Game-Jam");
+                    break;
+                }
+                case 1: // Settings
+                {
+                    UIButtons_Functions.instance.SettingsButton();
+                    break;
+                }
+                case 2: // Play
+                {
+                    UIButtons_Functions.instance.PlayButton();
+                    break;
+                }
+                case 3: // Credits
+                {
+                    // TOOD:
+                    break;
+                }
+                case 4: // ItchIO
+                {
+                    Application.OpenURL("https://victorgg-11.itch.io/mathsmare");
+                    break;
                 }
             }
         }
@@ -135,6 +270,61 @@ public class ButtonsController : MonoBehaviour
     {
         eventSystem.SetSelectedGameObject(gameObject);
         text.transform.position = new Vector2(gameObject.transform.position.x,
-            gameObject.transform.position.y - gameObject.GetComponent<RectTransform>().rect.height * 0.3F);
+            gameObject.transform.position.y - gameObject.GetComponent<RectTransform>().rect.height * 0.31F);
+
+        StopAllCoroutines();
+        sUpCoroutine = null;
+        wUpCoroutine = null;
+        sDownCoroutine = null;
+        wDownCoroutine = null;
+        sBar.material.SetFloat("_Fill", 0);
+        wBar.material.SetFloat("_Fill", 0);
+    }
+
+    IEnumerator MoveBar(Image image, float value)
+    {
+        image.gameObject.SetActive(true);
+
+        float current = image.material.GetFloat("_Fill");
+        float init = current;
+        float time = Time.time;
+
+        while (true)
+        {
+            float t = (Time.time - time) / timeHolding;
+            current = Mathf.Lerp(init, value, t);
+            image.material.SetFloat("_Fill", current);
+            
+            if (current == value)
+            {
+                if (image == sBar)
+                {
+                    if (value != 0)
+                    {
+                        sBarFinished = true;
+                        sUpCoroutine = null;
+                    }
+                    else
+                    {
+                        sDownCoroutine = null;
+                    }
+                    break;
+                }
+                else
+                {
+                    if (value != 0)
+                    {
+                        wBarFinished = true;
+                        wUpCoroutine = null;
+                    }
+                    else
+                    {
+                        wDownCoroutine = null;
+                    }
+                    break;
+                }
+            }
+            yield return null;
+        }
     }
 }

@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class UIButtons_Functions : MonoBehaviour
 {
+    static public UIButtons_Functions instance;
+
     [SerializeField]
     GameManager GameManager;
     [SerializeField]
     MenusManager Canvas;
+
+    private void Start()
+    {
+        instance = this;
+    }
 
     public void PlayButton()
     {
@@ -16,6 +23,8 @@ public class UIButtons_Functions : MonoBehaviour
 
     public void SettingsButton()
     {
+        GameManager.ignoreS = true;
+        GameManager.ignoreW = true;
         GameManager.ChangeState(GameManager.GameStates.Options);
     }
 }
