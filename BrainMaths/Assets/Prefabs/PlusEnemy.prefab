@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6504732322872879113}
   - component: {fileID: 6050089619861467761}
-  - component: {fileID: 3041894973484095667}
   - component: {fileID: 453862105492655272}
+  - component: {fileID: 547083397}
   m_Layer: 0
   m_Name: PlusEnemy
   m_TagString: Enemy
@@ -84,28 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3041894973484095667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6391039666279341151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e166236627492aa47a655ff4d9a5e7a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mPosition: {x: 0, y: 0}
-  mVelocity: {x: -2, y: 0}
-  mSpeed: {x: 5, y: 0}
-  randomizeStartingSpeed: 0
-  minAndMax: {x: 0, y: 0}
-  minCoordToDestroy: 0
-  deathParticlesTicks: {fileID: 1438847939287979412, guid: ff5eb1d4fe3c56e4cbb111d28d83961f,
-    type: 3}
-  deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
-    type: 3}
 --- !u!70 &453862105492655272
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -122,6 +100,28 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.32, y: 0.32}
   m_Direction: 0
+--- !u!114 &547083397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6391039666279341151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301c3eefd4215ec42b06fdc7d2f1e717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mPosition: {x: 0, y: 0}
+  mVelocity: {x: -3, y: 3}
+  mSpeed: {x: 1, y: 1}
+  randomizeStartingSpeed: 0
+  minAndMax: {x: 0, y: 0}
+  minCoordToDestroy: 0
+  deathParticlesTicks: {fileID: 1438847939287979412, guid: ff5eb1d4fe3c56e4cbb111d28d83961f,
+    type: 3}
+  deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
+    type: 3}
 --- !u!1 &8675975817136093710
 GameObject:
   m_ObjectHideFlags: 0

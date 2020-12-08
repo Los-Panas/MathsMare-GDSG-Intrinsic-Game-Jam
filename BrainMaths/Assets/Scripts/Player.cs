@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
                 special_time_hold = 0;
             }
         }
-        else if(!Input.GetKey(MoveUp) && !Input.GetKey(MoveDown))
+        else if (!Input.GetKey(MoveUp) && !Input.GetKey(MoveDown))
         {
             movement.y += Mathf.Sin(manual_time) * 0.35f;
         }
