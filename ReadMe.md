@@ -12,7 +12,7 @@ Controls:
 - S
 - W & S at the same time
 - All of them multiple porpouses
-
+- ESC to Close the Game
 ------------------------
 Authors:
 
