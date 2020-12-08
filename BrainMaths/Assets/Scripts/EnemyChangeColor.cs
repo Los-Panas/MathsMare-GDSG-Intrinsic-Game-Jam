@@ -5,21 +5,28 @@ using UnityEngine;
 public class EnemyChangeColor : MonoBehaviour
 {
     public SpriteRenderer[] srs;
-    
+    private int lastColorId;
 
-    public void ChangeColor(Color[] allColors, Color col)
+    private void Awake()
     {
+        lastColorId = 99;
+    }
+    public void ChangeColor(int col)
+    {
+        Color[] allColors = AudioManager.instance.availableColors;
 
         int n_color = Random.Range(0, allColors.Length);
 
-        while(allColors[n_color] == col)
+        while(n_color == col || n_color == lastColorId)
         {
             n_color = Random.Range(0, allColors.Length);
         }
 
         for (int i = 0; i < srs.Length; ++i)
         {
-            srs[i].material.color = allColors[n_color];
+            srs[i].color = allColors[n_color];
         }
+
+        lastColorId = n_color;
     }
 }

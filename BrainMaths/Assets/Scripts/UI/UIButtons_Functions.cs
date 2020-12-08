@@ -34,4 +34,9 @@ public class UIButtons_Functions : MonoBehaviour
         GameManager.ignoreW = true;
         GameManager.ChangeState(GameManager.GameStates.Credits);
     }
+
+    public void SliderChanged()
+    {
+        GameManager.ChangeMixerVolume();
+    }
 }

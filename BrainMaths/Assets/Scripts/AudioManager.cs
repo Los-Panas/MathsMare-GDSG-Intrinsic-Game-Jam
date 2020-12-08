@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
     [Space]
     private float beatsBeforeChange = 0;
     private float beatCout = 0;
+    private int backGroundColorId;
     [SerializeField]
     public Color[] availableColors;
 
@@ -69,6 +70,8 @@ public class AudioManager : MonoBehaviour
 
         currentAudioSource.volume = 1;
         extraAudioSource.volume = 1;
+
+        backGroundColorId = 99;
     }
 
     private void Update()
@@ -126,26 +129,29 @@ public class AudioManager : MonoBehaviour
         if (beatCout >= beatsBeforeChange)
         {
             beatCout = 0;
-            Color aux = Camera.main.backgroundColor;
-            while (aux == Camera.main.backgroundColor)
-            {
-                aux = availableColors[Random.Range(0, availableColors.Length)];
-            }
-            Camera.main.backgroundColor = aux;
 
-            Color col = aux;
-            Color colorbefore = col;
+            int aux = backGroundColorId;
+            while (aux == backGroundColorId)
+            {
+                aux = Random.Range(0, availableColors.Length);
+            }
+            Camera.main.backgroundColor = availableColors[aux];
+            BeatManager.instance.Beat(aux);
+
+            backGroundColorId = aux;
+
+            int col = aux;
+            int colorbefore = col;
             for (int i = 0; i <= (bars.Length - 1); ++i)
             {
-                while (col == Camera.main.backgroundColor || col == colorbefore)
+                while (col == backGroundColorId || col == colorbefore)
                 {
-                    col = availableColors[Random.Range(0, availableColors.Length)];
+                    col = Random.Range(0, availableColors.Length);
                 }
                 colorbefore = col;
-                bars[i].material.color = col;
+                bars[i].material.color = availableColors[col];
             }
 
-            BeatManager.instance.Beat(aux);
         }
 
         ++spawnCout;
