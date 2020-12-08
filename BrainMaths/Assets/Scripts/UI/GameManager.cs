@@ -117,24 +117,28 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0;
                 break;
             case GameStates.Game:
-                canvas_anim.gameObject.SetActive(false);
-                Gameplay.SetActive(true);
-                Time.timeScale = 1;
-                player.UseSpecial();
-                MenuCamera.SetActive(false);
-                for (int i = 0; i < 2; ++i)
                 {
-                    clouds[i].enabled = true;
+                    canvas_anim.gameObject.SetActive(false);
+                    Gameplay.SetActive(true);
+                    Time.timeScale = 1;
+                    player.UseSpecial();
+                    MenuCamera.SetActive(false);
+                    for (int i = 0; i < 2; ++i)
+                    {
+                        clouds[i].enabled = true;
+                    }
                 }
                 break;
             case GameStates.Dead:
-                MenuCamera.SetActive(true);
-                Gameplay.SetActive(false);
-                StartCoroutine(GetUpLoseMenu(0));
-                UpdateGameStats();
-                for (int i = 0; i < 2; ++i)
                 {
-                    clouds[i].enabled = false;
+                    MenuCamera.SetActive(true);
+                    Gameplay.SetActive(false);
+                    StartCoroutine(GetUpLoseMenu(0));
+                    UpdateGameStats();
+                    for (int i = 0; i < 2; ++i)
+                    {
+                        clouds[i].enabled = false;
+                    }
                 }
                 break;
         }
@@ -144,7 +148,6 @@ public class GameManager : MonoBehaviour
 
     void UpdateGameStats()
     {
-        //TODO: Activate lose menu and demases
         enemiesErased.text = player.enemies_erased.ToString();
         enemiesDodged.text = player.enemies_avoided.ToString();
         hitsRecieved.text = player.hits_received.ToString();
