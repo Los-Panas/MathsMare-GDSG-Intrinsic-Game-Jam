@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
     float time_holding_ulti = 0;
     bool accept_input = false;
 
+    public bool ignoreW = false;
+    public bool ignoreS = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -70,14 +73,26 @@ public class GameManager : MonoBehaviour
             case GameStates.MainMenu:
                 break;
             case GameStates.Options:
-                if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
+                if (ignoreW && !Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W) && !Input.GetKeyUp(KeyCode.W))
                 {
-                    time_holding_options += 1;
+                    ignoreW = false;
+                }
+                if (ignoreS && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) && !Input.GetKeyUp(KeyCode.S))
+                {
+                    ignoreS = false;
+                }
 
-                    if (time_holding_options >= 120)
+                if (!ignoreW && !ignoreS)
+                {
+                    if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
                     {
-                        time_holding_options = 0;
-                        ChangeState(GameStates.MainMenu);
+                        time_holding_options += 1;
+
+                        if (time_holding_options >= 120)
+                        {
+                            time_holding_options = 0;
+                            ChangeState(GameStates.MainMenu);
+                        }
                     }
                 }
 
