@@ -47,9 +47,16 @@ MonoBehaviour:
   PlayerBrain: {fileID: 0}
   MainGame: {fileID: 0}
   Gameplay: {fileID: 0}
+  BlackBoard: {fileID: 0}
+  MenuManager: {fileID: 0}
   MenuCamera: {fileID: 0}
   LoseMenu: {fileID: 0}
+  clouds:
+  - {fileID: 0}
+  - {fileID: 0}
   enemiesErased: {fileID: 0}
   enemiesDodged: {fileID: 0}
   hitsRecieved: {fileID: 0}
   player: {fileID: 0}
+  ignoreW: 0
+  ignoreS: 0
