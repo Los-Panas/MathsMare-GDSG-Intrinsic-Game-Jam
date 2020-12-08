@@ -71,6 +71,11 @@ public class ButtonsController : MonoBehaviour
 
         public void StartTime() { time = Time.time; }
 
+        public bool Released()
+        {
+            return !Input.GetKey(code) && !Input.GetKeyDown(code) && !Input.GetKeyUp(code);
+        }
+
         public void Update()
         {
             lastFrameStates[0] = states[0];
@@ -114,6 +119,16 @@ public class ButtonsController : MonoBehaviour
     {
         wStates.Update();
         sStates.Update();
+
+        if (wIgnore && wStates.Released())
+        {
+            wIgnore = false;
+        }
+
+        if (sIngore && sStates.Released())
+        {
+            sIngore = false;
+        }
 
         if (!wIgnore)
         {
@@ -161,10 +176,6 @@ public class ButtonsController : MonoBehaviour
                 }
             }
         }
-        else if (wStates.IsUp())
-        {
-            wIgnore = false;
-        }
 
         if (!sIngore)
         {
@@ -211,10 +222,6 @@ public class ButtonsController : MonoBehaviour
                     }
                 }
             }
-        }
-        else
-        {
-            sIngore = false;
         }
 
        
