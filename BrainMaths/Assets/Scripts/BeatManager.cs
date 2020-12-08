@@ -7,6 +7,8 @@ public class BeatManager : MonoBehaviour
     static public BeatManager instance;
     public List<BeatData> subscribed_objs_to_beat;
 
+    static private Color[] colors;
+
     public class BeatData : MonoBehaviour
     {
         public GameObject obj;
@@ -30,7 +32,13 @@ public class BeatManager : MonoBehaviour
                 return false;
 
             if (!beating)
+            {
                 StartCoroutine("Beating");
+            }
+
+            EnemyChangeColor ecc = obj.GetComponent<EnemyChangeColor>();
+            if (ecc != null)
+                ecc.ChangeColor(colors);
 
             return true;
         }
@@ -52,6 +60,13 @@ public class BeatManager : MonoBehaviour
     { 
         instance = this;
         subscribed_objs_to_beat = new List<BeatData>();
+
+        colors = new Color[5];
+        colors[0] = new Color32(251, 245, 239, 255);
+        colors[1] = new Color32(242, 211, 171, 255);
+        colors[2] = new Color32(198, 159, 165, 255);
+        colors[3] = new Color32(139, 109, 156, 255);
+        colors[4] = new Color32(73, 77, 126, 255);
     }
 
     // Update is called once per frame

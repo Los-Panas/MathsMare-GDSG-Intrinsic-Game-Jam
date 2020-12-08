@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 4823123726321996550}
   - component: {fileID: 1881302614}
   - component: {fileID: 1881302618}
+  - component: {fileID: 3183961754299612876}
   m_Layer: 0
   m_Name: SquareRootCANON
   m_TagString: Enemy
@@ -570,6 +571,21 @@ MonoBehaviour:
   trigger_point: 5.5
   max_random_bound: 4
   time_to_pos: 1
+--- !u!114 &3183961754299612876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4823123726321996552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bec9bde8aa89c428b40707363748e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  srs:
+  - {fileID: 4823123726321996551}
+  - {fileID: 4823123726838558295}
 --- !u!1 &4823123726421064615
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3842717060251453687}
   - component: {fileID: 3842717060251453680}
   - component: {fileID: 4518336926087185945}
+  - component: {fileID: 2094091065906543725}
   m_Layer: 0
   m_Name: DiagEnemy
   m_TagString: Enemy
@@ -124,6 +125,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.001706363, y: 0.008531762}
   m_Size: {x: 0.28018472, y: 0.1527766}
   m_Direction: 1
+--- !u!114 &2094091065906543725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842717060251453681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bec9bde8aa89c428b40707363748e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  srs:
+  - {fileID: 3842717060251453687}
 --- !u!1 &3842717060574709654
 GameObject:
   m_ObjectHideFlags: 0
