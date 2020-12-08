@@ -128,11 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4648506305775592215, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7223572265948631620, guid: ee6c3807af629d34886000912b720d24,
         type: 3}
       propertyPath: m_RootOrder
@@ -192,31 +187,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065079451677, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: fastSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065079451677, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: constantSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065326700997, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: constantSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324067019833041, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: dtDifToChange
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324067019833041, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: beatsBeforeSpawn
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6c3807af629d34886000912b720d24, type: 3}
