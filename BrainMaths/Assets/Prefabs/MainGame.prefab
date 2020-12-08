@@ -555,7 +555,7 @@ SpriteRenderer:
   m_SortingLayerID: 1215247651
   m_SortingLayer: 3
   m_SortingOrder: 21
-  m_Sprite: {fileID: 21300000, guid: 4cf9d9c36ba27de4c9e81669aed1bb8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59b05ddf3c629ae459392436ee77178b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0a696b74ea500ed488f7a4c208d69c37, type: 3}
   - {fileID: 8300000, guid: 829544ea667f7b84d9c0965bd57e50bc, type: 3}
   barLength: 4
-  refrashRate: 35
+  refrashRate: 15
   bars:
   - {fileID: 1249038168026999449}
   - {fileID: 1249038167892848268}
@@ -1241,16 +1241,16 @@ MonoBehaviour:
   - {fileID: 1249038169419926748}
   - {fileID: 1249038168094166960}
   - {fileID: 1249038167788037057}
-  changeBarsColor: 3.81
+  changeBarsColor: 2
   repeatColors: 0
   backgroundBar: {fileID: 9020324066488547898}
-  beatsBeforeChange: 10
+  beatsBeforeChange: 6
   availableColors:
   - {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0}
   - {r: 0.54509807, g: 0.42745098, b: 0.6117647, a: 0}
   - {r: 0.28627452, g: 0.3019608, b: 0.49411765, a: 0}
   - {r: 0.15294118, g: 0.15294118, b: 0.26666668, a: 0}
-  beatsBeforeSpawn: 5
+  beatsBeforeSpawn: 13
   spawner: {fileID: 852561009597216293}
   dtDifToChange: 0.25
 --- !u!1001 &3043463458193449105
@@ -1402,7 +1402,7 @@ PrefabInstance:
     - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
       propertyPath: grade
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
         type: 3}
@@ -1435,6 +1435,76 @@ PrefabInstance:
       propertyPath: EnergyCharged
       value: 
       objectReference: {fileID: 799581476}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: invulnerable_time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[0]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[1]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[2]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[3]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[4]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[5]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[6]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[7]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[8]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[9]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[10]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[11]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492117078378589323, guid: d8256edfc3251b24980aa212b51d0533,
+        type: 3}
+      propertyPath: enemyCoutToUpgrade.Array.data[12]
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8256edfc3251b24980aa212b51d0533, type: 3}
 --- !u!4 &9020324066457195318 stripped

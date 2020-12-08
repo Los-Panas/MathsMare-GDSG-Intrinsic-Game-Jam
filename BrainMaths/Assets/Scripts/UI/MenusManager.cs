@@ -9,6 +9,7 @@ public class MenusManager : MonoBehaviour
 
     public GameObject MainMenu;
     public GameObject SettingsMenu;
+    public GameObject CreditsMenu;
 
     [SerializeField]
     Text MoveUp_Text;

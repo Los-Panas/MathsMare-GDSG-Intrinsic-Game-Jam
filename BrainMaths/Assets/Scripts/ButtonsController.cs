@@ -13,10 +13,6 @@ public class ButtonsController : MonoBehaviour
     public Image wBar;
     public Image sBar;
     public float timeHolding = 1;
-    public Sprite sSprite;
-    public Sprite wSprite;
-    public Image sImage;
-    public Image wImage;
 
     private int selected = 2;
     private InputStates wStates = new InputStates(KeyCode.W);
@@ -100,20 +96,6 @@ public class ButtonsController : MonoBehaviour
         wBar.material.SetFloat("_Fill", 0);
     }
 
-    void SwapWSprites()
-    {
-        Sprite aux = wImage.sprite;
-        wImage.sprite = wSprite;
-        wSprite = aux;
-    }
-    
-    void SwapSSprite()
-    {
-        Sprite aux = sImage.sprite;
-        sImage.sprite = sSprite;
-        sSprite = aux;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -135,7 +117,6 @@ public class ButtonsController : MonoBehaviour
             if (wStates.IsDown())
             {
                 wStates.StartTime();
-                SwapWSprites();
             }
 
             if (wStates.IsLastFrameRepeat() && wStates.IsRepeat() && wStates.TimeUp())
@@ -152,7 +133,6 @@ public class ButtonsController : MonoBehaviour
             }
             else if (wStates.IsUp())
             {
-                SwapWSprites();
                 if (wStates.TimeUp())
                 {
                     if (wUpCoroutine != null)
@@ -171,8 +151,13 @@ public class ButtonsController : MonoBehaviour
                     if (selected != 4)
                     {
                         ++selected;
-                        SetSelectedGO(buttons[selected]);
                     }
+                    else
+                    {
+                        selected = 0;
+                    }
+
+                    SetSelectedGO(buttons[selected]);
                 }
             }
         }
@@ -182,7 +167,6 @@ public class ButtonsController : MonoBehaviour
             if (sStates.IsDown())
             {
                 sStates.StartTime();
-                SwapSSprite();
             }
 
             if (sStates.IsLastFrameRepeat() && sStates.IsRepeat() && sStates.TimeUp())
@@ -199,7 +183,6 @@ public class ButtonsController : MonoBehaviour
             }
             else if (sStates.IsUp())
             {
-                SwapSSprite();
                 if (sStates.TimeUp())
                 {
                     if (sUpCoroutine != null)
@@ -217,9 +200,13 @@ public class ButtonsController : MonoBehaviour
                 {
                     if (selected != 0)
                     {
-                        --selected;
-                        SetSelectedGO(buttons[selected]);
+                        --selected;   
                     }
+                    else
+                    {
+                        selected = 4;
+                    }
+                    SetSelectedGO(buttons[selected]);
                 }
             }
         }
@@ -254,7 +241,7 @@ public class ButtonsController : MonoBehaviour
                 }
                 case 3: // Credits
                 {
-                    // TOOD:
+                    UIButtons_Functions.instance.CreditsButton();
                     break;
                 }
                 case 4: // ItchIO
@@ -269,8 +256,11 @@ public class ButtonsController : MonoBehaviour
     private void SetSelectedGO(GameObject gameObject)
     {
         eventSystem.SetSelectedGameObject(gameObject);
-        text.transform.position = new Vector2(gameObject.transform.position.x,
-            gameObject.transform.position.y - gameObject.GetComponent<RectTransform>().rect.height * 0.31F);
+        text.transform.parent = gameObject.transform;
+        Vector3 pos = text.transform.localPosition;
+        pos.x = 0;
+        pos.y = - gameObject.GetComponent<RectTransform>().rect.height * 0.63f;
+        text.transform.localPosition = pos;
 
         StopAllCoroutines();
         sUpCoroutine = null;

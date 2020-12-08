@@ -7,6 +7,10 @@ public class BeatManager : MonoBehaviour
     static public BeatManager instance;
     public List<BeatData> subscribed_objs_to_beat;
 
+    public Color[] colors;
+
+    private static Color[] c;
+
     public class BeatData : MonoBehaviour
     {
         public GameObject obj;
@@ -24,13 +28,19 @@ public class BeatManager : MonoBehaviour
             speedMult = 11.0f;
         }
 
-        public bool DoBeat()
+        public bool DoBeat(Color col)
         {
             if (obj == null)
                 return false;
 
             if (!beating)
+            {
                 StartCoroutine("Beating");
+            }
+
+            EnemyChangeColor ecc = obj.GetComponent<EnemyChangeColor>();
+            if (ecc != null)
+                ecc.ChangeColor(c, col);
 
             return true;
         }
@@ -52,15 +62,8 @@ public class BeatManager : MonoBehaviour
     { 
         instance = this;
         subscribed_objs_to_beat = new List<BeatData>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            Beat();
-        }
+        c = colors;
     }
 
     public void AddObjToBeat(GameObject obj)
@@ -70,11 +73,11 @@ public class BeatManager : MonoBehaviour
         subscribed_objs_to_beat.Add(bd);
     }
 
-    public void Beat()
+    public void Beat(Color col)
     {
         for(int i = 0; i < subscribed_objs_to_beat.Count; ++i)
         {
-            if(!subscribed_objs_to_beat[i].DoBeat())
+            if(!subscribed_objs_to_beat[i].DoBeat(col))
             {
                 subscribed_objs_to_beat.RemoveAt(i);
             }
