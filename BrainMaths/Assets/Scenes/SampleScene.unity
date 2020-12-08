@@ -211,7 +211,12 @@ PrefabInstance:
     - target: {fileID: 9020324067019833041, guid: ee6c3807af629d34886000912b720d24,
         type: 3}
       propertyPath: dtDifToChange
-      value: 0.2
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020324067019833041, guid: ee6c3807af629d34886000912b720d24,
+        type: 3}
+      propertyPath: beatsBeforeSpawn
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6c3807af629d34886000912b720d24, type: 3}
