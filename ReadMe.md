@@ -7,6 +7,12 @@ This game was made for the GDSG Intrinsic Game Jam​​​ (https://itch.io/jam
 
 - Color Palette​​ (https://lospec.com/palette-list/oil-6)
 
+Controls:
+- W
+- S
+- W & S at the same time
+- All of them multiple porpouses
+
 ------------------------
 Authors:
 
