@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
     {
         currentCreditName = creditsNames[0];
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -126,24 +127,19 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameStates.Credits:
-                if (ignoreW && !Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W) && !Input.GetKeyUp(KeyCode.W))
-                {
-                    ignoreW = false;
-                }
-                if (ignoreS && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) && !Input.GetKeyUp(KeyCode.S))
-                {
-                    ignoreS = false;
-                }
-
                 if (!ignoreW && !ignoreS)
                 {
                     if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
-                    {  
+                    {
                         time_holding_credits += 1;
 
-                        if (time_holding_credits >= 1000)
+                        if (time_holding_credits >= 120)
                         {
-                            time_holding_options = 0;
+                            time_holding_credits = 0;
+
+                            ignoreS = true;
+                            ignoreW = true;
+
                             switch (contCredits)
                             {
                                 case 0:
@@ -162,48 +158,49 @@ public class GameManager : MonoBehaviour
                                     Application.OpenURL("https://github.com/RoperoIvan");
                                     break;
                                 case 5:
-                                    Application.OpenURL("https://github.com/PerezEnric");
-                                    break;
-                                case 6:
                                     Application.OpenURL("https://github.com/VictorSegura99");
                                     break;
-                                case 7:
+                                case 6:
                                     Application.OpenURL("https://danosongs.com/home");
                                     break;
-                                case 8:
+                                case 7:
                                     ChangeState(GameStates.MainMenu);
                                     break;
                             }
-                                
                         }
+                    }
+                    else if (Input.GetKeyUp(player.MoveUp))
+                    {
+                        time_holding_credits = 0;
+                        contCredits--;
+                        if (contCredits < 0)
+                            contCredits = creditsNames.Length - 1;
+
+                        currentCreditName.SetActive(false);
+                        currentCreditName = creditsNames[contCredits];
+                        currentCreditName.SetActive(true);
+                    }
+                    else if (Input.GetKeyUp(player.MoveDown))
+                    {
+                        time_holding_credits = 0;
+                        contCredits++;
+                        if (contCredits > creditsNames.Length - 1)
+                            contCredits = 0;
+
+
+                        currentCreditName.SetActive(false);
+                        currentCreditName = creditsNames[contCredits];
+                        currentCreditName.SetActive(true);
                     }
                 }
 
-                if(Input.GetKeyUp(player.MoveUp))
+                if (ignoreW && !Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W) && Input.GetKeyUp(KeyCode.W))
                 {
-                    Debug.Log(contCredits);
-                    contCredits--;
-                    if (contCredits < 0)
-                        contCredits = creditsNames.Length - 1;
-
-                    currentCreditName.SetActive(false);
-                    currentCreditName = creditsNames[contCredits];
-                    currentCreditName.SetActive(true);
+                    ignoreW = false;
                 }
-                if (Input.GetKeyUp(player.MoveDown))
+                if (ignoreS && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) && Input.GetKeyUp(KeyCode.S))
                 {
-                    contCredits++;
-                    if (contCredits > creditsNames.Length - 1)
-                        contCredits = 0;
-
-                    currentCreditName.SetActive(false);
-                    currentCreditName = creditsNames[contCredits];
-                    currentCreditName.SetActive(true);
-                }
-
-                if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
-                {
-                    time_holding_options = 0;
+                    ignoreS = false;
                 }
                 break;
             case GameStates.Transition:
