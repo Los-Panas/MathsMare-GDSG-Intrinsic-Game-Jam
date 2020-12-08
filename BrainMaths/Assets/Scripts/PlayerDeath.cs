@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
@@ -24,13 +23,13 @@ public class PlayerDeath : MonoBehaviour
     public float maxAngleDeg;
 
     private Vector2 realPos;
-  
+
     // Start is called before the first frame update
     void Start()
     {
         realPos = transform.position;
         scaleInc = transform.localScale.x;
-       
+
         StartCoroutine("ParticleExplosion", liveTimeSeconds);
         StartCoroutine("Suffer");
     }
@@ -77,9 +76,15 @@ public class PlayerDeath : MonoBehaviour
 
         Instantiate(particleExplosionPrefab, transform.position, Quaternion.identity);
 
-        GameObject.Find("GameManager").GetComponent<GameManager>().ChangeState(GameManager.GameStates.Dead);
+        Invoke("ExplosionEnded", 2.0f);
 
-        Destroy(this.gameObject);
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    void ExplosionEnded()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().ChangeState(GameManager.GameStates.Dead);
+        Destroy(gameObject);
     }
 
     IEnumerator Suffer()
@@ -91,4 +96,6 @@ public class PlayerDeath : MonoBehaviour
             Instantiate(particleSufferingPrefab, transform.position, Quaternion.identity);
         }
     }
+
+
 }
