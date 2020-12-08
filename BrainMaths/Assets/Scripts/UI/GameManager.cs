@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour
     CloudMove[] clouds;
     [SerializeField]
     Slider VolumeSlider;
+    [SerializeField]
+    AudioMixer MasterMixer;
 
     [SerializeField]
     Text enemiesErased;
@@ -102,10 +105,13 @@ public class GameManager : MonoBehaviour
                     else if(Input.GetKey(player.MoveUp))
                     {
                         VolumeSlider.value += 2 * Time.deltaTime;
+                        float value = VolumeSlider.value
+                        MasterMixer.SetFloat("musicVol", value);
                     }
                     else if (Input.GetKey(player.MoveDown))
                     {
                         VolumeSlider.value -= 2 * Time.deltaTime;
+                        MasterMixer.SetFloat("musicVol", VolumeSlider.value);
                     }
                 }
 
