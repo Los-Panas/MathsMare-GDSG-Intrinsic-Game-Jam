@@ -248,8 +248,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1800698453
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ff17fac1447ce364c8c28104af6db0b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -274,9 +274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0337b274ff27dd46a75567b21165c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
-  constantSpeed: 0
-  fastSpeed: 1
+  speed: 0.3
+  constantSpeed: 1
+  fastSpeed: 0
 --- !u!1 &9020324065139557123
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +472,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1215247651
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 21
   m_Sprite: {fileID: 21300000, guid: 4cf9d9c36ba27de4c9e81669aed1bb8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1400,6 +1400,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RealBestCloud
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993262586487886043, guid: 750c452d33371dd40b1782438a9e8cc0,
+        type: 3}
+      propertyPath: speed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993262586487886043, guid: 750c452d33371dd40b1782438a9e8cc0,
+        type: 3}
+      propertyPath: fastSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993262586487886043, guid: 750c452d33371dd40b1782438a9e8cc0,
+        type: 3}
+      propertyPath: constantSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 750c452d33371dd40b1782438a9e8cc0, type: 3}

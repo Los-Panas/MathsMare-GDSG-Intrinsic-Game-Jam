@@ -163,41 +163,11 @@ public class AudioManager : MonoBehaviour
         }
         ++beatcountbybars;
 
-        lastdt = Time.fixedTime - timeLastBeat;
-        if (Mathf.Abs(dtBeats - lastdt) >= dtDifToChange)
-        {
-            ++dtBeatsChangeCount;
-            if (dtBeatsChangeCount >= 3)
-            {
-                Debug.Log("change speed");
-                dtBeats = lastdt;
-            }
-        }
-        else
-        {
-            dtBeatsChangeCount = 0;
-        }
-        timeLastBeat = Time.fixedTime;
-    }
-
-    public void OnSpectrum(float[] spectrum)
-    {
-        ++spectrumCount;
-        if (spectrumCount >= refrashRate)
-        {
-            spectrumCount = 0;
-            int min = Mathf.Min(spectrum.Length, bars.Length);
-            for (int i = 0; i < min; ++i)
-            {
-                bars[i].material.SetFloat("_Fill", Mathf.Min(1, spectrum[i] * barLength));
-            }
-        }
-
         if (changeBarsColor <= beatcountbybars)
         {
             spectrumCount = 0;
-            int min = Mathf.Min(spectrum.Length, bars.Length);
-            
+            int min = bars.Length;
+
             float mult = 0.5f;
             if (!repeatColors)
                 mult = 1;
@@ -228,6 +198,36 @@ public class AudioManager : MonoBehaviour
                 }
             }
 
+        }
+
+        lastdt = Time.fixedTime - timeLastBeat;
+        if (Mathf.Abs(dtBeats - lastdt) >= dtDifToChange)
+        {
+            ++dtBeatsChangeCount;
+            if (dtBeatsChangeCount >= 3)
+            {
+                Debug.Log("change speed");
+                dtBeats = lastdt;
+            }
+        }
+        else
+        {
+            dtBeatsChangeCount = 0;
+        }
+        timeLastBeat = Time.fixedTime;
+    }
+
+    public void OnSpectrum(float[] spectrum)
+    {
+        ++spectrumCount;
+        if (spectrumCount >= refrashRate)
+        {
+            spectrumCount = 0;
+            int min = Mathf.Min(spectrum.Length, bars.Length);
+            for (int i = 0; i < min; ++i)
+            {
+                bars[i].material.SetFloat("_Fill", Mathf.Min(1, spectrum[i] * barLength));
+            }
         }
     }
 
