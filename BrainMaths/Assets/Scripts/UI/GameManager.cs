@@ -105,12 +105,10 @@ public class GameManager : MonoBehaviour
                     else if(Input.GetKey(player.MoveUp))
                     {
                         VolumeSlider.value += 2 * Time.deltaTime;
-                        MasterMixer.SetFloat("musicVol", Mathf.Log10(VolumeSlider.value) * 20);
                     }
                     else if (Input.GetKey(player.MoveDown))
                     {
                         VolumeSlider.value -= 2 * Time.deltaTime;
-                        MasterMixer.SetFloat("musicVol", Mathf.Log10(VolumeSlider.value) * 20);
                     }
                 }
 
@@ -295,5 +293,10 @@ public class GameManager : MonoBehaviour
     {
         accept_input = false;
         StartCoroutine(GetUpLoseMenu(-1020, true));
+    }
+
+    public void ChangeMixerVolume()
+    {
+        MasterMixer.SetFloat("musicVol", Mathf.Log10(VolumeSlider.value) * 20);
     }
 }
