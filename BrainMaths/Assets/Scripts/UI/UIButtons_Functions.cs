@@ -13,4 +13,9 @@ public class UIButtons_Functions : MonoBehaviour
     {
         GameManager.ChangeState(GameManager.GameStates.Transition);
     }
+
+    public void SettingsButton()
+    {
+        GameManager.ChangeState(GameManager.GameStates.Options);
+    }
 }

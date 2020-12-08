@@ -6,6 +6,10 @@ public class MenusManager : MonoBehaviour
 {
     [SerializeField]
     GameManager GameManager;
+
+    public GameObject MainMenu;
+    public GameObject SettingsMenu;
+
     [SerializeField]
     Text MoveUp_Text;
     [SerializeField]

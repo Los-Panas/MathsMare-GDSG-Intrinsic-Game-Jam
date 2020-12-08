@@ -300,8 +300,8 @@ MonoBehaviour:
     type: 3}
   deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
     type: 3}
-  amplitude: 2
-  waveSpeed: 10
+  amplitude: 1
+  waveSpeed: 7
   mySpeedX: 2
 --- !u!70 &8939427255685349410
 CapsuleCollider2D:
