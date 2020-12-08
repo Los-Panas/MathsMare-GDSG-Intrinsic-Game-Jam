@@ -241,7 +241,7 @@ public class ButtonsController : MonoBehaviour
                 }
                 case 3: // Credits
                 {
-                    // TOOD:
+                    UIButtons_Functions.instance.CreditsButton();
                     break;
                 }
                 case 4: // ItchIO
