@@ -45,6 +45,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Eyes
+    uniqueID: 2735919953
+    locked: 0
+  - name: Clouds
+    uniqueID: 2494268843
+    locked: 0
   - name: UI
     uniqueID: 1215247651
     locked: 0

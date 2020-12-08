@@ -289,6 +289,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2745074522995842068, guid: ebe44c57ee4a86145b55c5aefe89684b,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2745074522995842068, guid: ebe44c57ee4a86145b55c5aefe89684b,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022784459106768206, guid: ebe44c57ee4a86145b55c5aefe89684b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 803.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022784459106768206, guid: ebe44c57ee4a86145b55c5aefe89684b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -237.58
+      objectReference: {fileID: 0}
     - target: {fileID: 9059128362365843960, guid: ebe44c57ee4a86145b55c5aefe89684b,
         type: 3}
       propertyPath: m_Name
@@ -545,6 +565,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020324065079451676, guid: ee6c3807af629d34886000912b720d24,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020324065079451676, guid: ee6c3807af629d34886000912b720d24,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1800698453
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020324065326700996, guid: ee6c3807af629d34886000912b720d24,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020324065326700996, guid: ee6c3807af629d34886000912b720d24,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1800698453
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6c3807af629d34886000912b720d24, type: 3}
