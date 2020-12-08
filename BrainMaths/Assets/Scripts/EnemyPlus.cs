@@ -19,7 +19,7 @@ public class EnemyPlus : EnemyBase
     {
         if (Camera.main.WorldToScreenPoint(transform.position).y >= 0.5f)
         {
-            vertical_dir = 1;
+            vertical_dir = -1;
         }
     }
 
