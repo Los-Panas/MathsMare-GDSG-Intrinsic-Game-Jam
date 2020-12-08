@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
                     {
                         time_holding_options += 1;
 
-                        if (time_holding_options >= 120)
+                        if (time_holding_options >= 60)
                         {
                             time_holding_options = 0;
                             ChangeState(GameStates.MainMenu);
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
                     {
                         time_holding_credits += 1;
 
-                        if (time_holding_credits >= 120)
+                        if (time_holding_credits >= 60)
                         {
                             time_holding_credits = 0;
 
