@@ -109,7 +109,7 @@ public class PlayerDeath : MonoBehaviour
         }
 
         float time_start = Time.time;
-
+        GameObject.Find("AudioSourceDieMenu").GetComponent<AudioSource>().Play();
         while (Time.time - time_start < 2.0f)
         {
             float t = (Time.time - time_start) / 2.0f;
