@@ -315,6 +315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7162911139037364160}
+  - component: {fileID: 7278068793191188243}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -343,3 +344,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7278068793191188243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639145767991585533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ff363a7eaa0b745a1af5a95d3ca1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sSprite: {fileID: 21300000, guid: 0b466e9cde755eb4999e33f7f4d6dd86, type: 3}
+  wSprite: {fileID: 21300000, guid: 0b466e9cde755eb4999e33f7f4d6dd86, type: 3}
+  sImage: {fileID: 6112952742684025709}
+  wImage: {fileID: 6112952743149845300}
