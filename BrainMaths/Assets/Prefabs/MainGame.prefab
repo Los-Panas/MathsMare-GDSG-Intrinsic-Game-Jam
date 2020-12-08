@@ -1247,10 +1247,10 @@ MonoBehaviour:
   backgroundBar: {fileID: 9020324066488547898}
   beatsBeforeChange: 6
   availableColors:
-  - {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 0}
-  - {r: 0.54509807, g: 0.42745098, b: 0.6117647, a: 0}
-  - {r: 0.28627452, g: 0.3019608, b: 0.49411765, a: 0}
-  - {r: 0.15294118, g: 0.15294118, b: 0.26666668, a: 0}
+  - {r: 0.7764706, g: 0.62352943, b: 0.64705884, a: 1}
+  - {r: 0.54509807, g: 0.42745098, b: 0.6117647, a: 1}
+  - {r: 0.28627452, g: 0.3019608, b: 0.49411765, a: 1}
+  - {r: 0.15294118, g: 0.15294118, b: 0.26666668, a: 1}
   beatsBeforeSpawn: 13
   spawner: {fileID: 852561009597216293}
   dtDifToChange: 0.25
@@ -1371,6 +1371,16 @@ PrefabInstance:
       propertyPath: colors.Array.data[4].r
       value: 0.28627452
       objectReference: {fileID: 0}
+    - target: {fileID: 2709603130681588019, guid: a0709fa49c28d2748ab372b78959c3db,
+        type: 3}
+      propertyPath: manually_subscribed.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2709603130681588019, guid: a0709fa49c28d2748ab372b78959c3db,
+        type: 3}
+      propertyPath: manually_subscribed.Array.data[0]
+      value: 
+      objectReference: {fileID: 9020324065418958677}
     - target: {fileID: 4506347410032410696, guid: a0709fa49c28d2748ab372b78959c3db,
         type: 3}
       propertyPath: m_RootOrder
