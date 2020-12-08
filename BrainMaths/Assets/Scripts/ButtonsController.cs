@@ -171,8 +171,13 @@ public class ButtonsController : MonoBehaviour
                     if (selected != 4)
                     {
                         ++selected;
-                        SetSelectedGO(buttons[selected]);
                     }
+                    else
+                    {
+                        selected = 0;
+                    }
+
+                    SetSelectedGO(buttons[selected]);
                 }
             }
         }
@@ -217,9 +222,13 @@ public class ButtonsController : MonoBehaviour
                 {
                     if (selected != 0)
                     {
-                        --selected;
-                        SetSelectedGO(buttons[selected]);
+                        --selected;   
                     }
+                    else
+                    {
+                        selected = 0;
+                    }
+                    SetSelectedGO(buttons[selected]);
                 }
             }
         }
