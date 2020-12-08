@@ -246,6 +246,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2001255117}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &862647401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9020324065079451677, guid: ee6c3807af629d34886000912b720d24,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001255117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0337b274ff27dd46a75567b21165c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1220654709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9020324065326700997, guid: ee6c3807af629d34886000912b720d24,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001255117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0337b274ff27dd46a75567b21165c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1387766870 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7979097562989682405, guid: ebe44c57ee4a86145b55c5aefe89684b,
@@ -468,6 +492,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4648506305775592215, guid: ee6c3807af629d34886000912b720d24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7223572265948631620, guid: ee6c3807af629d34886000912b720d24,
         type: 3}
       propertyPath: m_RootOrder
@@ -903,5 +932,20 @@ PrefabInstance:
       propertyPath: enemiesErased
       value: 
       objectReference: {fileID: 2001906354}
+    - target: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
+        type: 3}
+      propertyPath: clouds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
+        type: 3}
+      propertyPath: clouds.Array.data[0]
+      value: 
+      objectReference: {fileID: 1220654709}
+    - target: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
+        type: 3}
+      propertyPath: clouds.Array.data[1]
+      value: 
+      objectReference: {fileID: 862647401}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b5066eae6e2d744bfaf1258ec7b55e, type: 3}
