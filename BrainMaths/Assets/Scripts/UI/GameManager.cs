@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject Gameplay;
     [SerializeField]
+    MenusManager MenuManager;
+    [SerializeField]
     GameObject MenuCamera;
     [SerializeField]
     RectTransform LoseMenu;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Player player;
 
+    float time_holding_options = 0;
     float time_holding_ulti = 0;
     bool accept_input = false;
 
@@ -62,39 +65,72 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (game_state == GameStates.Tutorial)
+        switch (game_state)
         {
-            if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
-            {
-                time_holding_ulti += 1;
-
-                if (time_holding_ulti >= 10)
+            case GameStates.MainMenu:
+                break;
+            case GameStates.Options:
+                if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
                 {
-                    ChangeState(GameStates.Game);
+                    time_holding_options += 1;
+
+                    if (time_holding_options >= 120)
+                    {
+                        time_holding_options = 0;
+                        ChangeState(GameStates.MainMenu);
+                    }
                 }
-            }
 
-            if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
-            {
-                time_holding_ulti = 0;
-            }
-        }
-        else if(game_state==GameStates.Dead && accept_input)
-        {
-            if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
-            {
-                time_holding_ulti += 1;
-
-                if (time_holding_ulti >= 10)
+                if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
                 {
-                    RestartGame();
+                    time_holding_options = 0;
                 }
-            }
+                break;
+            case GameStates.Credits:
+                break;
+            case GameStates.Transition:
+                break;
+            case GameStates.Tutorial:
+                if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
+                {
+                    time_holding_ulti += 1;
 
-            if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
-            {
-                time_holding_ulti = 0;
-            }
+                    if (time_holding_ulti >= 10)
+                    {
+                        time_holding_ulti = 0;
+                        ChangeState(GameStates.Game);
+                    }
+                }
+
+                if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
+                {
+                    time_holding_ulti = 0;
+                }
+                break;
+            case GameStates.Game:
+                break;
+            case GameStates.Dead:
+                if (accept_input)
+                {
+                    if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
+                    {
+                        time_holding_ulti += 1;
+
+                        if (time_holding_ulti >= 10)
+                        {
+                            time_holding_ulti = 0;
+                            RestartGame();
+                        }
+                    }
+
+                    if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
+                    {
+                        time_holding_ulti = 0;
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
     
@@ -104,8 +140,14 @@ public class GameManager : MonoBehaviour
         switch (new_state)
         {
             case GameStates.MainMenu:
+                MenuManager.MainMenu.SetActive(true);
+                MenuManager.SettingsMenu.SetActive(false);
+                //MenuManager.Credits.SetActive(false);
                 break;
             case GameStates.Options:
+                MenuManager.MainMenu.SetActive(false);
+                MenuManager.SettingsMenu.SetActive(true);
+                //MenuManager.Credits.SetActive(false);
                 break;
             case GameStates.Credits:
                 break;
