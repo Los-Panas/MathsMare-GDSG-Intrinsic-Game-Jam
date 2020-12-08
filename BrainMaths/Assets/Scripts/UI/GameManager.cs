@@ -133,7 +133,6 @@ public class GameManager : MonoBehaviour
                     time_holding_options = 0;
                 }
                 break;
-                break;
             case GameStates.Transition:
                 break;
             case GameStates.Tutorial:
