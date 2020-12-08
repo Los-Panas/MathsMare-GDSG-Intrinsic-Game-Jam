@@ -7,6 +7,7 @@ Shader "Unlit/BackgrounMusic"
     Properties{
        _Fill("Fill", float) = 0
         _Color("Main Color", Color) = (1,1,1,1)
+        _Alph("Alph", float) = 1
     }
     SubShader{
         Tags { "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
@@ -43,6 +44,7 @@ Shader "Unlit/BackgrounMusic"
 
            UNITY_INSTANCING_BUFFER_START(Props)
            UNITY_DEFINE_INSTANCED_PROP(float, _Fill)
+           UNITY_DEFINE_INSTANCED_PROP(float, _Alph)
            UNITY_INSTANCING_BUFFER_END(Props)
 
            v2f vert(appdata v) {
@@ -68,10 +70,11 @@ Shader "Unlit/BackgrounMusic"
                // UNITY_ACCESS_INSTANCED_PROP(Props, _Foo);
                // But, remember to uncomment lines flagged above
             float fill = UNITY_ACCESS_INSTANCED_PROP(Props, _Fill);
+            float alph = UNITY_ACCESS_INSTANCED_PROP(Props, _Alph);
             float4 albedo = _Color;
             albedo.w = 1 - i.uv.x;
             if (albedo.w > 0)
-                albedo.w = 1;
+                albedo.w = alph;
             else
                 albedo.w = 0;
             return albedo;
