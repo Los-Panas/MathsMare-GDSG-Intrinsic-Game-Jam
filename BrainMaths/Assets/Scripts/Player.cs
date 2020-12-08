@@ -77,6 +77,10 @@ public class Player : MonoBehaviour
     int[] enemyCoutToUpgrade;
     [SerializeField]
     float max_scale_to_add = 0.25f;
+    [SerializeField]
+    GameObject plusGrade;
+    [SerializeField]
+    List<GameObject> pluses = new List<GameObject>();
 
     [Header("Controls")]
     public KeyCode MoveUp = KeyCode.W;
@@ -288,7 +292,18 @@ public class Player : MonoBehaviour
 
         if (grade == Grade.ULTRA_A)
         {
+            Debug.Log("ULTRA");
             // TODO: add pluses
+            pluses.Add(GameObject.Instantiate(plusGrade));
+            Vector2 newPos = Vector2.zero;
+            newPos.x += 0.16f;
+            if (pluses.Count-1  < 1)
+                pluses[pluses.Count-1].transform.parent = gradeSprite.gameObject.transform;
+            else
+                pluses[pluses.Count-1].transform.parent = pluses[pluses.Count - 2].transform;                  
+
+            pluses[pluses.Count - 1].transform.localPosition = newPos;
+            pluses[pluses.Count - 1].transform.localRotation = Quaternion.identity;
         }
         OnResetBar();
     }
@@ -330,7 +345,6 @@ public class Player : MonoBehaviour
             return;
         }
 
-        --grade;
 
         if (grade_growing_coroutine == null)
         {
@@ -342,9 +356,20 @@ public class Player : MonoBehaviour
         if (grade == Grade.ULTRA_A)
         {
             // TODO: Decrease pluses
+
+            //foreach(GameObject plus in pluses)
+            //{
+            //    Debug.Log("DESTROY");
+            //    Destroy(plus);
+            //}
+            Destroy(gradeSprite.transform.GetChild(0).gameObject);
+            grade -= 2;
+            gradeSprite.sprite = spriteGrades[(int)grade];
+            pluses.Clear();
         }
         else
         {
+            --grade;
             gradeSprite.sprite = spriteGrades[(int)grade];
             if (grade == Grade.F)
             {
