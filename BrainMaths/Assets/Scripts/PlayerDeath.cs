@@ -76,6 +76,8 @@ public class PlayerDeath : MonoBehaviour
 
         Instantiate(particleExplosionPrefab, transform.position, Quaternion.identity);
 
+        StartCoroutine(FadeMusics(GameObject.Find("Main Camera").GetComponents<AudioSource>()));
+
         Invoke("ExplosionEnded", 2.0f);
 
         GetComponent<SpriteRenderer>().enabled = false;
@@ -97,5 +99,28 @@ public class PlayerDeath : MonoBehaviour
         }
     }
 
+    IEnumerator FadeMusics(AudioSource[] sources)
+    {
+        float[] volumes = new float[sources.Length];
+
+        for (int i = 0; i < sources.Length; ++i)
+        {
+            volumes[i] = sources[i].volume;
+        }
+
+        float time_start = Time.time;
+
+        while (Time.time - time_start < 2.0f)
+        {
+            float t = (Time.time - time_start) / 2.0f;
+
+            for (int i = 0; i < sources.Length; ++i)
+            {
+                sources[i].volume = volumes[i] - t;
+            }
+
+            yield return null;
+        }
+    }
 
 }
