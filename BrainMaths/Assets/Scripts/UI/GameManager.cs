@@ -104,14 +104,13 @@ public class GameManager : MonoBehaviour
                     }
                     else if(Input.GetKey(player.MoveUp))
                     {
-                        //VolumeSlider.value += 2 * Time.deltaTime;
-                        ////float value = VolumeSlider.value
-                        //MasterMixer.SetFloat("musicVol", value); // TODO
+                        VolumeSlider.value += 2 * Time.deltaTime;
+                        MasterMixer.SetFloat("musicVol", Mathf.Log10(VolumeSlider.value) * 20);
                     }
                     else if (Input.GetKey(player.MoveDown))
                     {
                         VolumeSlider.value -= 2 * Time.deltaTime;
-                        MasterMixer.SetFloat("musicVol", VolumeSlider.value);
+                        MasterMixer.SetFloat("musicVol", Mathf.Log10(VolumeSlider.value) * 20);
                     }
                 }
 
