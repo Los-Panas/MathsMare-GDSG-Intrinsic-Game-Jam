@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     GameObject MenuCamera;
     [SerializeField]
     RectTransform LoseMenu;
+    [SerializeField]
+    CloudMove[] clouds;
 
     [SerializeField]
     Text enemiesErased;
@@ -50,6 +52,11 @@ public class GameManager : MonoBehaviour
     {
         player = PlayerBrain.GetComponent<Player>();
         Gameplay.SetActive(false);
+
+        for (int i = 0; i < 2; ++i)
+        {
+            clouds[i].enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -115,12 +122,20 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 player.UseSpecial();
                 MenuCamera.SetActive(false);
+                for (int i = 0; i < 2; ++i)
+                {
+                    clouds[i].enabled = true;
+                }
                 break;
             case GameStates.Dead:
                 MenuCamera.SetActive(true);
                 Gameplay.SetActive(false);
                 StartCoroutine(GetUpLoseMenu(0));
                 UpdateGameStats();
+                for (int i = 0; i < 2; ++i)
+                {
+                    clouds[i].enabled = false;
+                }
                 break;
         }
 
