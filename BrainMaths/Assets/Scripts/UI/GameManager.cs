@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     RectTransform LoseMenu;
     [SerializeField]
     CloudMove[] clouds;
+    [SerializeField]
+    Slider VolumeSlider;
 
     [SerializeField]
     Text enemiesErased;
@@ -96,6 +98,14 @@ public class GameManager : MonoBehaviour
                             time_holding_options = 0;
                             ChangeState(GameStates.MainMenu);
                         }
+                    }
+                    else if(Input.GetKey(player.MoveUp))
+                    {
+                        VolumeSlider.value += 2 * Time.deltaTime;
+                    }
+                    else if (Input.GetKey(player.MoveDown))
+                    {
+                        VolumeSlider.value -= 2 * Time.deltaTime;
                     }
                 }
 
