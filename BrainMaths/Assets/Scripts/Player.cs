@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
     GameObject Camera;
     [SerializeField]
     GameObject deadPlayer;
+    [SerializeField]
+    GameObject EnergyCharged;
 
     [Header("Grade Variables")]
     [SerializeField]
@@ -131,6 +133,8 @@ public class Player : MonoBehaviour
         special_charged = false;
         gradeSprite.sprite = spriteGrades[(int)grade];
         gradeBar.material.SetFloat("_Fill", 0);
+
+        EnergyCharged.SetActive(false);
     }
 
     // Update is called once per frame
@@ -175,7 +179,7 @@ public class Player : MonoBehaviour
                 special_time_hold = 0;
             }
         }
-        else if(!Input.GetKey(MoveUp) && !Input.GetKey(MoveDown))
+        else if (!Input.GetKey(MoveUp) && !Input.GetKey(MoveDown))
         {
             movement.y += Mathf.Sin(manual_time) * 0.35f;
         }
@@ -262,6 +266,11 @@ public class Player : MonoBehaviour
 
         special_charged = true;
         audioSource.PlayOneShot(onGradeUp, 0.15F);
+
+        if (!EnergyCharged.activeSelf)
+        {
+            EnergyCharged.SetActive(true);
+        }
 
         if (grade_growing_coroutine == null)
         {
@@ -424,6 +433,7 @@ public class Player : MonoBehaviour
         Vector2 pos = transform.position;
         pos.x += 1;
         Instantiate(DeathExpansionWave, pos, Quaternion.identity);
+        EnergyCharged.SetActive(false);
     }
 
     IEnumerator NoSpecialChargedFeedback()
