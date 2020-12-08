@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1953652585}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1482573628
@@ -454,6 +454,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9059128364249894958, guid: ebe44c57ee4a86145b55c5aefe89684b,
     type: 3}
   m_PrefabInstance: {fileID: 1475244684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1953652585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1561491560038671713, guid: f007c54598d319e4980851d7220338d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561491558270103056}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2001255117
 PrefabInstance:
@@ -547,10 +553,24 @@ PrefabInstance:
       propertyPath: GameManager
       value: 
       objectReference: {fileID: 815055182}
+    - target: {fileID: 751184303, guid: f007c54598d319e4980851d7220338d4, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b9934e1e5720c3498fd17f96050bade,
+        type: 3}
     - target: {fileID: 1492897179, guid: f007c54598d319e4980851d7220338d4, type: 3}
       propertyPath: GameManager
       value: 
       objectReference: {fileID: 815055182}
+    - target: {fileID: 1817282605, guid: f007c54598d319e4980851d7220338d4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817282605, guid: f007c54598d319e4980851d7220338d4, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed934a9c6bcdc2942acba31b46277730,
+        type: 3}
     - target: {fileID: 731180138530614798, guid: f007c54598d319e4980851d7220338d4,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -711,6 +731,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1561491560038671715, guid: f007c54598d319e4980851d7220338d4,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7d9632af0be8f6843afeff9b01a484c5,
+        type: 3}
+    - target: {fileID: 2268105460361758808, guid: f007c54598d319e4980851d7220338d4,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2268105460361758808, guid: f007c54598d319e4980851d7220338d4,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2268105460361758808, guid: f007c54598d319e4980851d7220338d4,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2268105460361758808, guid: f007c54598d319e4980851d7220338d4,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a54baa4d8eb836a4ea971b477aafff53,
+        type: 3}
     - target: {fileID: 4712697793630471287, guid: f007c54598d319e4980851d7220338d4,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -736,6 +783,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7790255970193534804, guid: f007c54598d319e4980851d7220338d4,
+        type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea820278614d14a4f91bd0db56121f66,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f007c54598d319e4980851d7220338d4, type: 3}
 --- !u!1001 &7496068746924063421
