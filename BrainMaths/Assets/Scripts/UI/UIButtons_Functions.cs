@@ -23,6 +23,8 @@ public class UIButtons_Functions : MonoBehaviour
 
     public void SettingsButton()
     {
+        GameManager.ignoreS = true;
+        GameManager.ignoreW = true;
         GameManager.ChangeState(GameManager.GameStates.Options);
     }
 }

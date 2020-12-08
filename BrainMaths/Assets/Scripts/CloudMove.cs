@@ -19,7 +19,7 @@ public class CloudMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y > 0)
+        if(transform.position.y >= 0)
             GetComponent<SpriteRenderer>().material.SetFloat("time", Time.fixedTime);
         else
             GetComponent<SpriteRenderer>().material.SetFloat("time", -Time.fixedTime);

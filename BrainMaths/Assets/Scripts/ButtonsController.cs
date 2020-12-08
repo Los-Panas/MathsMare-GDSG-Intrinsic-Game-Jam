@@ -13,10 +13,6 @@ public class ButtonsController : MonoBehaviour
     public Image wBar;
     public Image sBar;
     public float timeHolding = 1;
-    public Sprite sSprite;
-    public Sprite wSprite;
-    public Image sImage;
-    public Image wImage;
 
     private int selected = 2;
     private InputStates wStates = new InputStates(KeyCode.W);
@@ -71,6 +67,11 @@ public class ButtonsController : MonoBehaviour
 
         public void StartTime() { time = Time.time; }
 
+        public bool Released()
+        {
+            return !Input.GetKey(code) && !Input.GetKeyDown(code) && !Input.GetKeyUp(code);
+        }
+
         public void Update()
         {
             lastFrameStates[0] = states[0];
@@ -95,32 +96,27 @@ public class ButtonsController : MonoBehaviour
         wBar.material.SetFloat("_Fill", 0);
     }
 
-    void SwapWSprites()
-    {
-        Sprite aux = wImage.sprite;
-        wImage.sprite = wSprite;
-        wSprite = aux;
-    }
-    
-    void SwapSSprite()
-    {
-        Sprite aux = sImage.sprite;
-        sImage.sprite = sSprite;
-        sSprite = aux;
-    }
-
     // Update is called once per frame
     void Update()
     {
         wStates.Update();
         sStates.Update();
 
+        if (wIgnore && wStates.Released())
+        {
+            wIgnore = false;
+        }
+
+        if (sIngore && sStates.Released())
+        {
+            sIngore = false;
+        }
+
         if (!wIgnore)
         {
             if (wStates.IsDown())
             {
                 wStates.StartTime();
-                SwapWSprites();
             }
 
             if (wStates.IsLastFrameRepeat() && wStates.IsRepeat() && wStates.TimeUp())
@@ -137,7 +133,6 @@ public class ButtonsController : MonoBehaviour
             }
             else if (wStates.IsUp())
             {
-                SwapWSprites();
                 if (wStates.TimeUp())
                 {
                     if (wUpCoroutine != null)
@@ -156,14 +151,15 @@ public class ButtonsController : MonoBehaviour
                     if (selected != 4)
                     {
                         ++selected;
-                        SetSelectedGO(buttons[selected]);
                     }
+                    else
+                    {
+                        selected = 0;
+                    }
+
+                    SetSelectedGO(buttons[selected]);
                 }
             }
-        }
-        else if (wStates.IsUp())
-        {
-            wIgnore = false;
         }
 
         if (!sIngore)
@@ -171,7 +167,6 @@ public class ButtonsController : MonoBehaviour
             if (sStates.IsDown())
             {
                 sStates.StartTime();
-                SwapSSprite();
             }
 
             if (sStates.IsLastFrameRepeat() && sStates.IsRepeat() && sStates.TimeUp())
@@ -188,7 +183,6 @@ public class ButtonsController : MonoBehaviour
             }
             else if (sStates.IsUp())
             {
-                SwapSSprite();
                 if (sStates.TimeUp())
                 {
                     if (sUpCoroutine != null)
@@ -206,15 +200,15 @@ public class ButtonsController : MonoBehaviour
                 {
                     if (selected != 0)
                     {
-                        --selected;
-                        SetSelectedGO(buttons[selected]);
+                        --selected;   
                     }
+                    else
+                    {
+                        selected = 0;
+                    }
+                    SetSelectedGO(buttons[selected]);
                 }
             }
-        }
-        else
-        {
-            sIngore = false;
         }
 
        
