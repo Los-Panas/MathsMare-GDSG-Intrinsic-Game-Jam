@@ -28,7 +28,7 @@ public class BeatManager : MonoBehaviour
             speedMult = 11.0f;
         }
 
-        public bool DoBeat(Color col)
+        public bool DoBeat(int col)
         {
             if (obj == null)
                 return false;
@@ -40,7 +40,7 @@ public class BeatManager : MonoBehaviour
 
             EnemyChangeColor ecc = obj.GetComponent<EnemyChangeColor>();
             if (ecc != null)
-                ecc.ChangeColor(c, col);
+                ecc.ChangeColor(col);
 
             return true;
         }
@@ -73,11 +73,11 @@ public class BeatManager : MonoBehaviour
         subscribed_objs_to_beat.Add(bd);
     }
 
-    public void Beat(Color col)
+    public void Beat(int bgColorId)
     {
         for(int i = 0; i < subscribed_objs_to_beat.Count; ++i)
         {
-            if(!subscribed_objs_to_beat[i].DoBeat(col))
+            if(!subscribed_objs_to_beat[i].DoBeat(bgColorId))
             {
                 subscribed_objs_to_beat.RemoveAt(i);
             }
