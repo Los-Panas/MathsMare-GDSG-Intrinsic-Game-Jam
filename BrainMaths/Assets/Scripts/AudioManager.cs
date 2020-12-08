@@ -25,11 +25,6 @@ public class AudioManager : MonoBehaviour
     private int spectrumCount = 0;
     [SerializeField]
     private MeshRenderer[] bars;
-    [SerializeField]
-    private float changeBarsColor = 0;
-    private float beatcountbybars = 0;
-    [SerializeField]
-    private bool repeatColors = false;
 
 
     [Header("Background")]
@@ -40,7 +35,7 @@ public class AudioManager : MonoBehaviour
     private float beatsBeforeChange = 0;
     private float beatCout = 0;
     [SerializeField]
-    private Color[] availableColors;
+    public Color[] availableColors;
 
     [Header("Enemy Spawner")]
     [SerializeField]
@@ -71,8 +66,6 @@ public class AudioManager : MonoBehaviour
         audioProcessor = GetComponent<AudioProcessor>();
 
         OnChangeMusic();
-
-        beatcountbybars = changeBarsColor;
 
         currentAudioSource.volume = 1;
         extraAudioSource.volume = 1;
@@ -133,17 +126,16 @@ public class AudioManager : MonoBehaviour
         if (beatCout >= beatsBeforeChange)
         {
             beatCout = 0;
-            Camera.main.backgroundColor = availableColors[Random.Range(0, availableColors.Length)];
-            
-            float mult = 0.5f;
-            if (!repeatColors)
-                mult = 1;
-            else
-                mult = 0.5f;
+            Color aux = Camera.main.backgroundColor;
+            while (aux == Camera.main.backgroundColor)
+            {
+                aux = availableColors[Random.Range(0, availableColors.Length)];
+            }
+            Camera.main.backgroundColor = aux;
 
-            Color col = Camera.main.backgroundColor;
+            Color col = aux;
             Color colorbefore = col;
-            for (int i = 0; i <= (bars.Length - 1) *mult; ++i)
+            for (int i = 0; i <= (bars.Length - 1); ++i)
             {
                 while (col == Camera.main.backgroundColor || col == colorbefore)
                 {
@@ -151,53 +143,16 @@ public class AudioManager : MonoBehaviour
                 }
                 colorbefore = col;
                 bars[i].material.color = col;
-                if(repeatColors)
-                    bars[(bars.Length - 1) - i].material.color = col;
             }
+
+            BeatManager.instance.Beat(aux);
         }
+
         ++spawnCout;
-        if(spawnCout >= beatsBeforeSpawn)
+        if (spawnCout >= beatsBeforeSpawn)
         {
             spawnCout = 0;
             spawner.SpawnRandomEnemy();
-        }
-        ++beatcountbybars;
-
-        if (changeBarsColor <= beatcountbybars)
-        {
-            spectrumCount = 0;
-            int min = bars.Length;
-
-            float mult = 0.5f;
-            if (!repeatColors)
-                mult = 1;
-            else
-                mult = 0.5f;
-
-            Color colorbefore = Camera.main.backgroundColor;
-
-            for (int i = 0; i <= min - 1; ++i)
-            {
-                beatcountbybars = 0;
-
-                if (i <= min * mult)
-                {
-                    Color col = Camera.main.backgroundColor;
-                    while (col == Camera.main.backgroundColor || col == colorbefore)
-                    {
-                        col = availableColors[Random.Range(0, availableColors.Length)];
-                    }
-                    colorbefore = col;
-                    bars[i].material.color = col; // TODO: change color
-
-                    // send general beat
-                    BeatManager.instance.Beat();
-
-                    if (repeatColors)
-                        bars[min - 1 - i].material.color = col;
-                }
-            }
-
         }
 
         lastdt = Time.fixedTime - timeLastBeat;
