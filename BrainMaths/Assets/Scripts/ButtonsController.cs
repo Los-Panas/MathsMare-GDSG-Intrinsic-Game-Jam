@@ -12,6 +12,11 @@ public class ButtonsController : MonoBehaviour
     public EventSystem eventSystem;
     public Image wBar;
     public Image sBar;
+    public float timeHolding = 1;
+    public Sprite sSprite;
+    public Sprite wSprite;
+    public Image sImage;
+    public Image wImage;
 
     private int selected = 2;
     private InputStates wStates = new InputStates(KeyCode.W);
@@ -24,6 +29,9 @@ public class ButtonsController : MonoBehaviour
 
     bool wBarFinished = false;
     bool sBarFinished = false;
+
+    bool sIngore = false;
+    bool wIgnore = false;
 
     struct InputStates
     {
@@ -87,92 +95,165 @@ public class ButtonsController : MonoBehaviour
         wBar.material.SetFloat("_Fill", 0);
     }
 
+    void SwapWSprites()
+    {
+        Sprite aux = wImage.sprite;
+        wImage.sprite = wSprite;
+        wSprite = aux;
+    }
+    
+    void SwapSSprite()
+    {
+        Sprite aux = sImage.sprite;
+        sImage.sprite = sSprite;
+        sSprite = aux;
+    }
+
     // Update is called once per frame
     void Update()
     {
         wStates.Update();
         sStates.Update();
 
-        if (wStates.IsDown())
+        if (!wIgnore)
         {
-            wStates.StartTime();
-        }
-
-        if (wStates.IsLastFrameRepeat() && wStates.IsRepeat() && wStates.TimeUp())
-        {
-            if (wDownCoroutine != null)
+            if (wStates.IsDown())
             {
-                StopCoroutine(wDownCoroutine);
-                wDownCoroutine = null;
+                wStates.StartTime();
+                SwapWSprites();
             }
-            if (wUpCoroutine == null)
+
+            if (wStates.IsLastFrameRepeat() && wStates.IsRepeat() && wStates.TimeUp())
             {
-                wUpCoroutine = StartCoroutine(MoveBar(wBar, 1));
+                if (wDownCoroutine != null)
+                {
+                    StopCoroutine(wDownCoroutine);
+                    wDownCoroutine = null;
+                }
+                if (wUpCoroutine == null)
+                {
+                    wUpCoroutine = StartCoroutine(MoveBar(wBar, 1));
+                }
+            }
+            else if (wStates.IsUp())
+            {
+                SwapWSprites();
+                if (wStates.TimeUp())
+                {
+                    if (wUpCoroutine != null)
+                    {
+                        StopCoroutine(wUpCoroutine);
+                        wUpCoroutine = null;
+                    }
+                    if (wDownCoroutine == null)
+                    {
+                        wDownCoroutine = StartCoroutine(MoveBar(wBar, 0));
+                        wBarFinished = false;
+                    }
+                }
+                else
+                {
+                    if (selected != 4)
+                    {
+                        ++selected;
+                        SetSelectedGO(buttons[selected]);
+                    }
+                }
             }
         }
         else if (wStates.IsUp())
         {
-            if (wStates.TimeUp())
-            {
-                if (wUpCoroutine != null)
-                {
-                    StopCoroutine(wUpCoroutine);
-                    wUpCoroutine = null;
-                }
-                if (wDownCoroutine == null)
-                {
-                    wDownCoroutine = StartCoroutine(MoveBar(wBar, 0));
-                    wBarFinished = false;
-                }
-            }
-            else
-            {
-                if (selected != 4)
-                {
-                    ++selected;
-                    SetSelectedGO(buttons[selected]);
-                }
-            }
+            wIgnore = false;
         }
 
-        if (sStates.IsDown())
+        if (!sIngore)
         {
-            sStates.StartTime();
+            if (sStates.IsDown())
+            {
+                sStates.StartTime();
+                SwapSSprite();
+            }
+
+            if (sStates.IsLastFrameRepeat() && sStates.IsRepeat() && sStates.TimeUp())
+            {
+                if (sDownCoroutine != null)
+                {
+                    StopCoroutine(sDownCoroutine);
+                    sDownCoroutine = null;
+                }
+                if (sUpCoroutine == null)
+                {
+                    sUpCoroutine = StartCoroutine(MoveBar(sBar, 1));
+                }
+            }
+            else if (sStates.IsUp())
+            {
+                SwapSSprite();
+                if (sStates.TimeUp())
+                {
+                    if (sUpCoroutine != null)
+                    {
+                        StopCoroutine(sUpCoroutine);
+                        sUpCoroutine = null;
+                    }
+                    if (sDownCoroutine == null)
+                    {
+                        sDownCoroutine = StartCoroutine(MoveBar(sBar, 0));
+                        sBarFinished = false;
+                    }
+                }
+                else
+                {
+                    if (selected != 0)
+                    {
+                        --selected;
+                        SetSelectedGO(buttons[selected]);
+                    }
+                }
+            }
+        }
+        else
+        {
+            sIngore = false;
         }
 
-        if (sStates.IsLastFrameRepeat() && sStates.IsRepeat() && sStates.TimeUp())
+       
+        if (wBarFinished && sBarFinished)
         {
-            if (sDownCoroutine != null)
+            wBarFinished = false;
+            sBarFinished = false;
+            sBar.material.SetFloat("_Fill", 0);
+            wBar.material.SetFloat("_Fill", 0);
+
+            sIngore = true;
+            wIgnore = true;
+
+            switch (selected)
             {
-                StopCoroutine(sDownCoroutine);
-                sDownCoroutine = null;
-            }
-            if (sUpCoroutine == null)
-            {
-                sUpCoroutine = StartCoroutine(MoveBar(sBar, 1));
-            }
-        }
-        else if (sStates.IsUp())
-        {
-            if (sStates.TimeUp())
-            {
-                if (sUpCoroutine != null)
+                case 0: // Github
                 {
-                    StopCoroutine(sUpCoroutine);
-                    sUpCoroutine = null;
+                    Application.OpenURL("https://github.com/Los-Panas/MathsMare-GDSG-Intrinsic-Game-Jam");
+                    break;
                 }
-                if (sDownCoroutine == null)
+                case 1: // Settings
                 {
-                    sDownCoroutine = StartCoroutine(MoveBar(sBar, 0));
-                    sBarFinished = false;
+                    UIButtons_Functions.instance.SettingsButton();
+                    break;
                 }
-            }
-            else
-            {
-                if (selected != 0)
+                case 2: // Play
                 {
-                    --selected;
-                    SetSelectedGO(buttons[selected]);
+                    UIButtons_Functions.instance.PlayButton();
+                    break;
+                }
+                case 3: // Credits
+                {
+                    // TOOD:
+                    break;
+                }
+                case 4: // ItchIO
+                {
+                    Application.OpenURL("https://victorgg-11.itch.io/mathsmare");
+                    break;
                 }
             }
         }
@@ -183,6 +264,14 @@ public class ButtonsController : MonoBehaviour
         eventSystem.SetSelectedGameObject(gameObject);
         text.transform.position = new Vector2(gameObject.transform.position.x,
             gameObject.transform.position.y - gameObject.GetComponent<RectTransform>().rect.height * 0.31F);
+
+        StopAllCoroutines();
+        sUpCoroutine = null;
+        wUpCoroutine = null;
+        sDownCoroutine = null;
+        wDownCoroutine = null;
+        sBar.material.SetFloat("_Fill", 0);
+        wBar.material.SetFloat("_Fill", 0);
     }
 
     IEnumerator MoveBar(Image image, float value)
@@ -195,7 +284,7 @@ public class ButtonsController : MonoBehaviour
 
         while (true)
         {
-            float t = (Time.time - time) / 2.0f;
+            float t = (Time.time - time) / timeHolding;
             current = Mathf.Lerp(init, value, t);
             image.material.SetFloat("_Fill", current);
             
