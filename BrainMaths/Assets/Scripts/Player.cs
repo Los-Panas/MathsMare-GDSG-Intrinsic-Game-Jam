@@ -265,7 +265,7 @@ public class Player : MonoBehaviour
 
         if (grade_growing_coroutine == null)
         {
-            StartCoroutine(GradeGrowing(1));
+            grade_growing_coroutine = StartCoroutine(GradeGrowing(1));
         }
 
         if (grade != Grade.ULTRA_A)
@@ -325,7 +325,7 @@ public class Player : MonoBehaviour
 
         if (grade_growing_coroutine == null)
         {
-            StartCoroutine(GradeGrowing(-1));
+            grade_growing_coroutine = StartCoroutine(GradeGrowing(-1));
         }
 
         OnResetBar();
