@@ -204,7 +204,7 @@ public class ButtonsController : MonoBehaviour
                     }
                     else
                     {
-                        selected = 0;
+                        selected = 4;
                     }
                     SetSelectedGO(buttons[selected]);
                 }
