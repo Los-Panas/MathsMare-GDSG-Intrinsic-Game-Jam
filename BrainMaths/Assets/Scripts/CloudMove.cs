@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CloudMove : MonoBehaviour
 {
+    [SerializeField]
+    private float speed = 0.2f;
+    [SerializeField]
+    private bool constantSpeed = false;
+    [SerializeField]
+    private bool fastSpeed = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +24,10 @@ public class CloudMove : MonoBehaviour
         else
             GetComponent<SpriteRenderer>().material.SetFloat("time", -Time.fixedTime);
 
+        if(!constantSpeed)
+            speed = AudioManager.instance.DtBeats();
+        if (fastSpeed)
+            speed = 1 - speed;
+        GetComponent<SpriteRenderer>().material.SetFloat("speed", speed);
     }
 }

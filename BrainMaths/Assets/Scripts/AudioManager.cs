@@ -50,6 +50,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private EnemiesSpawner spawner;
 
+
+    [Header("Clouds")]
+    [SerializeField]
+    [Range(0.1f, 1.0f)]
+    private float dtDifToChange = 0;
+    private float lastdt = 0;
+    private float timeLastBeat = 0;
+    private float dtBeats = 0.8f;
+    private int dtBeatsChangeCount = 0;
+
     private void Awake()
     {
         instance = this;
@@ -152,6 +162,22 @@ public class AudioManager : MonoBehaviour
             spawner.SpawnRandomEnemy();
         }
         ++beatcountbybars;
+
+        lastdt = Time.fixedTime - timeLastBeat;
+        if (Mathf.Abs(dtBeats - lastdt) >= dtDifToChange)
+        {
+            ++dtBeatsChangeCount;
+            if (dtBeatsChangeCount >= 3)
+            {
+                Debug.Log("change speed");
+                dtBeats = lastdt;
+            }
+        }
+        else
+        {
+            dtBeatsChangeCount = 0;
+        }
+        timeLastBeat = Time.fixedTime;
     }
 
     public void OnSpectrum(float[] spectrum)
@@ -203,5 +229,10 @@ public class AudioManager : MonoBehaviour
             }
 
         }
+    }
+
+    public float DtBeats()
+    {
+        return dtBeats;
     }
 }
