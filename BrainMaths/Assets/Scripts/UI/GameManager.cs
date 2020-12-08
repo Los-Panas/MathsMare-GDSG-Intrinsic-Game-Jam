@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject Gameplay;
     [SerializeField]
+    GameObject BlackBoard;
+    [SerializeField]
     MenusManager MenuManager;
     [SerializeField]
     GameObject MenuCamera;
@@ -47,6 +49,7 @@ public class GameManager : MonoBehaviour
     public Player player;
 
     float time_holding_options = 0;
+    float time_holding_credits = 0;
     float time_holding_ulti = 0;
     bool accept_input = false;
 
@@ -102,6 +105,34 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameStates.Credits:
+                if (ignoreW && !Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.W) && !Input.GetKeyUp(KeyCode.W))
+                {
+                    ignoreW = false;
+                }
+                if (ignoreS && !Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.S) && !Input.GetKeyUp(KeyCode.S))
+                {
+                    ignoreS = false;
+                }
+
+                if (!ignoreW && !ignoreS)
+                {
+                    if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
+                    {
+                        time_holding_credits += 1;
+
+                        if (time_holding_credits >= 120)
+                        {
+                            time_holding_options = 0;
+                            ChangeState(GameStates.MainMenu);
+                        }
+                    }
+                }
+
+                if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
+                {
+                    time_holding_options = 0;
+                }
+                break;
                 break;
             case GameStates.Transition:
                 break;
@@ -157,14 +188,17 @@ public class GameManager : MonoBehaviour
             case GameStates.MainMenu:
                 MenuManager.MainMenu.SetActive(true);
                 MenuManager.SettingsMenu.SetActive(false);
-                //MenuManager.Credits.SetActive(false);
+                MenuManager.CreditsMenu.SetActive(false);
+                BlackBoard.SetActive(true);
                 break;
             case GameStates.Options:
                 MenuManager.MainMenu.SetActive(false);
                 MenuManager.SettingsMenu.SetActive(true);
-                //MenuManager.Credits.SetActive(false);
                 break;
             case GameStates.Credits:
+                BlackBoard.SetActive(false);
+                MenuManager.MainMenu.SetActive(false);
+                MenuManager.CreditsMenu.SetActive(true);
                 break;
             case GameStates.Transition:
                 // Start Transition

@@ -27,4 +27,11 @@ public class UIButtons_Functions : MonoBehaviour
         GameManager.ignoreW = true;
         GameManager.ChangeState(GameManager.GameStates.Options);
     }
+
+    public void CreditsButton()
+    {
+        GameManager.ignoreS = true;
+        GameManager.ignoreW = true;
+        GameManager.ChangeState(GameManager.GameStates.Credits);
+    }
 }
