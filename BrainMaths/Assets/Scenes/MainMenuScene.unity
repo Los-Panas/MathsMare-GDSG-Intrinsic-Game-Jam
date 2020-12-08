@@ -952,10 +952,18 @@ PrefabInstance:
       propertyPath: GameManager
       value: 
       objectReference: {fileID: 815055182}
+    - target: {fileID: 751184302, guid: f007c54598d319e4980851d7220338d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 560
+      objectReference: {fileID: 0}
     - target: {fileID: 1492897179, guid: f007c54598d319e4980851d7220338d4, type: 3}
       propertyPath: GameManager
       value: 
       objectReference: {fileID: 815055182}
+    - target: {fileID: 1817282604, guid: f007c54598d319e4980851d7220338d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -560
+      objectReference: {fileID: 0}
     - target: {fileID: 2116079601, guid: f007c54598d319e4980851d7220338d4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -6.380005
