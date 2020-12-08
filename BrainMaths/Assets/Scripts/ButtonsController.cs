@@ -256,8 +256,11 @@ public class ButtonsController : MonoBehaviour
     private void SetSelectedGO(GameObject gameObject)
     {
         eventSystem.SetSelectedGameObject(gameObject);
-        text.transform.position = new Vector2(gameObject.transform.position.x,
-            gameObject.transform.position.y - gameObject.GetComponent<RectTransform>().rect.height * 0.31F);
+        text.transform.parent = gameObject.transform;
+        Vector3 pos = text.transform.localPosition;
+        pos.x = 0;
+        pos.y = - gameObject.GetComponent<RectTransform>().rect.height * 0.63f;
+        text.transform.localPosition = pos;
 
         StopAllCoroutines();
         sUpCoroutine = null;

@@ -254,6 +254,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2001255117}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &786959452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2123710344686706796, guid: f007c54598d319e4980851d7220338d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561491558270103056}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &815055182 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
@@ -681,61 +687,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainGame
       objectReference: {fileID: 0}
-    - target: {fileID: 9020324065079451676, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065079451676, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1800698453
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065079451677, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: speed
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065079451677, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: fastSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065079451677, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: constantSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065326700996, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065326700996, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1800698453
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065326700997, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: speed
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065326700997, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: fastSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324065326700997, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: constantSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020324066457195317, guid: ee6c3807af629d34886000912b720d24,
-        type: 3}
-      propertyPath: grade
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6c3807af629d34886000912b720d24, type: 3}
 --- !u!114 &2001906354 stripped
@@ -963,6 +914,11 @@ PrefabInstance:
       propertyPath: MainGame
       value: 
       objectReference: {fileID: 860203114}
+    - target: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
+        type: 3}
+      propertyPath: BlackBoard
+      value: 
+      objectReference: {fileID: 786959452}
     - target: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
         type: 3}
       propertyPath: MenuCamera
