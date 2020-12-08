@@ -3,7 +3,6 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Speed("speed", float) = 0
     }
     SubShader
     {
@@ -38,10 +37,7 @@
 
             sampler2D _MainTex;
             uniform float time;
-
-            UNITY_INSTANCING_BUFFER_START(Props)
-            UNITY_DEFINE_INSTANCED_PROP(float, _Speed)
-            UNITY_INSTANCING_BUFFER_END(Props)
+            uniform float speed;
 
             v2f vert (appdata v)
             {
@@ -50,8 +46,10 @@
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
-                o.uv.x += time * _Speed;
+                if (speed == 0)
+                    speed = 0.1;
 
+                o.uv.x += time * speed;
                 return o;
             }
 

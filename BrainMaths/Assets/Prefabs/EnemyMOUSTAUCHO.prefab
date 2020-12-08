@@ -148,8 +148,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1559047343
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 57e7336230b6f40449aff1be52334443, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -229,8 +229,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1559047343
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: de6d56a6330bf184a84dbab560f727b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -300,8 +300,8 @@ MonoBehaviour:
     type: 3}
   deathParticlesExplosion: {fileID: 8888421266359060650, guid: 241f13bb9b49c2340994005d97818d09,
     type: 3}
-  amplitude: 2
-  waveSpeed: 10
+  amplitude: 1
+  waveSpeed: 7
   mySpeedX: 2
 --- !u!70 &8939427255685349410
 CapsuleCollider2D:
