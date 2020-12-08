@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Player player;
 
+    [SerializeField]
+    GameObject[] creditsNames;
+    GameObject currentCreditName;
+    int contCredits = 0;
+
     float time_holding_options = 0;
     float time_holding_credits = 0;
     float time_holding_ulti = 0;
@@ -72,7 +77,10 @@ public class GameManager : MonoBehaviour
             clouds[i].enabled = false;
         }
     }
-
+    private void Start()
+    {
+        currentCreditName = creditsNames[0];
+    }
     // Update is called once per frame
     void Update()
     {
@@ -132,15 +140,67 @@ public class GameManager : MonoBehaviour
                 if (!ignoreW && !ignoreS)
                 {
                     if (Input.GetKey(player.MoveUp) && Input.GetKey(player.MoveDown))
-                    {
+                    {  
                         time_holding_credits += 1;
 
-                        if (time_holding_credits >= 120)
+                        if (time_holding_credits >= 1000)
                         {
                             time_holding_options = 0;
-                            ChangeState(GameStates.MainMenu);
+                            switch (contCredits)
+                            {
+                                case 0:
+                                    Application.OpenURL("https://github.com/OriolCS2");
+                                    break;
+                                case 1:
+                                    Application.OpenURL("https://github.com/didaclis");
+                                    break;
+                                case 2:
+                                    Application.OpenURL("https://github.com/PerezEnric");
+                                    break;
+                                case 3:
+                                    Application.OpenURL("https://github.com/peterMcP");
+                                    break;
+                                case 4:
+                                    Application.OpenURL("https://github.com/RoperoIvan");
+                                    break;
+                                case 5:
+                                    Application.OpenURL("https://github.com/PerezEnric");
+                                    break;
+                                case 6:
+                                    Application.OpenURL("https://github.com/VictorSegura99");
+                                    break;
+                                case 7:
+                                    Application.OpenURL("https://danosongs.com/home");
+                                    break;
+                                case 8:
+                                    ChangeState(GameStates.MainMenu);
+                                    break;
+                            }
+                                
                         }
                     }
+                }
+
+                if(Input.GetKeyUp(player.MoveUp))
+                {
+                    Debug.Log(contCredits);
+                    contCredits--;
+                    if (contCredits < 0)
+                        contCredits = creditsNames.Length - 1;
+
+                    currentCreditName.SetActive(false);
+                    currentCreditName = creditsNames[contCredits];
+                    currentCreditName.SetActive(true);
+                }
+                if (Input.GetKeyUp(player.MoveDown))
+                {
+                    contCredits++;
+                    if (contCredits > creditsNames.Length - 1)
+                        contCredits = 0;
+
+                    currentCreditName.SetActive(false);
+                    currentCreditName = creditsNames[contCredits];
+                    currentCreditName.SetActive(true);
                 }
 
                 if (Input.GetKeyUp(player.MoveUp) || Input.GetKeyUp(player.MoveDown))
