@@ -748,6 +748,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1561491558270103056}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1991058517 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7335566610492151478, guid: f007c54598d319e4980851d7220338d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561491558270103056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2001255117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1184,6 +1196,11 @@ PrefabInstance:
       propertyPath: canvas_anim
       value: 
       objectReference: {fileID: 431726002}
+    - target: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
+        type: 3}
+      propertyPath: VolumeSlider
+      value: 
+      objectReference: {fileID: 1991058517}
     - target: {fileID: 7496068746126310387, guid: d2b5066eae6e2d744bfaf1258ec7b55e,
         type: 3}
       propertyPath: hitsRecieved
