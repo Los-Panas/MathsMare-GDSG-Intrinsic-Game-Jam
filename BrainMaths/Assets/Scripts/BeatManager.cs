@@ -6,10 +6,9 @@ public class BeatManager : MonoBehaviour
 {
     static public BeatManager instance;
     public List<BeatData> subscribed_objs_to_beat;
+    public List<GameObject> manually_subscribed;
 
     public Color[] colors;
-
-    private static Color[] c;
 
     public class BeatData : MonoBehaviour
     {
@@ -63,7 +62,11 @@ public class BeatManager : MonoBehaviour
         instance = this;
         subscribed_objs_to_beat = new List<BeatData>();
 
-        c = colors;
+        for (int i = 0; i < manually_subscribed.Count; ++i)
+        {
+            AddObjToBeat(manually_subscribed[i]);
+        }
+
     }
 
     public void AddObjToBeat(GameObject obj)
