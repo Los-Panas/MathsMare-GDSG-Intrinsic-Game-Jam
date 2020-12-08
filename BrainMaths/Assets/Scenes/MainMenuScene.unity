@@ -842,7 +842,7 @@ PrefabInstance:
     - target: {fileID: 9020324066457195317, guid: ee6c3807af629d34886000912b720d24,
         type: 3}
       propertyPath: is_invulnerable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9020324067019833041, guid: ee6c3807af629d34886000912b720d24,
         type: 3}

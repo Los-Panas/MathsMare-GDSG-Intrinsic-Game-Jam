@@ -138,6 +138,8 @@ public class AudioManager : MonoBehaviour
             Camera.main.backgroundColor = availableColors[aux];
             BeatManager.instance.Beat(aux);
 
+            backGroundColorId = aux;
+
             int col = aux;
             int colorbefore = col;
             for (int i = 0; i <= (bars.Length - 1); ++i)
